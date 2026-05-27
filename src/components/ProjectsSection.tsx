@@ -70,7 +70,7 @@ const ImageCarousel = ({ images, name }: { images: string[]; name: string }) => 
         <img
           src={images[0]}
           alt={`${name} preview`}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
           loading="lazy"
           draggable={false}
         />
