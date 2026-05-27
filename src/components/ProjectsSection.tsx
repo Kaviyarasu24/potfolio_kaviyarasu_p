@@ -10,8 +10,8 @@ interface ProjectData {
   description: string;
   liveUrl: string;
   col1Image1: string;
-  col1Image2: string;
-  col2Image: string;
+  col1Image2?: string;
+  col2Image?: string;
 }
 
 const PROJECTS: ProjectData[] = [
@@ -21,9 +21,7 @@ const PROJECTS: ProjectData[] = [
     name: 'IPL Analysis Dashboard (2008–2024)',
     description: 'Built an interactive Power BI dashboard analyzing IPL data (2008–2024), with visuals showing player performance, team wins, venue outcomes, and toss impact. Used data modeling and DAX to enable advanced filtering and time-series storytelling.',
     liveUrl: '#',
-    col1Image1: '/Forge.png',
-    col1Image2: '/Forge1.png',
-    col2Image: '/Forge2.png',
+    col1Image1: '/project01_01.png',
   },
   {
     number: '02',
@@ -127,47 +125,59 @@ const ProjectCard = ({ project, index, total, containerRef }: ProjectCardProps) 
                     </div>
                   </div>
 
-        {/* Bottom row: two-column image grid */}
-        <div className="grid grid-cols-[40%_60%] gap-3 sm:gap-4 md:gap-5 flex-1 min-h-0">
-          {/* Left column - 2 stacked */}
-          <div className="flex flex-col gap-3 sm:gap-4 md:gap-5 min-h-0">
-            <div
-              className="overflow-hidden rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
-              style={{ height: 'clamp(130px, 16vw, 230px)' }}
-            >
-              <img
-                src={project.col1Image1}
-                alt={`${project.name} preview 1`}
-                className="h-full w-full object-cover"
-                loading="lazy"
-                draggable={false}
-              />
+        {/* Bottom row: image grid */}
+        {project.col1Image2 || project.col2Image ? (
+          <div className="grid grid-cols-[40%_60%] gap-3 sm:gap-4 md:gap-5 flex-1 min-h-0">
+            {/* Left column - 2 stacked */}
+            <div className="flex flex-col gap-3 sm:gap-4 md:gap-5 min-h-0">
+              <div
+                className="overflow-hidden rounded-[24px] sm:rounded-[28px] md:rounded-[32px]"
+                style={{ height: 'clamp(130px, 16vw, 230px)' }}
+              >
+                <img
+                  src={project.col1Image1}
+                  alt={`${project.name} preview 1`}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  draggable={false}
+                />
+              </div>
+              <div
+                className="overflow-hidden rounded-[24px] sm:rounded-[28px] md:rounded-[32px]"
+                style={{ height: 'clamp(160px, 22vw, 340px)' }}
+              >
+                <img
+                  src={project.col1Image2}
+                  alt={`${project.name} preview 2`}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  draggable={false}
+                />
+              </div>
             </div>
-            <div
-              className="overflow-hidden rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
-              style={{ height: 'clamp(160px, 22vw, 340px)' }}
-            >
+
+            {/* Right column - 1 tall */}
+            <div className="overflow-hidden rounded-[24px] sm:rounded-[28px] md:rounded-[32px] min-h-0">
               <img
-                src={project.col1Image2}
-                alt={`${project.name} preview 2`}
+                src={project.col2Image}
+                alt={`${project.name} preview 3`}
                 className="h-full w-full object-cover"
                 loading="lazy"
                 draggable={false}
               />
             </div>
           </div>
-
-          {/* Right column - 1 tall */}
-          <div className="overflow-hidden rounded-[40px] sm:rounded-[50px] md:rounded-[60px] min-h-0">
+        ) : (
+          <div className="flex-1 min-h-0 overflow-hidden rounded-[24px] sm:rounded-[28px] md:rounded-[32px]">
             <img
-              src={project.col2Image}
-              alt={`${project.name} preview 3`}
+              src={project.col1Image1}
+              alt={`${project.name} preview`}
               className="h-full w-full object-cover"
               loading="lazy"
               draggable={false}
             />
           </div>
-        </div>
+        )}
       </motion.article>
     </div>
   );
