@@ -9,6 +9,7 @@ interface ProjectData {
   name: string;
   description: string;
   liveUrl: string;
+  liveLabel?: string;
   col1Image1: string;
   col1Image2?: string;
   col2Image?: string;
@@ -20,7 +21,8 @@ const PROJECTS: ProjectData[] = [
     category: 'Data Analytics · Power BI',
     name: 'IPL Analysis Dashboard (2008–2024)',
     description: 'Built an interactive Power BI dashboard analyzing IPL data (2008–2024), with visuals showing player performance, team wins, venue outcomes, and toss impact. Used data modeling and DAX to enable advanced filtering and time-series storytelling.',
-    liveUrl: '#',
+    liveUrl: 'https://github.com/Kaviyarasu24/IPL-Analysis-Dashboard-Power-Bi.git',
+    liveLabel: 'GitHub',
     col1Image1: '/project01_01.png',
   },
   {
@@ -111,7 +113,7 @@ const ProjectCard = ({ project, index, total, containerRef }: ProjectCardProps) 
                         </h3>
                         {project.description ? (
                           <p
-                            className="font-light text-[#D7E2EA]/55 leading-relaxed max-w-xl"
+                            className="font-light text-[#D7E2EA]/55 leading-relaxed w-full"
                             style={{ fontSize: 'clamp(0.75rem, 1.3vw, 1rem)' }}
                           >
                             {project.description}
@@ -121,7 +123,7 @@ const ProjectCard = ({ project, index, total, containerRef }: ProjectCardProps) 
                     </div>
 
                     <div className="shrink-0 self-start sm:self-auto pt-1 sm:pt-2 md:pt-3 w-full sm:w-auto">
-                      <LiveProjectButton href={project.liveUrl} className="w-full sm:w-auto" />
+                      <LiveProjectButton href={project.liveUrl} label={project.liveLabel} className="w-full sm:w-auto" />
                     </div>
                   </div>
 
