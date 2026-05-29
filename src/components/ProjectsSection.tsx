@@ -11,6 +11,7 @@ interface ProjectData {
   liveUrl: string;
   liveLabel?: string;
   images: string[];
+  imageLayout?: 'landscape' | 'portrait';
 }
 
 const PROJECTS: ProjectData[] = [
@@ -22,6 +23,7 @@ const PROJECTS: ProjectData[] = [
     liveUrl: 'https://github.com/Kaviyarasu24/IPL-Analysis-Dashboard-Power-Bi.git',
     liveLabel: 'GitHub',
     images: ['/project01_01.png'],
+    imageLayout: 'landscape',
   },
   {
     number: '02',
@@ -31,14 +33,17 @@ const PROJECTS: ProjectData[] = [
     liveUrl: 'https://github.com/Kaviyarasu24/JARVIS.git',
     liveLabel: 'GitHub',
     images: ['/project02_01.png', '/project02_02.png', '/project02_03.png'],
+    imageLayout: 'landscape',
   },
   {
     number: '03',
-    category: 'Machine Learning · GenAI',
-    name: 'Project 3',
-    description: '',
-    liveUrl: '#',
-    images: ['/resumeiq-hero.png', '/resumeiq-feedback.png', '/resumeiq-score.png'],
+    category: 'Mobile · React Native · Supabase',
+    name: 'FinanceFlow — Personal Finance App',
+    description: 'A personal finance mobile app built with Expo, React Native, TypeScript, and Supabase. Features full authentication (sign in, sign up, forgot password), transaction tracking with income/expense types, category management with custom icons and colors, analytics with donut and bar charts, savings rate panel, and profile/settings management — all with real-time Supabase sync.',
+    liveUrl: 'https://github.com/Kaviyarasu24/FinanceFlow',
+    liveLabel: 'GitHub',
+    images: ['/financeflow-01.jpeg', '/financeflow-02.jpeg', '/financeflow-03.jpeg', '/financeflow-04.jpeg', '/financeflow-05.jpeg', '/financeflow-06.jpeg', '/financeflow-07.jpeg', '/financeflow-08.jpeg', '/financeflow-09.jpeg'],
+    imageLayout: 'portrait',
   },
   {
     number: '04',
@@ -47,20 +52,18 @@ const PROJECTS: ProjectData[] = [
     description: '',
     liveUrl: '#',
     images: ['/notch-hero.png', '/notch-pricing.png', '/notch-mockup.png'],
+    imageLayout: 'landscape',
   },
 ];
 
-/* ── Auto-sliding image carousel (one image at a time) ── */
-const ImageCarousel = ({ images, name }: { images: string[]; name: string }) => {
+/* ── Landscape carousel (one image at a time, full width) ── */
+const LandscapeCarousel = ({ images, name }: { images: string[]; name: string }) => {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
 
-  // Auto-advance every 3s unless paused
   useEffect(() => {
     if (paused || images.length <= 1) return;
-    const id = setInterval(() => {
-      setCurrent(c => (c + 1) % images.length);
-    }, 3000);
+    const id = setInterval(() => setCurrent(c => (c + 1) % images.length), 3000);
     return () => clearInterval(id);
   }, [paused, images.length]);
 
@@ -101,8 +104,6 @@ const ImageCarousel = ({ images, name }: { images: string[]; name: string }) => 
           />
         </motion.div>
       ))}
-
-      {/* Dot indicators */}
       <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
         {images.map((_, i) => (
           <button
@@ -116,6 +117,91 @@ const ImageCarousel = ({ images, name }: { images: string[]; name: string }) => 
       </div>
     </div>
   );
+};
+
+/* ── Portrait strip (horizontal scroll of phone-frame cards) ── */
+const PortraitStrip = ({ images, name }: { images: string[]; name: string }) => {
+  const [active, setActive] = useState(0);
+  const stripRef = useRef<HTMLDivElement>(null);
+
+  const scrollToCard = (index: number) => {
+    const strip = stripRef.current;
+    if (!strip) return;
+    const card = strip.children[index] as HTMLElement;
+    if (!card) return;
+    const stripRect = strip.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const offset = cardRect.left - stripRect.left - (stripRect.width - cardRect.width) / 2;
+    strip.scrollBy({ left: offset, behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const id = setInterval(() => {
+      setActive(c => {
+        const next = (c + 1) % images.length;
+        scrollToCard(next);
+        return next;
+      });
+    }, 2500);
+    return () => clearInterval(id);
+  }, [images.length]);
+
+  const handleClick = (i: number) => {
+    setActive(i);
+    scrollToCard(i);
+  };
+
+  return (
+    <div className="flex-1 min-h-0 flex flex-col gap-3 overflow-hidden">
+      {/* Scrollable phone strip */}
+      <div
+        ref={stripRef}
+        className="flex-1 min-h-0 flex items-center gap-3 sm:gap-4 overflow-x-auto overflow-y-hidden px-2 pb-1"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        {images.map((src, i) => (
+          <button
+            key={i}
+            onClick={() => handleClick(i)}
+            className={`shrink-0 overflow-hidden rounded-[18px] sm:rounded-[22px] border-2 transition-all duration-300 focus:outline-none ${
+              i === active
+                ? 'border-[#D7E2EA] scale-105 shadow-[0_0_20px_rgba(215,226,234,0.25)]'
+                : 'border-[#D7E2EA]/20 opacity-60 hover:opacity-90 hover:border-[#D7E2EA]/50'
+            }`}
+            style={{ height: '100%', aspectRatio: '9/19.5' }}
+          >
+            <img
+              src={src}
+              alt={`${name} screen ${i + 1}`}
+              className="h-full w-full object-cover"
+              loading="lazy"
+              draggable={false}
+            />
+          </button>
+        ))}
+      </div>
+
+      {/* Dot indicators */}
+      <div className="flex justify-center gap-2 shrink-0">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => handleClick(i)}
+            className={`rounded-full transition-all duration-300 ${
+              i === active ? 'bg-[#D7E2EA] w-4 h-2' : 'bg-[#D7E2EA]/30 w-2 h-2'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/* ── Router: pick layout based on image type ── */
+const ImageCarousel = ({ images, name, layout }: { images: string[]; name: string; layout?: 'landscape' | 'portrait' }) => {
+  if (layout === 'portrait') return <PortraitStrip images={images} name={name} />;
+  return <LandscapeCarousel images={images} name={name} />;
 };
 
 interface ProjectCardProps {
@@ -186,7 +272,7 @@ const ProjectCard = ({ project, index, total }: ProjectCardProps) => {
         </div>
 
         {/* Image area */}
-        <ImageCarousel images={project.images} name={project.name} />
+        <ImageCarousel images={project.images} name={project.name} layout={project.imageLayout} />
       </motion.article>
     </div>
   );
