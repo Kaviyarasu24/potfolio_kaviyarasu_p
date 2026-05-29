@@ -8,10 +8,13 @@ interface ProjectData {
   category: string;
   name: string;
   description: string;
-  liveUrl: string;
+  liveUrl?: string;
   liveLabel?: string;
+  githubUrl?: string;
   images: string[];
-  imageLayout?: 'landscape' | 'portrait';
+  imageLayout?: 'landscape' | 'portrait' | 'terminal';
+  terminalLines?: string[];
+  terminalTitle?: string;
 }
 
 const PROJECTS: ProjectData[] = [
@@ -20,8 +23,7 @@ const PROJECTS: ProjectData[] = [
     category: 'Data Analytics · Power BI',
     name: 'IPL Analysis Dashboard (2008–2024)',
     description: 'Built an interactive Power BI dashboard analyzing IPL data (2008–2024), with visuals showing player performance, team wins, venue outcomes, and toss impact. Used data modeling and DAX to enable advanced filtering and time-series storytelling.',
-    liveUrl: 'https://github.com/Kaviyarasu24/IPL-Analysis-Dashboard-Power-Bi.git',
-    liveLabel: 'GitHub',
+    githubUrl: 'https://github.com/Kaviyarasu24/IPL-Analysis-Dashboard-Power-Bi.git',
     images: ['/project01_01.png'],
     imageLayout: 'landscape',
   },
@@ -30,8 +32,7 @@ const PROJECTS: ProjectData[] = [
     category: 'AI · Python · Voice Assistant',
     name: 'J.A.R.V.I.S — Personal Voice Assistant',
     description: 'J.A.R.V.I.S is a Windows-first AI voice assistant built in Python, upgraded to a goal-based agent architecture. Instead of rigid command matching, it understands user intent, plans a sequence of tool actions, executes them step-by-step, and synthesizes a final spoken response — enabling natural, multi-step voice interactions. It can launch apps, control system settings, open websites, fetch live information, take screenshots, automate repetitive workflows, and manage files entirely through natural speech. The cinematic desktop UI adds a real-time transcript panel, task and calendar widgets, face authentication, and full speech controls — all powered by the same underlying agent.',
-    liveUrl: 'https://github.com/Kaviyarasu24/JARVIS.git',
-    liveLabel: 'GitHub',
+    githubUrl: 'https://github.com/Kaviyarasu24/JARVIS.git',
     images: ['/project02_01.png', '/project02_02.png', '/project02_03.png'],
     imageLayout: 'landscape',
   },
@@ -40,19 +41,128 @@ const PROJECTS: ProjectData[] = [
     category: 'Mobile · React Native · Supabase',
     name: 'FinanceFlow — Personal Finance App',
     description: 'A personal finance mobile app built with Expo, React Native, TypeScript, and Supabase. Features full authentication (sign in, sign up, forgot password), transaction tracking with income/expense types, category management with custom icons and colors, analytics with donut and bar charts, savings rate panel, and profile/settings management — all with real-time Supabase sync.',
-    liveUrl: 'https://github.com/Kaviyarasu24/FinanceFlow',
-    liveLabel: 'GitHub',
+    githubUrl: 'https://github.com/Kaviyarasu24/FinanceFlow',
     images: ['/financeflow-01.jpeg', '/financeflow-02.jpeg', '/financeflow-03.jpeg', '/financeflow-04.jpeg', '/financeflow-05.jpeg', '/financeflow-06.jpeg', '/financeflow-07.jpeg', '/financeflow-08.jpeg', '/financeflow-09.jpeg'],
     imageLayout: 'portrait',
   },
   {
     number: '04',
-    category: 'Front-end · React',
-    name: 'Project 4',
-    description: '',
-    liveUrl: '#',
-    images: ['/notch-hero.png', '/notch-pricing.png', '/notch-mockup.png'],
-    imageLayout: 'landscape',
+    category: 'Python · Automation · AI',
+    name: 'Auto-Mail-Reply — Intelligent Email Automation',
+    description: 'An intelligent email automation system that responds to incoming emails using keyword matching with fuzzy logic and an Excel-based knowledge base. Integrates with Gmail via IMAP/SMTP, tracks processed emails in SQLite, and supports dry-run mode for safe testing — with retry logic and comprehensive logging throughout.',
+    githubUrl: 'https://github.com/Kaviyarasu24/Auto-Mail-Reply.git',
+    images: [],
+    imageLayout: 'terminal',
+    terminalTitle: 'auto-mail-reply — python main.py',
+    terminalLines: [
+      '$ python main.py',
+      '✔  Connected to Gmail IMAP — inbox ready',
+      '📬  Fetching unread emails... found 3',
+      '',
+      '── Email 1 ──────────────────────────────',
+      '  From    : client@example.com',
+      '  Subject : Inquiry about your services',
+      '  Keyword : "inquiry"  →  match score 94',
+      '  Action  : Sending reply...',
+      '  ✔  Reply sent successfully',
+      '',
+      '── Email 2 ──────────────────────────────',
+      '  From    : hr@company.com',
+      '  Subject : Job application follow-up',
+      '  Keyword : "follow-up"  →  match score 87',
+      '  Action  : Sending reply...',
+      '  ✔  Reply sent successfully',
+      '',
+      '── Email 3 ──────────────────────────────',
+      '  From    : unknown@domain.net',
+      '  Subject : Random newsletter',
+      '  Keyword : no match found (score < 80)',
+      '  Action  : Skipped',
+      '',
+      '✔  Run complete — 2 replied, 1 skipped',
+      '📦  Logged to emails.db',
+    ],
+  },
+  {
+    number: '05',
+    category: 'Python · LangChain · OpenRouter · GenAI',
+    name: 'Agentic Coding AI — React App Generator',
+    description: 'An interactive CLI coding agent that generates complete, production-ready React 18+ applications from a single text prompt. Powered by OpenRouter API and LangChain, it outputs TypeScript + Tailwind CSS projects with proper file structure — including index.html, App.tsx, and component files — all scaffolded automatically from LLM output.',
+    githubUrl: 'https://github.com/Kaviyarasu24/Agentic-Coding-AI',
+    images: [],
+    imageLayout: 'terminal',
+    terminalTitle: 'agentic-coding-ai — python app.py',
+    terminalLines: [
+      '$ python app.py',
+      '',
+      '  ╔══════════════════════════════════════╗',
+      '  ║       Agentic Coding AI  🤖           ║',
+      '  ╚══════════════════════════════════════╝',
+      '',
+      '  Describe the app you want:',
+      '  > create a simple calculator',
+      '',
+      '🧠  Sending prompt to LLM via OpenRouter...',
+      '✔  Response received — parsing file structure',
+      '',
+      '── Generating project files ─────────────',
+      '  ✔  metadata.json',
+      '  ✔  index.html',
+      '  ✔  index.tsx',
+      '  ✔  App.tsx',
+      '  ✔  components/Calculator.tsx',
+      '',
+      '── metadata.json ────────────────────────',
+      '  {',
+      '    "name": "Simple Calculator",',
+      '    "description": "A responsive calculator',
+      '     built with React and TypeScript."',
+      '  }',
+      '',
+      '✔  Project saved to generated_project/',
+      '🚀  Ready — open in VS Code and run npm i',
+    ],
+  },
+  {
+    number: '06',
+    category: 'Next.js · React · OpenRouter · GenAI',
+    name: 'Farm Sage — AI Agricultural Assistant',
+    description: 'A Next.js web app that gives farmers real-time, weather-aware agricultural guidance through a multilingual AI chat interface. Pulls live temperature, humidity, and rainfall via Open-Meteo, auto-detects location via browser geolocation, and supports voice-to-text input. Responds in English, Hindi, Telugu, Tamil, and Marathi — with a leaf image upload flow for crop disease diagnosis.',
+    githubUrl: 'https://github.com/Kaviyarasu24/Farm-Sage',
+    liveUrl: 'https://farm-sage.kaviyarasup24.workers.dev/',
+    images: [],
+    imageLayout: 'terminal',
+    terminalTitle: 'farm-sage — pnpm dev',
+    terminalLines: [
+      '$ pnpm dev',
+      '✔  Next.js ready on http://localhost:3000',
+      '',
+      '── Incoming chat request ────────────────',
+      '  Language : Tamil',
+      '  Location : 11.0168° N, 76.9558° E',
+      '',
+      '🌦  Fetching weather via Open-Meteo...',
+      '  Temperature  : 31°C',
+      '  Humidity     : 78%',
+      '  Rainfall     : 4.2 mm',
+      '',
+      '📍  Reverse geocoding via Nominatim...',
+      '  Place : Coimbatore, Tamil Nadu, India',
+      '',
+      '🧠  Building farming system prompt...',
+      '  Context injected: weather + location',
+      '  Language target : Tamil',
+      '',
+      '🤖  Calling OpenRouter LLM...',
+      '✔  Response received',
+      '',
+      '── Assistant reply ──────────────────────',
+      '  "இன்றைய வெப்பநிலை 31°C மற்றும் ஈரப்பதம்',
+      '   78% உள்ளது. நெல் பயிருக்கு இப்போது',
+      '   நீர்ப்பாசனம் தேவையில்லை..."',
+      '',
+      '✔  Reply streamed to client',
+    ],
   },
 ];
 
@@ -198,8 +308,71 @@ const PortraitStrip = ({ images, name }: { images: string[]; name: string }) => 
   );
 };
 
+/* ── Terminal preview (animated typewriter for CLI projects) ── */
+const TerminalPreview = ({ lines, title }: { lines: string[]; title?: string }) => {
+  const [visibleCount, setVisibleCount] = useState(0);
+
+  useEffect(() => {
+    if (visibleCount >= lines.length) return;
+    const delay = lines[visibleCount] === '' ? 120 : lines[visibleCount].startsWith('──') ? 180 : 90;
+    const id = setTimeout(() => setVisibleCount(c => c + 1), delay);
+    return () => clearTimeout(id);
+  }, [visibleCount, lines]);
+
+  return (
+    <div className="flex-1 min-h-0 overflow-hidden rounded-[24px] sm:rounded-[28px] md:rounded-[32px] bg-[#0a0a0a] border border-[#D7E2EA]/10 flex flex-col">
+      {/* Window chrome */}
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-[#D7E2EA]/10 shrink-0">
+        <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+        <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
+        <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+        <span className="ml-3 text-[11px] font-mono text-[#D7E2EA]/30 tracking-wider">{title ?? 'terminal'}</span>
+      </div>
+
+      {/* Terminal body */}
+      <div className="flex-1 overflow-y-auto px-5 py-4 font-mono" style={{ scrollbarWidth: 'none' }}>
+        {lines.slice(0, visibleCount).map((line, i) => {
+          const isCommand  = line.startsWith('$');
+          const isSuccess  = line.includes('✔');
+          const isSkipped  = line.includes('Skipped') || line.includes('no match');
+          const isSeparator = line.startsWith('──');
+          const isEmpty    = line === '';
+
+          return (
+            <div
+              key={i}
+              className={`leading-relaxed whitespace-pre ${
+                isEmpty      ? 'h-3'
+                : isCommand  ? 'text-[#D7E2EA] font-bold'
+                : isSuccess  ? 'text-[#28c840]'
+                : isSkipped  ? 'text-[#febc2e]'
+                : isSeparator ? 'text-[#D7E2EA]/25'
+                : 'text-[#D7E2EA]/65'
+              }`}
+              style={{ fontSize: 'clamp(0.65rem, 1.1vw, 0.82rem)' }}
+            >
+              {line}
+              {/* blinking cursor on last visible line */}
+              {i === visibleCount - 1 && visibleCount < lines.length && (
+                <span className="inline-block w-[7px] h-[13px] bg-[#D7E2EA]/70 ml-0.5 align-middle animate-pulse" />
+              )}
+            </div>
+          );
+        })}
+        {/* Final cursor after all lines */}
+        {visibleCount >= lines.length && (
+          <div className="text-[#D7E2EA]/65 leading-relaxed" style={{ fontSize: 'clamp(0.65rem, 1.1vw, 0.82rem)' }}>
+            <span className="inline-block w-[7px] h-[13px] bg-[#D7E2EA]/70 align-middle animate-pulse" />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 /* ── Router: pick layout based on image type ── */
-const ImageCarousel = ({ images, name, layout }: { images: string[]; name: string; layout?: 'landscape' | 'portrait' }) => {
+const ImageCarousel = ({ images, name, layout, terminalLines, terminalTitle }: { images: string[]; name: string; layout?: 'landscape' | 'portrait' | 'terminal'; terminalLines?: string[]; terminalTitle?: string }) => {
+  if (layout === 'terminal') return <TerminalPreview lines={terminalLines ?? []} title={terminalTitle} />;
   if (layout === 'portrait') return <PortraitStrip images={images} name={name} />;
   return <LandscapeCarousel images={images} name={name} />;
 };
@@ -266,13 +439,18 @@ const ProjectCard = ({ project, index, total }: ProjectCardProps) => {
             </div>
           </div>
 
-          <div className="shrink-0 self-start sm:self-auto pt-1 sm:pt-2 md:pt-3 w-full sm:w-auto">
-            <LiveProjectButton href={project.liveUrl} label={project.liveLabel} className="w-full sm:w-auto" />
+          <div className="shrink-0 self-start sm:self-auto pt-1 sm:pt-2 md:pt-3 w-full sm:w-auto flex flex-col sm:flex-row gap-2">
+            {project.githubUrl && (
+              <LiveProjectButton href={project.githubUrl} label="GitHub" className="w-full sm:w-auto" />
+            )}
+            {project.liveUrl && (
+              <LiveProjectButton href={project.liveUrl} label="Live Preview" className="w-full sm:w-auto" />
+            )}
           </div>
         </div>
 
         {/* Image area */}
-        <ImageCarousel images={project.images} name={project.name} layout={project.imageLayout} />
+        <ImageCarousel images={project.images} name={project.name} layout={project.imageLayout} terminalLines={project.terminalLines} terminalTitle={project.terminalTitle} />
       </motion.article>
     </div>
   );
