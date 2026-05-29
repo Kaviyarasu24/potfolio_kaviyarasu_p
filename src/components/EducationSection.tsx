@@ -138,7 +138,7 @@ const EduCard = ({ edu, index, total }: EduCardProps) => {
 const ServicesSection = () => {
   return (
     <section
-      id="services"
+      id="education"
       className="relative w-full bg-white rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-4 sm:px-6 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-24"
     >
         <FadeIn y={40}>
