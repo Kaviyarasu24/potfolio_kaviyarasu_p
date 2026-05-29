@@ -1,6 +1,7 @@
 import FadeIn from './FadeIn';
 import ContactButton from './ContactButton';
 import AnimatedText from './AnimatedText';
+import Magnet from './Magnet';
 
 const ABOUT_TEXT =
   "I'm an AI & Data Science student from K.S.Rangasamy College of Technology, passionate about building intelligent applications and data-driven solutions. I work with Machine Learning, Data Analytics, Power BI, and Generative AI — turning ideas into voice assistants, smart dashboards, and impactful digital products. Always learning, always building. Let's create something amazing together!";
@@ -109,7 +110,9 @@ const AboutSection = () => {
                     </FadeIn>
 
                     <FadeIn delay={0.25}>
-                      <ContactButton />
+                      <Magnet strength={3} padding={80}>
+                        <ContactButton />
+                      </Magnet>
                     </FadeIn>
                   </div>      </div>
     </section>
