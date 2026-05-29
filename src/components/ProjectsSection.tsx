@@ -381,7 +381,6 @@ interface ProjectCardProps {
   project: ProjectData;
   index: number;
   total: number;
-  containerRef: React.RefObject<HTMLDivElement>;
 }
 
 const ProjectCard = ({ project, index, total }: ProjectCardProps) => {
@@ -480,7 +479,6 @@ const ProjectsSection = () => {
             project={project}
             index={i}
             total={PROJECTS.length}
-            containerRef={containerRef}
           />
         ))}
       </div>

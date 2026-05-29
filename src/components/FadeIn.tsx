@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useMemo } from 'react';
 import type { ReactNode, ElementType } from 'react';
 
 interface FadeInProps {
@@ -22,8 +23,8 @@ const FadeIn = ({
   className,
   style,
 }: FadeInProps) => {
-  // motion.create() supports dynamic element types in framer-motion v12
-  const MotionComponent = motion.create(as);
+  // Memoize so motion.create() isn't called on every render
+  const MotionComponent = useMemo(() => motion.create(as), [as]);
 
   return (
     <MotionComponent
