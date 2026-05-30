@@ -72,19 +72,19 @@ const AboutSection = () => {
                         {[
                           {
                             label: 'Languages',
-                            items: ['Python', 'JavaScript', 'HTML', 'CSS', 'SQL', 'Java'],
+                            items: ['Python', 'Java', 'SQL', 'TypeScript', 'HTML', 'CSS', 'JavaScript'],
                           },
                           {
                             label: 'Frameworks & Libraries',
-                            items: ['React', 'Tailwind', 'Pandas', 'NumPy', 'Scikit-learn', 'NLTK', 'TensorFlow'],
+                            items: ['Pandas', 'NumPy', 'Matplotlib', 'Scikit-learn', 'TensorFlow', 'React', 'Next.js', 'Expo', 'Expo Router', 'React Native', 'Tailwind CSS', 'LangChain'],
                           },
                           {
                             label: 'Tools & Platforms',
-                            items: ['Power BI', 'Figma', 'Vercel', 'Git', 'GitHub', 'Excel', 'VS Code'],
+                            items: ['Power BI', 'Tableau', 'Git', 'GitHub', 'VS Code', 'Vercel', 'Supabase'],
                           },
                           {
                             label: 'AI & GenAI',
-                            items: ['Machine Learning', 'Gemini', 'OpenAI', 'Prompt Engineering', 'Voice AI', 'Cloud Computing'],
+                            items: ['Machine Learning', 'Gemini', 'OpenAI', 'OpenRouter', 'Prompt Engineering', 'Speech Recognition', 'Cloud Computing', 'AI Native Development', 'Claude', 'Codex', 'LangChain Agents'],
                           },
                         ].map((group) => (
                           <div
