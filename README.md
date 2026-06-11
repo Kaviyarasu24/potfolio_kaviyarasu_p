@@ -1,6 +1,6 @@
-# Kaviyarasu P — Developer & Data Analyst Portfolio
+# Kaviyarasu P — Portfolio
 
-A dark-themed personal portfolio for **Kaviyarasu P** — AI & DS student from K.S.Rangasamy College of Technology, focused on full-stack development, data analytics, Power BI, and GenAI-powered solutions.
+A dark-themed personal portfolio for **Kaviyarasu P** — AI & Data Science student from K.S.Rangasamy College of Technology, focused on full-stack development, data analytics, Power BI, and GenAI-powered solutions.
 
 Built with **React + TypeScript + Vite + Tailwind CSS + Framer Motion**. Designed for one-click deployment on **Vercel**.
 
@@ -15,11 +15,24 @@ Built with **React + TypeScript + Vite + Tailwind CSS + Framer Motion**. Designe
 
 ## Sections
 
-1. **Hero** — name, tagline, magnetic-hover portrait
-2. **About** — bio + skills grouped by Languages / Frameworks / Tools / AI
-3. **Services** — UI/UX Design, Web Design, Front-end Development, GenAI Integration
-4. **Projects** — sticky-stacking cards
-5. **Contact** — Email, WhatsApp, LinkedIn, GitHub
+1. **Hero** — full-screen video background, name, tagline, nav, mute toggle
+2. **About** — bio, scroll-driven animated text, skills grouped by category
+3. **Education** — sticky-stacking white cards (B.Tech + HSC)
+4. **Experience** — horizontal drag-to-scroll cards (Inaiyam Innovations, EduSkills Foundation)
+5. **Projects** — sticky-stacking dark cards with landscape / portrait / terminal layouts
+6. **Contact** — Email, WhatsApp, LinkedIn, GitHub
+
+## Projects
+
+| # | Project | Tech | Layout |
+|---|---|---|---|
+| 01 | IPL Analysis Dashboard (2008–2024) | Power BI · DAX | Landscape image |
+| 02 | J.A.R.V.I.S — Personal Voice Assistant | Python · AI · Voice | Landscape image |
+| 03 | FinanceFlow — Personal Finance App | React Native · Expo · Supabase | Portrait strip |
+| 04 | Farm Vehicle Security Monitoring System | Python · YOLO · OpenCV · ANPR | Terminal |
+| 05 | Auto-Mail-Reply — Intelligent Email Automation | Python · IMAP · Fuzzy Logic | Terminal |
+| 06 | Agentic Coding AI — React App Generator | Python · LangChain · OpenRouter | Terminal |
+| 07 | Farm Sage — AI Agricultural Assistant | Next.js · OpenRouter · Open-Meteo | Terminal |
 
 ## Run locally
 
@@ -42,17 +55,25 @@ src/
 ├── main.tsx                   # React entry
 ├── index.css                  # global styles + .hero-heading gradient
 └── components/
-    ├── HeroSection.tsx        # navbar, massive heading, magnetic portrait
-    ├── AboutSection.tsx       # bio, animated text, skills grid
-    ├── ServicesSection.tsx    # white section, 4 numbered services
-    ├── ProjectsSection.tsx    # sticky-stacking project cards
+    ├── HeroSection.tsx        # navbar, video background, mute toggle
+    ├── AboutSection.tsx       # bio, animated text, skills grid, contact button
+    ├── EducationSection.tsx   # white sticky-stacking education cards
+    ├── ExperienceSection.tsx  # horizontal drag-to-scroll experience cards
+    ├── ProjectsSection.tsx    # sticky-stacking project cards (3 layouts)
     ├── ContactSection.tsx     # 4 contact methods with icons
     │
-    ├── ContactButton.tsx      # gradient pill CTA
-    ├── LiveProjectButton.tsx  # ghost outline pill
+    ├── ContactButton.tsx      # gradient pill CTA with magnetic hover
+    ├── LiveProjectButton.tsx  # ghost outline pill (GitHub / Live Preview)
     ├── FadeIn.tsx             # whileInView animation wrapper
-    ├── Magnet.tsx             # mouse-following magnetic hover
-    └── AnimatedText.tsx       # char-by-char scroll-driven reveal
+    ├── Magnet.tsx             # mouse-following magnetic hover effect
+    └── AnimatedText.tsx       # char-by-char scroll-driven text reveal
+
+public/
+    ├── intro.mp4              # hero background video
+    ├── project01_01.png       # IPL Dashboard screenshot
+    ├── project02_*.png        # JARVIS screenshots
+    ├── financeflow-*.jpeg     # FinanceFlow mobile screenshots (01–09)
+    └── ...                    # other project images
 ```
 
 ## Customisation
@@ -61,12 +82,21 @@ src/
 |---|---|
 | Name, nav links, hero text | `src/components/HeroSection.tsx` |
 | About paragraph, skills list | `src/components/AboutSection.tsx` |
-| Services list | `src/components/ServicesSection.tsx` (`SERVICES` array) |
+| Education entries | `src/components/EducationSection.tsx` (`EDUCATION` array) |
+| Experience entries | `src/components/ExperienceSection.tsx` (`EXPERIENCE` array) |
 | Projects, screenshots, live URLs | `src/components/ProjectsSection.tsx` (`PROJECTS` array) |
 | Contact methods | `src/components/ContactSection.tsx` (`CONTACT_METHODS` array) |
-| Project screenshots | drop new images in `public/` and reference as `/filename.png` |
+| Project screenshots | Drop images in `public/` and reference as `/filename.ext` |
 | Brand gradient, font, dark colour | `src/index.css` and `tailwind.config.js` |
 | Page title, meta description | `index.html` |
+
+## Image layout types (ProjectsSection)
+
+| Layout | Use case | Behaviour |
+|---|---|---|
+| `landscape` | Desktop/window screenshots | Full-width auto-sliding carousel |
+| `portrait` | Mobile app screenshots | Horizontal strip of phone-frame cards |
+| `terminal` | CLI / backend projects | Animated typewriter terminal window |
 
 ## Credits
 
