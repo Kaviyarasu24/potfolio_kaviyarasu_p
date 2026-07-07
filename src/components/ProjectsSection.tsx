@@ -65,42 +65,9 @@ const PROJECTS: ProjectData[] = [
     name: 'Farm Vehicle Security Monitoring System',
     description: 'An intelligent farm security system that automates vehicle monitoring using Computer Vision. Processes video footage to detect and identify vehicles via YOLO and OpenCV — performing automatic number plate recognition (ANPR) and logging movements in Excel.',
     githubUrl: 'https://github.com/Kaviyarasu24/security-system.git',
-    images: [],
-    imageLayout: 'terminal',
-    terminalTitle: 'security-system — python main.py',
-    terminalLines: [
-      '$ python main.py',
-      '✔  YOLO model loaded — vehicle detector ready',
-      '📷  Opening video stream... connected',
-      '',
-      '── Detection Event ──────────────────────',
-      '  Frame    : 0142',
-      '  Vehicle  : Car  |  Color: White',
-      '  Plate    : TN 33 AB 1234',
-      '  Status   : ENTRY  |  Time: 09:14:32',
-      '  ✔  Snapshot saved → snapshots/0142.jpg',
-      '  ✔  Record logged  → vehicle_log.xlsx',
-      '',
-      '── Detection Event ──────────────────────',
-      '  Frame    : 0387',
-      '  Vehicle  : Truck  |  Color: Blue',
-      '  Plate    : TN 28 CD 5678',
-      '  Status   : ENTRY  |  Time: 09:21:05',
-      '  ✔  Snapshot saved → snapshots/0387.jpg',
-      '  ✔  Record logged  → vehicle_log.xlsx',
-      '',
-      '── Detection Event ──────────────────────',
-      '  Frame    : 0614',
-      '  Vehicle  : Car  |  Color: White',
-      '  Plate    : TN 33 AB 1234',
-      '  Status   : EXIT   |  Time: 09:45:18',
-      '  ✔  Snapshot saved → snapshots/0614.jpg',
-      '  ✔  Record logged  → vehicle_log.xlsx',
-      '',
-      '📊  Session summary — 3 events logged',
-      '✔  vehicle_log.xlsx updated',
-    ],
-    gridSpan: 'md:col-span-1 lg:col-span-1',
+    images: ['/project04_01.png', '/project04_02.png', '/project04_03.png'],
+    imageLayout: 'landscape',
+    gridSpan: 'md:col-span-2 lg:col-span-2',
   },
   {
     number: '05',
@@ -180,7 +147,7 @@ const PROJECTS: ProjectData[] = [
       '✔  Project saved to generated_project/',
       '🚀  Ready — open in VS Code and run npm i',
     ],
-    gridSpan: 'md:col-span-1 lg:col-span-1',
+    gridSpan: 'md:col-span-2 lg:col-span-1',
   },
   {
     number: '07',
@@ -467,7 +434,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         style={{ minHeight: '420px' }}
       >
         {/* Left Column (Info + Actions) */}
-        <div className="flex flex-col justify-between gap-4 lg:w-[45%] lg:shrink-0 h-full">
+        <div className="flex flex-col justify-start gap-4 lg:w-[45%] lg:shrink-0">
           <div className="flex flex-col gap-1.5 w-full">
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/50">
@@ -488,7 +455,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center gap-2 w-full pt-2">
+          <div className="flex items-center gap-2 w-full pt-1">
             {project.githubUrl && (
               <LiveProjectButton href={project.githubUrl} label="GitHub" compact className="flex-1 sm:flex-initial" />
             )}
@@ -578,9 +545,9 @@ const CTACard = () => {
     <FadeIn
       delay={0.35}
       y={30}
-      className="relative flex flex-col justify-between rounded-[32px] sm:rounded-[40px] border border-[#D7E2EA]/15 p-6 sm:p-7 md:col-span-2 lg:col-span-1 transition-all duration-500 hover:border-[#D7E2EA]/35 hover:-translate-y-1 hover:shadow-[0_10px_35px_-10px_rgba(215,226,234,0.12)] group"
+      className="relative flex flex-col justify-between rounded-[32px] sm:rounded-[40px] border border-[#D7E2EA]/15 p-6 sm:p-7 md:col-span-2 lg:col-span-3 transition-all duration-500 hover:border-[#D7E2EA]/35 hover:-translate-y-1 hover:shadow-[0_10px_35px_-10px_rgba(215,226,234,0.12)] group"
       style={{
-        minHeight: '380px',
+        minHeight: '320px',
         background: 'radial-gradient(circle at top right, rgba(182, 0, 168, 0.15) 0%, rgba(12, 12, 12, 0) 70%), #121214',
       }}
     >
@@ -596,7 +563,7 @@ const CTACard = () => {
         </p>
       </div>
 
-      <div className="flex flex-col gap-2.5 mt-6 w-full">
+      <div className="flex flex-col sm:flex-row gap-3 mt-6 w-full max-w-md">
         <a
           href="mailto:Kaviyarasup24@gmail.com"
           className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 py-2.5 text-xs font-semibold uppercase tracking-widest text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98] w-full"
