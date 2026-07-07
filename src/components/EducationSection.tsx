@@ -135,7 +135,7 @@ const EduCard = ({ edu, index, total }: EduCardProps) => {
   );
 };
 
-const ServicesSection = () => {
+const EducationSection = () => {
   return (
     <section
       id="education"
@@ -164,4 +164,4 @@ const ServicesSection = () => {
   );
 };
 
-export default ServicesSection;
+export default EducationSection;
