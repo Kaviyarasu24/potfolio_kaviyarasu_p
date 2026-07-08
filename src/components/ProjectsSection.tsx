@@ -205,11 +205,11 @@ const LandscapeCarousel = ({ images, name }: { images: string[]; name: string })
 
   if (images.length === 1) {
     return (
-      <div className="w-full h-full min-h-0 overflow-hidden flex items-center justify-center">
+      <div className="w-full h-full min-h-0 overflow-hidden flex items-start justify-center">
         <img
           src={images[0]}
           alt={`${name} preview`}
-          className="h-full w-full object-contain max-h-[260px] lg:max-h-[340px]"
+          className="h-full w-full object-contain max-h-[260px] lg:max-h-[380px] transition-transform duration-500 group-hover:scale-[1.03]"
           loading="lazy"
           draggable={false}
         />
@@ -219,14 +219,14 @@ const LandscapeCarousel = ({ images, name }: { images: string[]; name: string })
 
   return (
     <div
-      className="w-full h-full min-h-0 overflow-hidden relative flex items-center justify-center"
+      className="w-full h-full min-h-0 overflow-hidden relative flex items-start justify-center"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       {images.map((src, i) => (
         <motion.div
           key={i}
-          className="absolute inset-0 overflow-hidden flex items-center justify-center"
+          className="absolute inset-0 overflow-hidden flex items-start justify-center"
           initial={false}
           animate={{ x: `${(i - current) * 100}%` }}
           transition={{ duration: 0.7, ease: [0.77, 0, 0.175, 1] }}
@@ -234,19 +234,19 @@ const LandscapeCarousel = ({ images, name }: { images: string[]; name: string })
           <img
             src={src}
             alt={`${name} preview ${i + 1}`}
-            className="h-full w-full object-contain max-h-[260px] lg:max-h-[340px]"
+            className="h-full w-full object-contain max-h-[260px] lg:max-h-[380px] transition-transform duration-500 group-hover:scale-[1.03]"
             loading="lazy"
             draggable={false}
           />
         </motion.div>
       ))}
-      <div className="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10 bg-black/40 backdrop-blur-sm px-2.5 py-1.5 rounded-full border border-white/10">
         {images.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
             className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-              i === current ? 'bg-[#D7E2EA] scale-125' : 'bg-[#D7E2EA]/40'
+              i === current ? 'bg-white scale-125' : 'bg-white/40'
             }`}
           />
         ))}
@@ -271,7 +271,7 @@ const PortraitCarousel = ({ images, name }: { images: string[]; name: string }) 
       <img
         src={images[0]}
         alt={`${name} screenshot`}
-        className="w-full h-full object-cover rounded-[16px] sm:rounded-[20px]"
+        className="w-full h-full object-cover rounded-[16px] sm:rounded-[20px] transition-transform duration-500 group-hover:scale-[1.03]"
         loading="lazy"
         draggable={false}
       />
@@ -295,7 +295,7 @@ const PortraitCarousel = ({ images, name }: { images: string[]; name: string }) 
           <img
             src={src}
             alt={`${name} screen ${i + 1}`}
-            className="w-full h-full object-cover rounded-[16px] sm:rounded-[20px]"
+            className="w-full h-full object-cover rounded-[16px] sm:rounded-[20px] transition-transform duration-500 group-hover:scale-[1.03]"
             loading="lazy"
             draggable={false}
           />
@@ -336,12 +336,15 @@ const TerminalPreview = ({ lines, title }: { lines: string[]; title?: string }) 
   }, [visibleCount]);
 
   return (
-    <div className="w-full h-full min-h-[180px] overflow-hidden rounded-[16px] bg-[#0a0a0a] border border-[#D7E2EA]/10 flex flex-col">
+    <div className="w-full h-full min-h-[180px] overflow-hidden rounded-[16px] bg-[#0a0a0a] border border-[#D7E2EA]/10 flex flex-col transition-all duration-500 group-hover:border-[#D7E2EA]/20">
       {/* Window header */}
       <div className="flex items-center gap-1.5 px-3.5 py-2 border-b border-[#D7E2EA]/10 shrink-0">
         <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
         <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-        <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+        <span className="w-2.5 h-2.5 rounded-full bg-[#28c840] relative flex items-center justify-center">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#28c840] opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#28c840]"></span>
+        </span>
         <span className="ml-2 text-[10px] font-mono text-[#D7E2EA]/30 tracking-wider overflow-hidden text-ellipsis whitespace-nowrap">{title ?? 'terminal'}</span>
       </div>
 
@@ -424,34 +427,72 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
   const isPortrait = project.imageLayout === 'portrait';
   const isWide = project.gridSpan?.includes('lg:col-span-2');
 
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setCoords({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  const techs = project.category.split('·').map((t) => t.trim());
+
   // Wide layout (horizontal side-by-side on desktop)
   if (isWide) {
     return (
       <FadeIn
         delay={index * 0.05}
         y={30}
-        className={`relative flex flex-col lg:flex-row justify-between rounded-[32px] sm:rounded-[40px] border border-[#D7E2EA]/10 bg-[#121214] p-5 sm:p-7 transition-all duration-500 hover:border-[#D7E2EA]/30 hover:bg-[#161619] hover:shadow-[0_10px_35px_-10px_rgba(215,226,234,0.08)] hover:-translate-y-1 group lg:gap-8 ${project.gridSpan}`}
+        className={`relative flex flex-col lg:flex-row justify-between overflow-hidden rounded-[32px] sm:rounded-[40px] border border-[#D7E2EA]/10 bg-[#121214] p-5 sm:p-7 transition-all duration-500 hover:border-[#D7E2EA]/30 hover:bg-[#161619] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:-translate-y-2 group lg:gap-8 ${project.gridSpan}`}
         style={{ minHeight: '420px' }}
       >
+        <div
+          ref={cardRef}
+          onMouseMove={handleMouseMove}
+          className="absolute inset-0 z-0 pointer-events-none rounded-[inherit]"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[inherit]"
+          style={{
+            background: `radial-gradient(500px circle at ${coords.x}px ${coords.y}px, rgba(215, 226, 234, 0.055), transparent 75%)`,
+          }}
+        />
+
         {/* Left Column (Info + Actions) */}
-        <div className="flex flex-col justify-start gap-4 lg:w-[45%] lg:shrink-0">
-          <div className="flex flex-col gap-1.5 w-full">
+        <div className="relative z-10 flex flex-col justify-between gap-6 lg:w-[45%] lg:shrink-0">
+          <div className="flex flex-col gap-2 w-full">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/50">
-                {project.category}
+              <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/40 group-hover:text-[#D7E2EA]/60 transition-colors duration-300">
+                Project Category
               </span>
-              <span className="font-mono text-xs font-semibold text-[#D7E2EA]/30 select-none">
+              <span className="font-mono text-xs font-semibold text-[#D7E2EA]/30 select-none group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] transition-all duration-500">
                 // {project.number}
               </span>
             </div>
 
-            <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-tight text-lg sm:text-xl md:text-2xl mt-1">
+            <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-tight text-lg sm:text-xl md:text-2xl mt-1.5 transition-colors duration-300 group-hover:text-white">
               {project.name}
             </h3>
 
             <p className="font-light text-[#D7E2EA]/60 leading-relaxed text-xs sm:text-sm mt-1">
               {project.description}
             </p>
+
+            {/* Tech badges */}
+            <div className="flex flex-wrap gap-1.5 mt-2.5">
+              {techs.map((tech) => (
+                <span
+                  key={tech}
+                  className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-[#1e1e22] text-[#D7E2EA]/75 border border-[#D7E2EA]/10 transition-all duration-300 group-hover:border-[#D7E2EA]/20 hover:!border-[#D7E2EA]/40 hover:bg-[#D7E2EA]/5"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
           </div>
 
           {/* Action buttons */}
@@ -466,7 +507,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         </div>
 
         {/* Right Column (Visual Preview) */}
-        <div className="flex-grow flex-shrink min-h-0 my-5 lg:my-0 flex items-center justify-center overflow-hidden w-full lg:h-full lg:w-[50%]">
+        <div className="relative z-10 flex-grow flex-shrink min-h-0 mt-4 mb-2 lg:my-0 flex items-start lg:items-start justify-center overflow-hidden w-full lg:h-full lg:w-[50%]">
           <ImageCarousel
             images={project.images}
             name={project.name}
@@ -484,30 +525,54 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
     <FadeIn
       delay={index * 0.05}
       y={30}
-      className={`relative flex flex-col justify-between rounded-[32px] sm:rounded-[40px] border border-[#D7E2EA]/10 bg-[#121214] p-5 sm:p-7 transition-all duration-500 hover:border-[#D7E2EA]/30 hover:bg-[#161619] hover:shadow-[0_10px_35px_-10px_rgba(215,226,234,0.08)] hover:-translate-y-1 group ${project.gridSpan}`}
+      className={`relative flex flex-col justify-between overflow-hidden rounded-[32px] sm:rounded-[40px] border border-[#D7E2EA]/10 bg-[#121214] p-5 sm:p-7 transition-all duration-500 hover:border-[#D7E2EA]/30 hover:bg-[#161619] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:-translate-y-2 group ${project.gridSpan}`}
       style={{
         minHeight: isPortrait ? '580px' : '400px',
       }}
     >
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        className="absolute inset-0 z-0 pointer-events-none rounded-[inherit]"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[inherit]"
+        style={{
+          background: `radial-gradient(400px circle at ${coords.x}px ${coords.y}px, rgba(215, 226, 234, 0.055), transparent 75%)`,
+        }}
+      />
+
       {/* Top info and actions grouped together */}
-      <div className="flex flex-col gap-3 w-full">
-        <div className="flex flex-col gap-1.5 w-full">
+      <div className="relative z-10 flex flex-col gap-4 w-full">
+        <div className="flex flex-col gap-2 w-full">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/50">
-              {project.category}
+            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/40 group-hover:text-[#D7E2EA]/60 transition-colors duration-300">
+              Project Category
             </span>
-            <span className="font-mono text-xs font-semibold text-[#D7E2EA]/30 select-none">
+            <span className="font-mono text-xs font-semibold text-[#D7E2EA]/30 select-none group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] transition-all duration-500">
               // {project.number}
             </span>
           </div>
 
-          <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-tight text-lg sm:text-xl md:text-2xl mt-1">
+          <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-tight text-lg sm:text-xl md:text-2xl mt-1.5 transition-colors duration-300 group-hover:text-white">
             {project.name}
           </h3>
 
           <p className="font-light text-[#D7E2EA]/60 leading-relaxed text-xs sm:text-sm mt-1">
             {project.description}
           </p>
+
+          {/* Tech badges */}
+          <div className="flex flex-wrap gap-1.5 mt-2.5">
+            {techs.map((tech) => (
+              <span
+                key={tech}
+                className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-[#1e1e22] text-[#D7E2EA]/75 border border-[#D7E2EA]/10 transition-all duration-300 group-hover:border-[#D7E2EA]/20 hover:!border-[#D7E2EA]/40 hover:bg-[#D7E2EA]/5"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Action buttons directly below description */}
@@ -523,7 +588,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
       {/* Visual Preview at the bottom */}
       <div
-        className={`flex-grow flex-shrink min-h-0 mt-6 flex items-center justify-center overflow-hidden w-full ${
+        className={`relative z-10 flex-grow flex-shrink min-h-0 mt-6 flex items-end justify-center overflow-hidden w-full ${
           isPortrait ? 'h-[360px] sm:h-[420px] lg:h-[480px]' : 'h-[180px] sm:h-[220px]'
         }`}
       >
