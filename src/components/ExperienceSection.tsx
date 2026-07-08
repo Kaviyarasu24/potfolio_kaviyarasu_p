@@ -5,6 +5,17 @@ import FadeIn from './FadeIn';
 const EXPERIENCE = [
   {
     number: '01',
+    type: 'College Fest',
+    company: 'DAKSHAA T26',
+    location: 'K. S. Rangasamy College of Technology',
+    role: 'Full Stack Developer & Data Management Coordinator',
+    duration: 'Jan 2026 – Mar 2026',
+    description:
+      'Contributed as a full stack developer on the team building the official website for DAKSHAA T26 using React, handling both frontend and backend development. Also coordinated content and data management for the platform, including online registration, attendance tracking, payment processing, and certificate generation for participants. Ensured data accuracy and smooth workflow across registration and certification systems, supporting a seamless experience for a large-scale, multi-day national fest.',
+    tags: ['React', 'Full Stack Development', 'Data Management', 'Workflow Automation'],
+  },
+  {
+    number: '02',
     type: 'Internship',
     company: 'Inaiyam Innovations',
     location: 'Tiruchengodu, Tamil Nadu',
@@ -15,7 +26,7 @@ const EXPERIENCE = [
     tags: ['Python', 'Excel', 'GIS', 'NDVI', 'Data Validation', 'Reporting'],
   },
   {
-    number: '02',
+    number: '03',
     type: 'Internship',
     company: 'EduSkills Foundation',
     location: 'Remote',

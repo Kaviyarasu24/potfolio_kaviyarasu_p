@@ -119,7 +119,7 @@ const LandscapeCarousel = ({ images, name }: { images: string[]; name: string })
         <img
           src={images[0]}
           alt={`${name} preview`}
-          className="h-full w-full object-contain max-h-[260px] lg:max-h-[380px] transition-transform duration-500 group-hover:scale-[1.03]"
+          className="h-full w-full object-contain max-h-[340px] lg:max-h-[480px] transition-transform duration-500 group-hover:scale-[1.03]"
           loading="lazy"
           draggable={false}
         />
@@ -144,7 +144,7 @@ const LandscapeCarousel = ({ images, name }: { images: string[]; name: string })
           <img
             src={src}
             alt={`${name} preview ${i + 1}`}
-            className="h-full w-full object-contain max-h-[260px] lg:max-h-[380px] transition-transform duration-500 group-hover:scale-[1.03]"
+            className="h-full w-full object-contain max-h-[340px] lg:max-h-[480px] transition-transform duration-500 group-hover:scale-[1.03]"
             loading="lazy"
             draggable={false}
           />
@@ -292,8 +292,8 @@ const ActiveProjectDetails = ({ project }: ActiveProjectDetailsProps) => {
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className="relative flex flex-col lg:flex-row justify-between overflow-hidden rounded-[32px] sm:rounded-[40px] border border-[#D7E2EA]/15 bg-[#121214] p-6 sm:p-9 transition-all duration-500 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)] group lg:gap-10 w-full"
-      style={{ minHeight: '480px' }}
+      className="relative flex flex-col lg:flex-row justify-between overflow-hidden rounded-[32px] sm:rounded-[40px] border border-[#D7E2EA]/15 bg-[#121214] p-8 sm:p-11 transition-all duration-500 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)] group lg:gap-10 w-full"
+      style={{ minHeight: '600px' }}
     >
       {/* Background Spotlight Glow */}
       <div
@@ -304,31 +304,31 @@ const ActiveProjectDetails = ({ project }: ActiveProjectDetailsProps) => {
       />
 
       {/* Left Column (Info + Actions) */}
-      <div className="relative z-10 flex flex-col justify-between gap-6 lg:w-[48%] lg:shrink-0">
-        <div className="flex flex-col gap-3 w-full">
+      <div className="relative z-10 flex flex-col justify-between gap-6 lg:w-[45%] lg:shrink-0">
+        <div className="flex flex-col gap-4.5 w-full">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/40">
+            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#D7E2EA]/50">
               Project Category
             </span>
-            <span className="font-mono text-xs font-semibold text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] select-none">
+            <span className="font-mono text-sm font-semibold text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] select-none">
               // {project.number}
             </span>
           </div>
 
-          <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-tight text-xl sm:text-2xl md:text-3xl mt-1.5 transition-colors duration-300 group-hover:text-white">
+          <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl mt-2 transition-colors duration-300 group-hover:text-white">
             {project.name}
           </h3>
 
-          <p className="font-light text-[#D7E2EA]/70 leading-relaxed text-xs sm:text-sm mt-1">
+          <p className="font-normal text-[#D7E2EA]/90 leading-relaxed text-base sm:text-lg mt-3">
             {project.description}
           </p>
 
           {/* Tech badges */}
-          <div className="flex flex-wrap gap-1.5 mt-3">
+          <div className="flex flex-wrap gap-2.5 mt-5">
             {techs.map((tech) => (
               <span
                 key={tech}
-                className="px-3 py-0.5 rounded-full text-[10px] font-mono font-medium bg-[#1e1e22] text-[#D7E2EA]/90 border border-[#D7E2EA]/10 hover:border-[#D7E2EA]/40 hover:bg-[#D7E2EA]/5 transition-all duration-300"
+                className="px-4 py-1.5 rounded-full text-sm font-mono font-medium bg-[#1e1e22] text-[#D7E2EA]/95 border border-[#D7E2EA]/10 hover:border-[#D7E2EA]/40 hover:bg-[#D7E2EA]/5 transition-all duration-300"
               >
                 {tech}
               </span>
@@ -337,7 +337,7 @@ const ActiveProjectDetails = ({ project }: ActiveProjectDetailsProps) => {
         </div>
 
         {/* Action buttons */}
-        <div className="flex items-center gap-2.5 w-full pt-2">
+        <div className="flex items-center gap-3.5 w-full pt-5">
           {project.githubUrl && (
             <LiveProjectButton href={project.githubUrl} label="GitHub" compact className="flex-1 sm:flex-initial" />
           )}
@@ -348,8 +348,8 @@ const ActiveProjectDetails = ({ project }: ActiveProjectDetailsProps) => {
       </div>
 
       {/* Right Column (Visual Preview) */}
-      <div className={`relative z-10 flex-grow flex-shrink min-h-0 mt-6 lg:mt-0 flex items-start lg:items-center justify-center overflow-hidden w-full lg:w-[48%] lg:self-stretch ${
-        isPortrait ? 'h-[380px] sm:h-[460px] lg:h-auto' : 'h-[200px] sm:h-[280px] lg:h-auto'
+      <div className={`relative z-10 flex-grow flex-shrink min-h-0 mt-6 lg:mt-0 flex items-start lg:items-center justify-center overflow-hidden w-full lg:w-[51%] lg:self-stretch ${
+        isPortrait ? 'h-[460px] sm:h-[540px] lg:h-[580px]' : 'h-[260px] sm:h-[360px] lg:h-[460px]'
       }`}>
         <ImageCarousel
           images={project.images}
@@ -425,7 +425,7 @@ const ProjectsSection = () => {
 
       <div className="mx-auto max-w-7xl flex flex-col lg:flex-row gap-8 items-start relative">
         {/* Sidebar Navigation - Sticky on Desktop */}
-        <div className="w-full lg:w-[30%] lg:shrink-0 flex flex-col gap-3 lg:sticky lg:top-24 h-fit z-20">
+        <div className="w-full lg:w-[24%] lg:shrink-0 flex flex-col gap-3.5 lg:sticky lg:top-24 h-fit z-20">
           {/* Mobile Horizontal Tabs */}
           <div
             className="flex lg:hidden overflow-x-auto gap-2 pb-4 scrollbar-none w-full snap-x snap-mandatory"
@@ -437,16 +437,20 @@ const ProjectsSection = () => {
                 <button
                   key={project.number}
                   onClick={() => setActiveProject(project)}
-                  className={`snap-center flex-shrink-0 flex items-center gap-2.5 px-4 py-2.5 rounded-full border text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                  className={`snap-center flex-shrink-0 flex items-center gap-2.5 px-5 py-3 rounded-full border transition-all duration-300 ${
                     isActive
-                      ? 'bg-[#121214] border-[#D7E2EA]/20 text-white shadow-[0_4px_12px_rgba(0,0,0,0.4)]'
-                      : 'bg-[#0f0f11]/30 border-transparent text-[#D7E2EA]/40 hover:bg-[#121214]/20'
+                       ? 'bg-[#121214] border-[#D7E2EA]/20 shadow-[0_4px_12px_rgba(0,0,0,0.4)]'
+                      : 'bg-[#0f0f11]/30 border-transparent hover:bg-[#121214]/20'
                   }`}
                 >
-                  <span className={`font-mono ${isActive ? 'text-cyan-400' : 'text-[#D7E2EA]/20'}`}>
+                  <span className={`font-mono text-xs sm:text-sm ${isActive ? 'text-cyan-400 font-black' : 'text-[#D7E2EA]/20'}`}>
                     {project.number}
                   </span>
-                  <span>{project.name.split('—')[0].split('(')[0].trim()}</span>
+                  <span className={`font-black text-xs sm:text-sm uppercase tracking-tight transition-colors duration-300 ${
+                    isActive ? 'hero-heading' : 'text-[#D7E2EA]/40'
+                  }`}>
+                    {project.name.split('—')[0].split('(')[0].trim()}
+                  </span>
                 </button>
               );
             })}
@@ -460,17 +464,19 @@ const ProjectsSection = () => {
                 <button
                   key={project.number}
                   onClick={() => setActiveProject(project)}
-                  className={`group flex items-center justify-between text-left p-4.5 rounded-2xl border transition-all duration-300 w-full ${
+                  className={`group flex items-center justify-between text-left p-5 rounded-2xl border transition-all duration-300 w-full ${
                     isActive
-                      ? 'bg-[#121214] border-[#D7E2EA]/20 text-white shadow-[0_10px_35px_-10px_rgba(215,226,234,0.08)]'
-                      : 'bg-[#0f0f11]/40 border-transparent text-[#D7E2EA]/40 hover:bg-[#121214]/30 hover:text-[#D7E2EA]/85'
+                      ? 'bg-[#121214] border-[#D7E2EA]/20 shadow-[0_12px_40px_-8px_rgba(215,226,234,0.1)]'
+                      : 'bg-[#0f0f11]/40 border-transparent hover:bg-[#121214]/30'
                   }`}
                 >
-                  <div className="flex items-center gap-3.5">
-                    <span className={`font-mono text-xs ${isActive ? 'text-cyan-400 font-bold' : 'text-[#D7E2EA]/20 group-hover:text-[#D7E2EA]/40 transition-colors'}`}>
+                  <div className="flex items-center gap-4">
+                    <span className={`font-mono text-sm sm:text-base ${isActive ? 'text-cyan-400 font-black' : 'text-[#D7E2EA]/20 group-hover:text-[#D7E2EA]/40 transition-colors'}`}>
                       {project.number}
                     </span>
-                    <span className="font-bold text-xs uppercase tracking-wide">
+                    <span className={`font-black text-sm sm:text-base uppercase tracking-tight transition-colors duration-300 ${
+                      isActive ? 'hero-heading' : 'text-[#D7E2EA]/40 group-hover:text-[#D7E2EA]/85'
+                    }`}>
                       {project.name.split('—')[0].split('(')[0].trim()}
                     </span>
                   </div>
@@ -489,7 +495,7 @@ const ProjectsSection = () => {
         </div>
 
         {/* Active Project Details Content Panel */}
-        <div className="w-full lg:w-[70%] flex-grow relative">
+        <div className="w-full lg:w-[73%] flex-grow relative">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeProject.number}
