@@ -19,15 +19,11 @@ const FadeIn = ({
   duration = 0.7,
   x = 0,
   y = 30,
-  as = 'div',
   className,
   style,
 }: FadeInProps) => {
-  // Memoize so motion.create() isn't called on every render
-  const MotionComponent = useMemo(() => motion.create(as), [as]);
-
   return (
-    <MotionComponent
+    <motion.div
       initial={{ opacity: 0, x, y }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: '50px', amount: 0 }}
@@ -40,7 +36,7 @@ const FadeIn = ({
       style={style}
     >
       {children}
-    </MotionComponent>
+    </motion.div>
   );
 };
 

@@ -23,6 +23,7 @@ const Magnet = ({
   const magnetRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isActive, setIsActive] = useState(false);
+  const activeRef = useRef(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -39,12 +40,14 @@ const Magnet = ({
       const isWithinY = Math.abs(distY) < rect.height / 2 + padding;
 
       if (isWithinX && isWithinY) {
+        activeRef.current = true;
         setIsActive(true);
         setPosition({
           x: distX / strength,
           y: distY / strength,
         });
-      } else {
+      } else if (activeRef.current) {
+        activeRef.current = false;
         setIsActive(false);
         setPosition({ x: 0, y: 0 });
       }
