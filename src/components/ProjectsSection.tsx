@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import FadeIn from './FadeIn';
 import LiveProjectButton from './LiveProjectButton';
 
@@ -76,36 +76,7 @@ const PROJECTS: ProjectData[] = [
     description: 'An intelligent email automation system that responds to incoming emails using keyword matching with fuzzy logic. Integrates with Gmail via IMAP/SMTP, tracks processed emails in SQLite, and supports dry-run mode for safe testing.',
     githubUrl: 'https://github.com/Kaviyarasu24/Auto-Mail-Reply.git',
     images: [],
-    imageLayout: 'terminal',
-    terminalTitle: 'auto-mail-reply — python main.py',
-    terminalLines: [
-      '$ python main.py',
-      '✔  Connected to Gmail IMAP — inbox ready',
-      '📬  Fetching unread emails... found 3',
-      '',
-      '── Email 1 ──────────────────────────────',
-      '  From    : client@example.com',
-      '  Subject : Inquiry about your services',
-      '  Keyword : "inquiry"  →  match score 94',
-      '  Action  : Sending reply...',
-      '  ✔  Reply sent successfully',
-      '',
-      '── Email 2 ──────────────────────────────',
-      '  From    : hr@company.com',
-      '  Subject : Job application follow-up',
-      '  Keyword : "follow-up"  →  match score 87',
-      '  Action  : Sending reply...',
-      '  ✔  Reply sent successfully',
-      '',
-      '── Email 3 ──────────────────────────────',
-      '  From    : unknown@domain.net',
-      '  Subject : Random newsletter',
-      '  Keyword : no match found (score < 80)',
-      '  Action  : Skipped',
-      '',
-      '✔  Run complete — 2 replied, 1 skipped',
-      '📦  Logged to emails.db',
-    ],
+    imageLayout: 'landscape',
     gridSpan: 'md:col-span-1 lg:col-span-1',
   },
   {
@@ -115,38 +86,7 @@ const PROJECTS: ProjectData[] = [
     description: 'An interactive CLI coding agent that generates complete, production-ready React 18+ applications from a single text prompt. Powered by OpenRouter API and LangChain, it outputs TypeScript + Tailwind CSS projects automatically.',
     githubUrl: 'https://github.com/Kaviyarasu24/Agentic-Coding-AI',
     images: [],
-    imageLayout: 'terminal',
-    terminalTitle: 'agentic-coding-ai — python app.py',
-    terminalLines: [
-      '$ python app.py',
-      '',
-      '  ╔══════════════════════════════════════╗',
-      '  ║       Agentic Coding AI  🤖           ║',
-      '  ╚══════════════════════════════════════╝',
-      '',
-      '  Describe the app you want:',
-      '  > create a simple calculator',
-      '',
-      '🧠  Sending prompt to LLM via OpenRouter...',
-      '✔  Response received — parsing file structure',
-      '',
-      '── Generating project files ─────────────',
-      '  ✔  metadata.json',
-      '  ✔  index.html',
-      '  ✔  index.tsx',
-      '  ✔  App.tsx',
-      '  ✔  components/Calculator.tsx',
-      '',
-      '── metadata.json ────────────────────────',
-      '  {',
-      '    "name": "Simple Calculator",',
-      '    "description": "A responsive calculator',
-      '     built with React and TypeScript."',
-      '  }',
-      '',
-      '✔  Project saved to generated_project/',
-      '🚀  Ready — open in VS Code and run npm i',
-    ],
+    imageLayout: 'landscape',
     gridSpan: 'md:col-span-2 lg:col-span-1',
   },
   {
@@ -157,37 +97,7 @@ const PROJECTS: ProjectData[] = [
     githubUrl: 'https://github.com/Kaviyarasu24/Farm-Sage',
     liveUrl: 'https://farm-sage.kaviyarasup24.workers.dev/',
     images: [],
-    imageLayout: 'terminal',
-    terminalTitle: 'farm-sage — pnpm dev',
-    terminalLines: [
-      '$ pnpm dev',
-      '✔  Next.js ready on http://localhost:3000',
-      '',
-      '── Incoming chat request ────────────────',
-      '  Language : Tamil',
-      '  Location : 11.0168° N, 76.9558° E',
-      '',
-      '🌦  Fetching weather via Open-Meteo...',
-      '  Temperature  : 31°C',
-      '  Humidity     : 78%',
-      '  Rainfall     : 4.2 mm',
-      '',
-      '📍  Reverse geocoding via Nominatim...',
-      '  Place : Coimbatore, Tamil Nadu, India',
-      '',
-      '🧠  Building farming system prompt...',
-      '  Context injected: weather + location',
-      '  Language target : Tamil',
-      '',
-      '🤖  Calling OpenRouter LLM...',
-      '✔  Response received',
-      '',
-      '── Assistant reply ──────────────────────',
-      '  "இன்றைய வெப்பநிலை 31°C மற்றும் ஈரப்பதம்',
-      '   78% உள்ளது. நெல் பயிருக்கு இப்போது...',
-      '',
-      '✔  Reply streamed to client',
-    ],
+    imageLayout: 'landscape',
     gridSpan: 'md:col-span-2 lg:col-span-2',
   },
 ];
@@ -301,7 +211,6 @@ const PortraitCarousel = ({ images, name }: { images: string[]; name: string }) 
           />
         </motion.div>
       ))}
-      {/* Small dot indicators at the bottom of the screen */}
       <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1 z-10 bg-black/40 backdrop-blur-sm px-2 py-1 rounded-full border border-white/10">
         {images.map((_, i) => (
           <button
@@ -317,94 +226,35 @@ const PortraitCarousel = ({ images, name }: { images: string[]; name: string }) 
   );
 };
 
-/* ── Terminal preview ── */
-const TerminalPreview = ({ lines, title }: { lines: string[]; title?: string }) => {
-  const [visibleCount, setVisibleCount] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (visibleCount >= lines.length) return;
-    const delay = lines[visibleCount] === '' ? 120 : lines[visibleCount].startsWith('──') ? 180 : 90;
-    const id = setTimeout(() => setVisibleCount(c => c + 1), delay);
-    return () => clearTimeout(id);
-  }, [visibleCount, lines]);
-
-  // Keep terminal auto-scrolled to bottom
-  useEffect(() => {
-    const el = containerRef.current;
-    if (el) el.scrollTop = el.scrollHeight;
-  }, [visibleCount]);
-
-  return (
-    <div className="w-full h-full min-h-[180px] overflow-hidden rounded-[16px] bg-[#0a0a0a] border border-[#D7E2EA]/10 flex flex-col transition-all duration-500 group-hover:border-[#D7E2EA]/20">
-      {/* Window header */}
-      <div className="flex items-center gap-1.5 px-3.5 py-2 border-b border-[#D7E2EA]/10 shrink-0">
-        <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-        <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-        <span className="w-2.5 h-2.5 rounded-full bg-[#28c840] relative flex items-center justify-center">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#28c840] opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#28c840]"></span>
-        </span>
-        <span className="ml-2 text-[10px] font-mono text-[#D7E2EA]/30 tracking-wider overflow-hidden text-ellipsis whitespace-nowrap">{title ?? 'terminal'}</span>
-      </div>
-
-      {/* Terminal logs */}
-      <div ref={containerRef} className="flex-1 overflow-y-auto px-4 py-3.5 font-mono" style={{ scrollbarWidth: 'none' }}>
-        {lines.slice(0, visibleCount).map((line, i) => {
-          const isCommand  = line.startsWith('$');
-          const isSuccess  = line.includes('✔');
-          const isSkipped  = line.includes('Skipped') || line.includes('no match');
-          const isSeparator = line.startsWith('──');
-          const isEmpty    = line === '';
-
-          return (
-            <div
-              key={i}
-              className={`leading-normal whitespace-pre-wrap ${
-                isEmpty      ? 'h-2'
-                : isCommand  ? 'text-[#D7E2EA] font-bold'
-                : isSuccess  ? 'text-[#28c840]'
-                : isSkipped  ? 'text-[#febc2e]'
-                : isSeparator ? 'text-[#D7E2EA]/20'
-                : 'text-[#D7E2EA]/60'
-              }`}
-              style={{ fontSize: 'clamp(0.6rem, 1vw, 0.75rem)' }}
-            >
-              {line}
-              {i === visibleCount - 1 && visibleCount < lines.length && (
-                <span className="inline-block w-[6px] h-[11px] bg-[#D7E2EA]/70 ml-0.5 align-middle animate-pulse" />
-              )}
-            </div>
-          );
-        })}
-        {visibleCount >= lines.length && (
-          <div className="text-[#D7E2EA]/60 leading-normal" style={{ fontSize: 'clamp(0.6rem, 1vw, 0.75rem)' }}>
-            <span className="inline-block w-[6px] h-[11px] bg-[#D7E2EA]/70 align-middle animate-pulse" />
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
 /* ── Carousel Router ── */
 const ImageCarousel = ({
   images,
   name,
   layout,
-  terminalLines,
-  terminalTitle,
 }: {
   images: string[];
   name: string;
   layout?: 'landscape' | 'portrait' | 'terminal';
-  terminalLines?: string[];
-  terminalTitle?: string;
 }) => {
-  if (layout === 'terminal') return <TerminalPreview lines={terminalLines ?? []} title={terminalTitle} />;
-  
+  if (images.length === 0) {
+    return (
+      <div className="w-full h-full min-h-[220px] rounded-[24px] border border-dashed border-[#D7E2EA]/20 bg-[#17171a]/40 flex flex-col items-center justify-center p-6 gap-3 text-center transition-all duration-500 group-hover:border-[#D7E2EA]/35 group-hover:bg-[#17171a]/60 w-full">
+        <div className="w-12 h-12 rounded-full bg-[#1e1e22] border border-[#D7E2EA]/10 flex items-center justify-center text-[#D7E2EA]/40 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all duration-500 shadow-inner">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+            <circle cx="9" cy="9" r="2"/>
+            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+          </svg>
+        </div>
+        <div className="flex flex-col gap-1">
+          <span className="text-xs font-bold text-[#D7E2EA]/70 tracking-wide uppercase">Preview Coming Soon</span>
+          <span className="text-[10px] text-[#D7E2EA]/40 font-light max-w-[200px]">We are preparing high-quality screenshots for this project.</span>
+        </div>
+      </div>
+    );
+  }
+
   if (layout === 'portrait') {
-    // Swipeable full vertical phone frame simulation
     return (
       <div className="w-full h-full flex items-end justify-center overflow-hidden pt-2">
         <div className="relative overflow-hidden rounded-[20px] sm:rounded-[24px] border-4 border-[#0c0c0c] bg-[#0c0c0c] shadow-[0_15px_30px_rgba(0,0,0,0.8)] h-full aspect-[9/19.5] transition-transform duration-500 group-hover:scale-105 group-hover:translate-y-1">
@@ -413,20 +263,17 @@ const ImageCarousel = ({
       </div>
     );
   }
-  
+
   return <LandscapeCarousel images={images} name={name} />;
 };
 
-/* ── Project Bento Card ── */
-interface ProjectCardProps {
+/* ── Active Project Details Card ── */
+interface ActiveProjectDetailsProps {
   project: ProjectData;
-  index: number;
 }
 
-const ProjectCard = ({ project, index }: ProjectCardProps) => {
+const ActiveProjectDetails = ({ project }: ActiveProjectDetailsProps) => {
   const isPortrait = project.imageLayout === 'portrait';
-  const isWide = project.gridSpan?.includes('lg:col-span-2');
-
   const cardRef = useRef<HTMLDivElement>(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
 
@@ -441,133 +288,47 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
   const techs = project.category.split('·').map((t) => t.trim());
 
-  // Wide layout (horizontal side-by-side on desktop)
-  if (isWide) {
-    return (
-      <FadeIn
-        delay={index * 0.05}
-        y={30}
-        className={`relative flex flex-col lg:flex-row justify-between overflow-hidden rounded-[32px] sm:rounded-[40px] border border-[#D7E2EA]/10 bg-[#121214] p-5 sm:p-7 transition-all duration-500 hover:border-[#D7E2EA]/30 hover:bg-[#161619] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:-translate-y-2 group lg:gap-8 ${project.gridSpan}`}
-        style={{ minHeight: '420px' }}
-      >
-        <div
-          ref={cardRef}
-          onMouseMove={handleMouseMove}
-          className="absolute inset-0 z-0 pointer-events-none rounded-[inherit]"
-        />
-        <div
-          className="pointer-events-none absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[inherit]"
-          style={{
-            background: `radial-gradient(500px circle at ${coords.x}px ${coords.y}px, rgba(215, 226, 234, 0.055), transparent 75%)`,
-          }}
-        />
-
-        {/* Left Column (Info + Actions) */}
-        <div className="relative z-10 flex flex-col justify-between gap-6 lg:w-[45%] lg:shrink-0">
-          <div className="flex flex-col gap-2 w-full">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/40 group-hover:text-[#D7E2EA]/60 transition-colors duration-300">
-                Project Category
-              </span>
-              <span className="font-mono text-xs font-semibold text-[#D7E2EA]/30 select-none group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] transition-all duration-500">
-                // {project.number}
-              </span>
-            </div>
-
-            <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-tight text-lg sm:text-xl md:text-2xl mt-1.5 transition-colors duration-300 group-hover:text-white">
-              {project.name}
-            </h3>
-
-            <p className="font-light text-[#D7E2EA]/60 leading-relaxed text-xs sm:text-sm mt-1">
-              {project.description}
-            </p>
-
-            {/* Tech badges */}
-            <div className="flex flex-wrap gap-1.5 mt-2.5">
-              {techs.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-[#1e1e22] text-[#D7E2EA]/75 border border-[#D7E2EA]/10 transition-all duration-300 group-hover:border-[#D7E2EA]/20 hover:!border-[#D7E2EA]/40 hover:bg-[#D7E2EA]/5"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Action buttons */}
-          <div className="flex items-center gap-2 w-full pt-1">
-            {project.githubUrl && (
-              <LiveProjectButton href={project.githubUrl} label="GitHub" compact className="flex-1 sm:flex-initial" />
-            )}
-            {project.liveUrl && (
-              <LiveProjectButton href={project.liveUrl} label="Live" compact className="flex-1 sm:flex-initial" />
-            )}
-          </div>
-        </div>
-
-        {/* Right Column (Visual Preview) */}
-        <div className="relative z-10 flex-grow flex-shrink min-h-0 mt-4 mb-2 lg:my-0 flex items-start lg:items-start justify-center overflow-hidden w-full lg:h-full lg:w-[50%]">
-          <ImageCarousel
-            images={project.images}
-            name={project.name}
-            layout={project.imageLayout}
-            terminalLines={project.terminalLines}
-            terminalTitle={project.terminalTitle}
-          />
-        </div>
-      </FadeIn>
-    );
-  }
-
-  // Vertical layout (for columns/normal cards)
   return (
-    <FadeIn
-      delay={index * 0.05}
-      y={30}
-      className={`relative flex flex-col justify-between overflow-hidden rounded-[32px] sm:rounded-[40px] border border-[#D7E2EA]/10 bg-[#121214] p-5 sm:p-7 transition-all duration-500 hover:border-[#D7E2EA]/30 hover:bg-[#161619] hover:shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:-translate-y-2 group ${project.gridSpan}`}
-      style={{
-        minHeight: isPortrait ? '580px' : '400px',
-      }}
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      className="relative flex flex-col lg:flex-row justify-between overflow-hidden rounded-[32px] sm:rounded-[40px] border border-[#D7E2EA]/15 bg-[#121214] p-6 sm:p-9 transition-all duration-500 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)] group lg:gap-10 w-full"
+      style={{ minHeight: '480px' }}
     >
-      <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        className="absolute inset-0 z-0 pointer-events-none rounded-[inherit]"
-      />
+      {/* Background Spotlight Glow */}
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[inherit]"
         style={{
-          background: `radial-gradient(400px circle at ${coords.x}px ${coords.y}px, rgba(215, 226, 234, 0.055), transparent 75%)`,
+          background: `radial-gradient(600px circle at ${coords.x}px ${coords.y}px, rgba(215, 226, 234, 0.05), transparent 75%)`,
         }}
       />
 
-      {/* Top info and actions grouped together */}
-      <div className="relative z-10 flex flex-col gap-4 w-full">
-        <div className="flex flex-col gap-2 w-full">
+      {/* Left Column (Info + Actions) */}
+      <div className="relative z-10 flex flex-col justify-between gap-6 lg:w-[48%] lg:shrink-0">
+        <div className="flex flex-col gap-3 w-full">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/40 group-hover:text-[#D7E2EA]/60 transition-colors duration-300">
+            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/40">
               Project Category
             </span>
-            <span className="font-mono text-xs font-semibold text-[#D7E2EA]/30 select-none group-hover:text-cyan-400 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] transition-all duration-500">
+            <span className="font-mono text-xs font-semibold text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] select-none">
               // {project.number}
             </span>
           </div>
 
-          <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-tight text-lg sm:text-xl md:text-2xl mt-1.5 transition-colors duration-300 group-hover:text-white">
+          <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-tight text-xl sm:text-2xl md:text-3xl mt-1.5 transition-colors duration-300 group-hover:text-white">
             {project.name}
           </h3>
 
-          <p className="font-light text-[#D7E2EA]/60 leading-relaxed text-xs sm:text-sm mt-1">
+          <p className="font-light text-[#D7E2EA]/70 leading-relaxed text-xs sm:text-sm mt-1">
             {project.description}
           </p>
 
           {/* Tech badges */}
-          <div className="flex flex-wrap gap-1.5 mt-2.5">
+          <div className="flex flex-wrap gap-1.5 mt-3">
             {techs.map((tech) => (
               <span
                 key={tech}
-                className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-[#1e1e22] text-[#D7E2EA]/75 border border-[#D7E2EA]/10 transition-all duration-300 group-hover:border-[#D7E2EA]/20 hover:!border-[#D7E2EA]/40 hover:bg-[#D7E2EA]/5"
+                className="px-3 py-0.5 rounded-full text-[10px] font-mono font-medium bg-[#1e1e22] text-[#D7E2EA]/90 border border-[#D7E2EA]/10 hover:border-[#D7E2EA]/40 hover:bg-[#D7E2EA]/5 transition-all duration-300"
               >
                 {tech}
               </span>
@@ -575,8 +336,8 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           </div>
         </div>
 
-        {/* Action buttons directly below description */}
-        <div className="flex items-center gap-2 w-full pt-1">
+        {/* Action buttons */}
+        <div className="flex items-center gap-2.5 w-full pt-2">
           {project.githubUrl && (
             <LiveProjectButton href={project.githubUrl} label="GitHub" compact className="flex-1 sm:flex-initial" />
           )}
@@ -586,21 +347,17 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
         </div>
       </div>
 
-      {/* Visual Preview at the bottom */}
-      <div
-        className={`relative z-10 flex-grow flex-shrink min-h-0 mt-6 flex items-end justify-center overflow-hidden w-full ${
-          isPortrait ? 'h-[360px] sm:h-[420px] lg:h-[480px]' : 'h-[180px] sm:h-[220px]'
-        }`}
-      >
+      {/* Right Column (Visual Preview) */}
+      <div className={`relative z-10 flex-grow flex-shrink min-h-0 mt-6 lg:mt-0 flex items-start lg:items-center justify-center overflow-hidden w-full lg:w-[48%] lg:self-stretch ${
+        isPortrait ? 'h-[380px] sm:h-[460px] lg:h-auto' : 'h-[200px] sm:h-[280px] lg:h-auto'
+      }`}>
         <ImageCarousel
           images={project.images}
           name={project.name}
           layout={project.imageLayout}
-          terminalLines={project.terminalLines}
-          terminalTitle={project.terminalTitle}
         />
       </div>
-    </FadeIn>
+    </div>
   );
 };
 
@@ -608,9 +365,9 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 const CTACard = () => {
   return (
     <FadeIn
-      delay={0.35}
+      delay={0.1}
       y={30}
-      className="relative flex flex-col justify-between rounded-[32px] sm:rounded-[40px] border border-[#D7E2EA]/15 p-6 sm:p-7 md:col-span-2 lg:col-span-3 transition-all duration-500 hover:border-[#D7E2EA]/35 hover:-translate-y-1 hover:shadow-[0_10px_35px_-10px_rgba(215,226,234,0.12)] group"
+      className="relative flex flex-col justify-between rounded-[32px] sm:rounded-[40px] border border-[#D7E2EA]/15 p-6 sm:p-7 transition-all duration-500 hover:border-[#D7E2EA]/35 hover:-translate-y-1 hover:shadow-[0_10px_35px_-10px_rgba(215,226,234,0.12)] group"
       style={{
         minHeight: '320px',
         background: 'radial-gradient(circle at top right, rgba(182, 0, 168, 0.15) 0%, rgba(12, 12, 12, 0) 70%), #121214',
@@ -650,6 +407,8 @@ const CTACard = () => {
 
 /* ── Main Projects Section ── */
 const ProjectsSection = () => {
+  const [activeProject, setActiveProject] = useState<ProjectData>(PROJECTS[0]);
+
   return (
     <section
       id="projects"
@@ -664,14 +423,89 @@ const ProjectsSection = () => {
         </h2>
       </FadeIn>
 
-      <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 grid-flow-row-dense">
-        {PROJECTS.map((project, i) => (
-          <ProjectCard
-            key={project.number}
-            project={project}
-            index={i}
-          />
-        ))}
+      <div className="mx-auto max-w-7xl flex flex-col lg:flex-row gap-8 items-start relative">
+        {/* Sidebar Navigation - Sticky on Desktop */}
+        <div className="w-full lg:w-[30%] lg:shrink-0 flex flex-col gap-3 lg:sticky lg:top-24 h-fit z-20">
+          {/* Mobile Horizontal Tabs */}
+          <div
+            className="flex lg:hidden overflow-x-auto gap-2 pb-4 scrollbar-none w-full snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {PROJECTS.map((project) => {
+              const isActive = activeProject.number === project.number;
+              return (
+                <button
+                  key={project.number}
+                  onClick={() => setActiveProject(project)}
+                  className={`snap-center flex-shrink-0 flex items-center gap-2.5 px-4 py-2.5 rounded-full border text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                    isActive
+                      ? 'bg-[#121214] border-[#D7E2EA]/20 text-white shadow-[0_4px_12px_rgba(0,0,0,0.4)]'
+                      : 'bg-[#0f0f11]/30 border-transparent text-[#D7E2EA]/40 hover:bg-[#121214]/20'
+                  }`}
+                >
+                  <span className={`font-mono ${isActive ? 'text-cyan-400' : 'text-[#D7E2EA]/20'}`}>
+                    {project.number}
+                  </span>
+                  <span>{project.name.split('—')[0].split('(')[0].trim()}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Desktop Vertical List */}
+          <div className="hidden lg:flex flex-col gap-2.5 w-full">
+            {PROJECTS.map((project) => {
+              const isActive = activeProject.number === project.number;
+              return (
+                <button
+                  key={project.number}
+                  onClick={() => setActiveProject(project)}
+                  className={`group flex items-center justify-between text-left p-4.5 rounded-2xl border transition-all duration-300 w-full ${
+                    isActive
+                      ? 'bg-[#121214] border-[#D7E2EA]/20 text-white shadow-[0_10px_35px_-10px_rgba(215,226,234,0.08)]'
+                      : 'bg-[#0f0f11]/40 border-transparent text-[#D7E2EA]/40 hover:bg-[#121214]/30 hover:text-[#D7E2EA]/85'
+                  }`}
+                >
+                  <div className="flex items-center gap-3.5">
+                    <span className={`font-mono text-xs ${isActive ? 'text-cyan-400 font-bold' : 'text-[#D7E2EA]/20 group-hover:text-[#D7E2EA]/40 transition-colors'}`}>
+                      {project.number}
+                    </span>
+                    <span className="font-bold text-xs uppercase tracking-wide">
+                      {project.name.split('—')[0].split('(')[0].trim()}
+                    </span>
+                  </div>
+                  <div className="flex items-center shrink-0 ml-2">
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeIndicator"
+                        className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"
+                      />
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Active Project Details Content Panel */}
+        <div className="w-full lg:w-[70%] flex-grow relative">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeProject.number}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="w-full"
+            >
+              <ActiveProjectDetails project={activeProject} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-7xl mt-8">
         <CTACard />
       </div>
     </section>
