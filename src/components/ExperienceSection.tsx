@@ -5,9 +5,9 @@ import FadeIn from './FadeIn';
 const EXPERIENCE = [
   {
     number: '01',
-    type: 'College Fest',
-    company: 'DAKSHAA T26',
-    location: 'K. S. Rangasamy College of Technology',
+    type: 'Freelance',
+    company: 'K. S. Rangasamy College of Technology',
+    location: 'DAKSHAA T26',
     role: 'Full Stack Developer & Data Management Coordinator',
     duration: 'Jan 2026 – Mar 2026',
     description:
@@ -129,7 +129,7 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
 
         {/* Back Side */}
         <div
-          className="absolute inset-0 flex flex-col justify-center rounded-[32px] sm:rounded-[40px] border-2 border-[#0C0C0C]/30 bg-[#0C0C0C] p-6 sm:p-8 shadow-xl"
+          className="absolute inset-0 flex flex-col justify-start rounded-[32px] sm:rounded-[40px] border-2 border-[#0C0C0C]/30 bg-[#0C0C0C] p-6 sm:p-8 shadow-xl"
           style={{ 
             backfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)'

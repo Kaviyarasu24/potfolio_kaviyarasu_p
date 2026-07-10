@@ -306,10 +306,7 @@ const ActiveProjectDetails = ({ project }: ActiveProjectDetailsProps) => {
       {/* Left Column (Info + Actions) */}
       <div className="relative z-10 flex flex-col justify-between gap-6 lg:w-[45%] lg:shrink-0">
         <div className="flex flex-col gap-4.5 w-full">
-          <div className="flex items-center justify-between">
-            <span className="text-sm font-semibold uppercase tracking-[0.2em] text-[#D7E2EA]/50">
-              Project Category
-            </span>
+          <div className="flex items-center justify-end">
             <span className="font-mono text-sm font-semibold text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] select-none">
               // {project.number}
             </span>
