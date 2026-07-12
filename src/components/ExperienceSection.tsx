@@ -44,7 +44,15 @@ interface ExpCardProps {
 }
 
 const ExpCard = ({ exp, index }: ExpCardProps) => {
-  const [hovered, setHovered] = useState(false);
+  const [flipped, setFlipped] = useState(false);
+
+  // Detect pointer type: on touch devices use tap-to-flip,
+  // on pointer devices use hover (mouse enter/leave)
+  const isTouch = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches;
+
+  const handleInteractionStart = () => { if (!isTouch) setFlipped(true); };
+  const handleInteractionEnd = () => { if (!isTouch) setFlipped(false); };
+  const handleTap = () => { if (isTouch) setFlipped(f => !f); };
 
   return (
     <motion.div
@@ -57,11 +65,12 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
         minHeight: 'clamp(320px, 40vh, 460px)',
         perspective: '1000px'
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={handleInteractionStart}
+      onMouseLeave={handleInteractionEnd}
+      onClick={handleTap}
     >
       <motion.div
-        animate={{ rotateY: hovered ? 180 : 0 }}
+        animate={{ rotateY: flipped ? 180 : 0 }}
         transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
         style={{ transformStyle: 'preserve-3d' }}
         className="relative w-full h-full"
@@ -114,16 +123,23 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
           {/* Divider */}
           <div className="w-full h-px bg-[#0C0C0C]/10" />
 
-          {/* Bottom: tags */}
-          <div className="flex flex-wrap gap-2">
-            {exp.tags.map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-[#0C0C0C]/20 bg-[#0C0C0C]/[0.04] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#0C0C0C]/60"
-              >
-                {tag}
-              </span>
-            ))}
+          {/* Bottom: tags + tap hint */}
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-wrap gap-2">
+              {exp.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-[#0C0C0C]/20 bg-[#0C0C0C]/[0.04] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#0C0C0C]/60"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            {isTouch && (
+              <p className="text-center text-[10px] uppercase tracking-widest text-[#0C0C0C]/30 pt-1">
+                Tap to see details
+              </p>
+            )}
           </div>
         </div>
 
@@ -135,7 +151,7 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
             transform: 'rotateY(180deg)'
           }}
         >
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 h-full">
             <div className="flex items-center gap-3">
               <span className="w-8 h-px bg-white/30"></span>
               <h4 className="font-bold uppercase tracking-widest text-white/50 text-xs sm:text-sm">
@@ -143,7 +159,7 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
               </h4>
             </div>
             <p
-              className="font-light text-white/90 leading-relaxed overflow-y-auto"
+              className="font-light text-white/90 leading-relaxed overflow-y-auto flex-1"
               style={{ 
                 fontSize: 'clamp(0.85rem, 1.3vw, 1rem)',
                 scrollbarWidth: 'none',
@@ -152,6 +168,12 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
             >
               {exp.description}
             </p>
+            {/* Tap hint — only visible on touch devices */}
+            {isTouch && (
+              <p className="text-center text-[10px] uppercase tracking-widest text-white/30 pt-2 border-t border-white/10">
+                Tap to flip back
+              </p>
+            )}
           </div>
         </div>
       </motion.div>

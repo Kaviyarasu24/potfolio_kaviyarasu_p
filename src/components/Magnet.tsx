@@ -26,6 +26,9 @@ const Magnet = ({
   const activeRef = useRef(false);
 
   useEffect(() => {
+    // No-op on touch-only devices — magnet effect is mouse-only
+    if (typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!magnetRef.current) return;
 

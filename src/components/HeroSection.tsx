@@ -43,18 +43,22 @@ const HeroSection = () => {
   }, []);
 
   // Snap-scroll: one wheel tick / keypress while at top → jump to About
-  useEffect(() => {
-    let fired = false;
+  // Use a ref so the flag persists across renders and resets when the user
+  // scrolls back to the top (i.e. scrollY drops below threshold).
+  const snapFiredRef = useRef(false);
 
-      const goToAbout = () => {
-        if (fired) return;
-        fired = true;
-        const about = document.getElementById('about');
-        if (about) about.scrollIntoView({ behavior: 'auto', block: 'start' });
-      };
+  useEffect(() => {
+    const goToAbout = () => {
+      if (snapFiredRef.current) return;
+      snapFiredRef.current = true;
+      const about = document.getElementById('about');
+      if (about) about.scrollIntoView({ behavior: 'auto', block: 'start' });
+    };
 
     const onWheel = (e: WheelEvent) => {
-      if (fired) return;
+      // Reset the flag when user scrolls back to the very top
+      if (window.scrollY === 0) snapFiredRef.current = false;
+      if (snapFiredRef.current) return;
       if (e.deltaY <= 0) return;
       if (window.scrollY > 50) return;
       e.preventDefault();
@@ -62,7 +66,8 @@ const HeroSection = () => {
     };
 
     const onKey = (e: KeyboardEvent) => {
-      if (fired) return;
+      if (window.scrollY === 0) snapFiredRef.current = false;
+      if (snapFiredRef.current) return;
       if (window.scrollY > 50) return;
       if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
         e.preventDefault();

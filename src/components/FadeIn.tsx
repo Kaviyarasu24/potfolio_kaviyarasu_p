@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { useMemo } from 'react';
-import type { ReactNode, ElementType } from 'react';
+import type { ReactNode } from 'react';
 
 interface FadeInProps {
   children: ReactNode;
@@ -8,7 +7,6 @@ interface FadeInProps {
   duration?: number;
   x?: number;
   y?: number;
-  as?: ElementType;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -22,6 +20,7 @@ const FadeIn = ({
   className,
   style,
 }: FadeInProps) => {
+
   return (
     <motion.div
       initial={{ opacity: 0, x, y }}

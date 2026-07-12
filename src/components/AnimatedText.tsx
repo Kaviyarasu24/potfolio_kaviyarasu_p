@@ -49,35 +49,43 @@ const AnimatedText = ({ text, className, style }: AnimatedTextProps) => {
   });
 
   // Split into words to preserve natural line-wrapping at word boundaries.
+  // Build a flat list of characters (excluding trailing space of last word)
+  // so totalChars exactly matches the highest index used.
   const words = text.split(' ');
-  const totalChars = text.length;
+  const chars: { char: string; globalIndex: number }[][] = [];
   let runningIndex = 0;
+
+  words.forEach((word, wi) => {
+    const wordChars = Array.from(word).map((ch, ci) => ({
+      char: ch,
+      globalIndex: runningIndex + ci,
+    }));
+    chars.push(wordChars);
+    // Only add +1 for the space if this is NOT the last word
+    runningIndex += wordChars.length + (wi < words.length - 1 ? 1 : 0);
+  });
+
+  const totalChars = runningIndex; // exact count, no trailing +1
 
   return (
     <p ref={ref} className={className} style={style}>
-      {words.map((word, wi) => {
-        const wordChars = Array.from(word);
-        const wordStart = runningIndex;
-        runningIndex += wordChars.length + 1; // +1 accounts for the space after
-
-        return (
-          <span
-            key={wi}
-            style={{ display: 'inline-block', whiteSpace: 'nowrap' }}
-          >
-            {wordChars.map((ch, ci) => (
-              <Char
-                key={ci}
-                char={ch}
-                index={wordStart + ci}
-                total={totalChars}
-                progress={scrollYProgress}
-              />
-            ))}
-            {wi < words.length - 1 && '\u00A0'}
-          </span>
-        );
-      })}
+      {words.map((_, wi) => (
+        <span
+          key={wi}
+          style={{ display: 'inline-block', whiteSpace: 'nowrap' }}
+        >
+          {chars[wi].map(({ char, globalIndex }) => (
+            <Char
+              key={globalIndex}
+              char={char}
+              index={globalIndex}
+              total={totalChars}
+              progress={scrollYProgress}
+            />
+          ))}
+          {wi < words.length - 1 && '\u00A0'}
+        </span>
+      ))}
     </p>
   );
 };
