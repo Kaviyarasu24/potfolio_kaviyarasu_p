@@ -613,10 +613,10 @@ const ProjectsSection = () => {
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    <span className={`font-mono text-sm ${isActive ? 'text-cyan-400 font-black' : 'text-[#D7E2EA]/20 group-hover:text-[#D7E2EA]/40 transition-colors'}`}>
+                    <span className={`font-mono text-sm sm:text-base ${isActive ? 'text-cyan-400 font-black' : 'text-[#D7E2EA]/20 group-hover:text-[#D7E2EA]/40 transition-colors'}`}>
                       {project.number}
                     </span>
-                    <span className={`font-black text-sm uppercase tracking-tight transition-colors duration-300 ${
+                    <span className={`font-black text-base lg:text-lg uppercase tracking-tight transition-colors duration-300 ${
                       isActive ? 'hero-heading' : 'text-[#D7E2EA]/40 group-hover:text-[#D7E2EA]/85'
                     }`}>
                       {project.name.split('—')[0].split('(')[0].trim()}
