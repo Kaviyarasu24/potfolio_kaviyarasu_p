@@ -283,9 +283,11 @@ const ImageCarousel = ({
 /* ── Active Project Details Card ── */
 interface ActiveProjectDetailsProps {
   project: any;
+  contentOpacity: any;
+  containerOpacity: any;
 }
 
-const ActiveProjectDetails = ({ project }: ActiveProjectDetailsProps) => {
+const ActiveProjectDetails = ({ project, contentOpacity, containerOpacity }: ActiveProjectDetailsProps) => {
   const isPortrait = project.imageLayout === 'portrait';
   const cardRef = useRef<HTMLDivElement>(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
@@ -302,9 +304,10 @@ const ActiveProjectDetails = ({ project }: ActiveProjectDetailsProps) => {
   const techs = project.category.split('·').map((t: string) => t.trim());
 
   return (
-    <div
+    <motion.div
       ref={cardRef}
       onMouseMove={handleMouseMove}
+      style={{ opacity: containerOpacity }}
       className="relative flex flex-col lg:flex-row justify-between overflow-hidden rounded-[24px] sm:rounded-[32px] md:rounded-[40px] border border-[#D7E2EA]/15 bg-[#121214] p-5 sm:p-7 lg:p-11 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)] group lg:gap-10 w-full h-full"
     >
       {/* Background Spotlight Glow */}
@@ -315,116 +318,127 @@ const ActiveProjectDetails = ({ project }: ActiveProjectDetailsProps) => {
         }}
       />
 
-      {/* Left Column (Info + Actions) */}
-      <div className="relative z-10 flex flex-col justify-between gap-3 sm:gap-4 lg:gap-6 lg:w-[45%] lg:shrink-0">
-        <div className="flex flex-col gap-1.5 sm:gap-2.5 w-full">
-          <div className="flex items-center justify-between lg:justify-end">
-            <span className="lg:hidden text-[9px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/40">
-              Project
-            </span>
-            <span className="font-mono text-xs sm:text-sm font-semibold text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] select-none">
-              // {project.number}
-            </span>
-          </div>
-
-          <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-none text-lg sm:text-2xl lg:text-4xl transition-colors duration-300 group-hover:text-white">
-            {project.name}
-          </h3>
-
-          <p className="font-normal text-[#D7E2EA]/80 leading-relaxed text-[11px] sm:text-xs lg:text-base">
-            {project.description}
-          </p>
-
-          {/* Tech badges */}
-          <div className="flex flex-wrap gap-1 sm:gap-2 mt-1 sm:mt-2">
-            {techs.map((tech: string) => (
-              <span
-                key={tech}
-                className="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[9px] sm:text-[11px] font-mono font-medium bg-[#1e1e22] text-[#D7E2EA]/95 border border-[#D7E2EA]/10 hover:border-[#D7E2EA]/40 hover:bg-[#D7E2EA]/5 transition-all duration-300"
-              >
-                {tech}
+      {/* Inner Content - Fades to 0 opacity when card is covered to prevent overlapping text */}
+      <motion.div
+        style={{ opacity: contentOpacity }}
+        className="relative z-10 flex flex-col lg:flex-row justify-between w-full h-full lg:gap-10"
+      >
+        {/* Left Column (Info + Actions) */}
+        <div className="relative z-10 flex flex-col justify-between gap-3 sm:gap-4 lg:gap-6 lg:w-[45%] lg:shrink-0">
+          <div className="flex flex-col gap-1.5 sm:gap-2.5 w-full">
+            <div className="flex items-center justify-between lg:justify-end">
+              <span className="lg:hidden text-[9px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/40">
+                Project
               </span>
-            ))}
+              <span className="font-mono text-xs sm:text-sm font-semibold text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] select-none">
+                // {project.number}
+              </span>
+            </div>
+
+            <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-none text-lg sm:text-2xl lg:text-4xl transition-colors duration-300 group-hover:text-white">
+              {project.name}
+            </h3>
+
+            <p className="font-normal text-[#D7E2EA]/80 leading-relaxed text-[11px] sm:text-xs lg:text-base">
+              {project.description}
+            </p>
+
+            {/* Tech badges */}
+            <div className="flex flex-wrap gap-1 sm:gap-2 mt-1 sm:mt-2">
+              {techs.map((tech: string) => (
+                <span
+                  key={tech}
+                  className="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[9px] sm:text-[11px] font-mono font-medium bg-[#1e1e22] text-[#D7E2EA]/95 border border-[#D7E2EA]/10 hover:border-[#D7E2EA]/40 hover:bg-[#D7E2EA]/5 transition-all duration-300"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Action buttons */}
+          <div className="flex items-center gap-2.5 w-full pt-1 sm:pt-2 lg:pt-4">
+            {project.githubUrl && (
+              <LiveProjectButton href={project.githubUrl} label="GitHub" compact className="flex-1 sm:flex-initial text-xs" />
+            )}
+            {project.liveUrl && (
+              <LiveProjectButton href={project.liveUrl} label="Live" compact className="flex-1 sm:flex-initial text-xs" />
+            )}
           </div>
         </div>
 
-        {/* Action buttons */}
-        <div className="flex items-center gap-2.5 w-full pt-1 sm:pt-2 lg:pt-4">
-          {project.githubUrl && (
-            <LiveProjectButton href={project.githubUrl} label="GitHub" compact className="flex-1 sm:flex-initial text-xs" />
-          )}
-          {project.liveUrl && (
-            <LiveProjectButton href={project.liveUrl} label="Live" compact className="flex-1 sm:flex-initial text-xs" />
-          )}
+        {/* Right Column (Visual Preview) */}
+        <div className={`relative z-10 flex-grow flex-shrink min-h-0 mt-4 lg:mt-0 flex items-start lg:items-center justify-center overflow-hidden w-full lg:w-[51%] lg:self-stretch ${
+          isPortrait ? 'h-[200px] sm:h-[260px] lg:h-full' : 'h-[140px] sm:h-[180px] lg:h-full'
+        }`}>
+          <ImageCarousel
+            images={project.images}
+            name={project.name}
+            layout={project.imageLayout}
+          />
         </div>
-      </div>
-
-      {/* Right Column (Visual Preview) */}
-      <div className={`relative z-10 flex-grow flex-shrink min-h-0 mt-4 lg:mt-0 flex items-start lg:items-center justify-center overflow-hidden w-full lg:w-[51%] lg:self-stretch ${
-        isPortrait ? 'h-[200px] sm:h-[260px] lg:h-full' : 'h-[140px] sm:h-[180px] lg:h-full'
-      }`}>
-        <ImageCarousel
-          images={project.images}
-          name={project.name}
-          layout={project.imageLayout}
-        />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
 /* ── Project Card Router (Project layout vs CTA layout) ── */
 interface ProjectCardProps {
   project: any;
+  contentOpacity: any;
+  containerOpacity: any;
 }
 
-const ProjectCard = ({ project }: ProjectCardProps) => {
+const ProjectCard = ({ project, contentOpacity, containerOpacity }: ProjectCardProps) => {
   if (project.isCTA) {
     return (
-      <div
+      <motion.div
         className="relative flex flex-col justify-between overflow-hidden rounded-[24px] sm:rounded-[32px] md:rounded-[40px] border border-[#D7E2EA]/15 p-6 sm:p-8 lg:p-11 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)] group w-full h-full"
         style={{
           background: 'radial-gradient(circle at top right, rgba(182, 0, 168, 0.15) 0%, rgba(12, 12, 12, 0) 70%), #121214',
+          opacity: containerOpacity,
         }}
       >
-        <div className="flex flex-col gap-3 max-w-2xl">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/40">
-              Collaboration
-            </span>
-            <span className="font-mono text-sm font-semibold text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] select-none">
-              // END
-            </span>
+        <motion.div style={{ opacity: contentOpacity }} className="flex flex-col gap-3 max-w-2xl h-full justify-between">
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/40">
+                Collaboration
+              </span>
+              <span className="font-mono text-sm font-semibold text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] select-none">
+                // END
+              </span>
+            </div>
+            <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-none text-2xl sm:text-3xl lg:text-5xl mt-2 transition-colors duration-300 group-hover:text-white">
+              Let's build something amazing
+            </h3>
+            <p className="font-normal text-[#D7E2EA]/90 leading-relaxed text-[11px] sm:text-xs lg:text-base mt-4">
+              Looking for an internship, open-source collaboration, or just want to chat about AI & Data Science? Let's connect!
+            </p>
           </div>
-          <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-none text-2xl sm:text-3xl lg:text-5xl mt-2 transition-colors duration-300 group-hover:text-white">
-            Let's build something amazing
-          </h3>
-          <p className="font-normal text-[#D7E2EA]/90 leading-relaxed text-[11px] sm:text-xs lg:text-base mt-4">
-            Looking for an internship, open-source collaboration, or just want to chat about AI & Data Science? Let's connect!
-          </p>
-        </div>
 
-        <div className="flex flex-col sm:flex-row gap-3.5 mt-8 w-full max-w-md">
-          <a
-            href="mailto:Kaviyarasup24@gmail.com"
-            className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 py-2.5 lg:px-8 lg:py-3 text-xs sm:text-sm font-semibold uppercase tracking-widest text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98] w-full text-center"
-          >
-            Email Me
-          </a>
-          <a
-            href="https://github.com/kaviyarasu24"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full border border-[#D7E2EA]/20 bg-transparent px-6 py-2.5 lg:px-8 lg:py-3 text-xs sm:text-sm font-semibold uppercase tracking-widest text-[#D7E2EA] transition hover:bg-white/5 hover:border-[#D7E2EA]/50 hover:scale-[1.02] active:scale-[0.98] w-full text-center"
-          >
-            GitHub Profile
-          </a>
-        </div>
-      </div>
+          <div className="flex flex-col sm:flex-row gap-3.5 mt-8 w-full max-w-md">
+            <a
+              href="mailto:Kaviyarasup24@gmail.com"
+              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 py-2.5 lg:px-8 lg:py-3 text-xs sm:text-sm font-semibold uppercase tracking-widest text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98] w-full text-center"
+            >
+              Email Me
+            </a>
+            <a
+              href="https://github.com/kaviyarasu24"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full border border-[#D7E2EA]/20 bg-transparent px-6 py-2.5 lg:px-8 lg:py-3 text-xs sm:text-sm font-semibold uppercase tracking-widest text-[#D7E2EA] transition hover:bg-white/5 hover:border-[#D7E2EA]/50 hover:scale-[1.02] active:scale-[0.98] w-full text-center"
+            >
+              GitHub Profile
+            </a>
+          </div>
+        </motion.div>
+      </motion.div>
     );
   }
 
-  return <ActiveProjectDetails project={project} />;
+  return <ActiveProjectDetails project={project} contentOpacity={contentOpacity} containerOpacity={containerOpacity} />;
 };
 
 /* ── Card Wrapper for Hooks Isolation in Loops ── */
@@ -469,15 +483,26 @@ const CardWrapper = ({ idx, totalCards, progress, project }: CardWrapperProps) =
       : [1, 1, 0.94, 0.94]
   );
 
-  // Fade out when covered
-  const opacity = useTransform(
+  // Fade out content when covered (to 0 opacity to prevent overlaps)
+  const contentOpacity = useTransform(
     progress,
     idx === totalCards - 1
       ? [0, 1]
       : [0, startOut, endOut, 1],
     idx === totalCards - 1
       ? [1, 1]
-      : [1, 1, 0.35, 0.35]
+      : [1, 1, 0, 0]
+  );
+
+  // Fade outer container slightly when covered to look like a stacked card
+  const containerOpacity = useTransform(
+    progress,
+    idx === totalCards - 1
+      ? [0, 1]
+      : [0, startOut, endOut, 1],
+    idx === totalCards - 1
+      ? [1, 1]
+      : [1, 1, 0.6, 0.6]
   );
 
   // Lift upwards slightly when covered
@@ -496,13 +521,12 @@ const CardWrapper = ({ idx, totalCards, progress, project }: CardWrapperProps) =
       style={{
         x,
         scale,
-        opacity,
         y: yOffset,
         zIndex: (idx + 1) * 10,
       }}
       className="absolute inset-0 w-full h-full"
     >
-      <ProjectCard project={project} />
+      <ProjectCard project={project} contentOpacity={contentOpacity} containerOpacity={containerOpacity} />
     </motion.div>
   );
 };
