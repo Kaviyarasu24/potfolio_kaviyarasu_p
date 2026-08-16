@@ -75,19 +75,25 @@ const HeroSection = () => {
         <div className="grid flex-1 items-center gap-10 px-5 pb-8 pt-6 sm:px-7 md:grid-cols-[1.05fr_0.95fr] md:px-9 md:pb-12 lg:gap-14">
           <div className="flex flex-col items-start">
             <FadeIn delay={0.15} y={24}>
-              <p className="mb-5 rounded-full border border-theme-border bg-theme-accentMuted px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-theme-accent">
-                Learn &gt; Build &gt; Analyze
-              </p>
+              <div className="mb-5 flex flex-wrap gap-2.5">
+                <span className="rounded-full border border-theme-border bg-theme-accentMuted px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-theme-accent select-none">
+                  Learn &gt; Build &gt; Analyze
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  Open to Internship & Full-time
+                </span>
+              </div>
             </FadeIn>
 
             <FadeIn delay={0.28} y={34}>
               <h1
                 className="max-w-4xl font-black uppercase leading-[0.9] tracking-tight text-theme-text"
-                style={{ fontSize: 'clamp(3.8rem, 11vw, 8.8rem)' }}
+                style={{ fontSize: 'clamp(3rem, 9vw, 7.8rem)' }}
               >
-                <span className="kinetic-word block">Data</span>
+                <span className="kinetic-word block">Data Analyst</span>
                 <span className="kinetic-word block text-theme-accent">Developer</span>
-                <span className="kinetic-word block text-theme-text">Builder</span>
+                <span className="kinetic-word block text-theme-text">Engineer</span>
               </h1>
             </FadeIn>
 
@@ -99,13 +105,20 @@ const HeroSection = () => {
             </FadeIn>
 
             <FadeIn delay={0.55} y={18}>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-8 flex flex-wrap items-center gap-3">
                 <ContactButton label="Start a conversation" href="#contact" />
                 <a
                   href="#projects"
-                  className="inline-flex items-center justify-center rounded-full border-2 border-theme-text px-8 py-3 text-xs font-bold uppercase tracking-widest text-theme-text transition hover:bg-theme-text hover:text-theme-bg sm:px-10 sm:py-3.5 sm:text-sm"
+                  className="inline-flex items-center justify-center rounded-full border-2 border-theme-text/80 px-7 py-2.5 text-xs font-bold uppercase tracking-widest text-theme-text transition hover:bg-theme-text hover:text-theme-bg sm:px-8 sm:py-3"
                 >
                   View projects
+                </a>
+                <a
+                  href="/resume.pdf"
+                  download="Kaviyarasu_P_Resume.pdf"
+                  className="inline-flex items-center justify-center rounded-full border border-theme-accent bg-theme-accentMuted/20 hover:bg-theme-accent/20 px-7 py-2.5 text-xs font-bold uppercase tracking-widest text-theme-accent transition sm:px-8 sm:py-3"
+                >
+                  Download CV
                 </a>
               </div>
             </FadeIn>
@@ -114,9 +127,7 @@ const HeroSection = () => {
           <FadeIn delay={0.35} x={40} y={0}>
             <div className="relative">
               <div className="absolute -right-4 -top-4 hidden h-28 w-28 rounded-full bg-theme-accent md:block" />
-              <div className="absolute -left-5 bottom-14 z-10 hidden rounded-full border border-theme-border bg-theme-card px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] text-theme-text shadow-lg lg:block">
-                Selected work / 2024-2026
-              </div>
+              {/* Removed selected work pill */}
               <div className="relative overflow-hidden rounded-[34px] border-[10px] border-theme-border bg-theme-border shadow-[18px_18px_0_var(--accent-color)] transition-all duration-400">
                 <video
                   ref={videoRef}
