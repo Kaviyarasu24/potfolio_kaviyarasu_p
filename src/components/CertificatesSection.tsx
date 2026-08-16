@@ -54,7 +54,6 @@ const CERTIFICATES: Certificate[] = [
     badge: 'Oracle Certified',
     title: 'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate',
     issuer: 'Oracle',
-    awardedTo: 'Kaviyarasu P',
     description:
       'Demonstrates foundational expertise in artificial intelligence and machine learning concepts, including generative AI, large language models, AI services, and core AI technologies within Oracle Cloud Infrastructure.',
     credentialId: '1024944150CI25AICFA',
@@ -75,7 +74,6 @@ const CERTIFICATES: Certificate[] = [
     badge: 'TN Skills 2025',
     title: 'TN Skills 2025 – Cloud Computing Competition',
     issuer: 'Tamil Nadu Skill Development Corporation (TNSDC)',
-    awardedTo: 'Kaviyarasu P',
     description:
       'Recognized participation in the TN Skills 2025 Cloud Computing competition, demonstrating practical knowledge and technical competency in cloud computing through progressive Level 1 and Level 2 competition stages.',
     credentialId: 'N/A',
