@@ -4,6 +4,7 @@ import { Play, RotateCcw, Send, Terminal, MessageSquare, ShieldCheck, CheckCircl
 
 interface InteractiveTerminalProps {
   projectNumber: string;
+  isActive?: boolean;
 }
 
 interface LogLine {
@@ -63,7 +64,7 @@ const FARM_SAGE_PRESETS = [
   },
 ];
 
-const InteractiveTerminal = ({ projectNumber }: InteractiveTerminalProps) => {
+const InteractiveTerminal = ({ projectNumber, isActive = true }: InteractiveTerminalProps) => {
   const isChat = projectNumber === '07';
   const logs = projectNumber === '06' ? AGENT_CODER_LOGS : AUTO_MAIL_LOGS;
 
@@ -90,9 +91,24 @@ const InteractiveTerminal = ({ projectNumber }: InteractiveTerminalProps) => {
     }
   }, [visibleLogs, chatMessages, isTypingCmd, isBotTyping]);
 
+  // Reset state when the card becomes inactive (e.g. user scrolls away)
+  useEffect(() => {
+    if (!isActive) {
+      setVisibleLogs([]);
+      setLogIndex(0);
+      setTypedCmdText('');
+      setIsTypingCmd(false);
+      setIsRunning(true);
+      setChatMessages([
+        { sender: 'bot', text: 'வணக்கம்! I am Farm Sage. Click a query below to see what I can calculate for you!' }
+      ]);
+      setIsBotTyping(false);
+    }
+  }, [isActive]);
+
   // Terminal Runner
   useEffect(() => {
-    if (isChat || !isRunning) return;
+    if (isChat || !isRunning || !isActive) return;
 
     if (logIndex >= logs.length) {
       setIsRunning(false);

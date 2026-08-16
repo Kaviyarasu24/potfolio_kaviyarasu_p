@@ -246,14 +246,16 @@ const ImageCarousel = ({
   name,
   layout,
   projectNumber,
+  isActive,
 }: {
   images: string[];
   name: string;
   layout?: 'landscape' | 'portrait' | 'terminal';
   projectNumber: string;
+  isActive: boolean;
 }) => {
   if (images.length === 0) {
-    return <InteractiveTerminal projectNumber={projectNumber} />;
+    return <InteractiveTerminal projectNumber={projectNumber} isActive={isActive} />;
   }
 
   if (layout === 'portrait') {
@@ -274,9 +276,10 @@ interface ActiveProjectDetailsProps {
   project: any;
   contentOpacity: any;
   containerOpacity: any;
+  isActive: boolean;
 }
 
-const ActiveProjectDetails = ({ project, contentOpacity, containerOpacity }: ActiveProjectDetailsProps) => {
+const ActiveProjectDetails = ({ project, contentOpacity, containerOpacity, isActive }: ActiveProjectDetailsProps) => {
   const isPortrait = project.imageLayout === 'portrait';
   const cardRef = useRef<HTMLDivElement>(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
@@ -365,6 +368,7 @@ const ActiveProjectDetails = ({ project, contentOpacity, containerOpacity }: Act
             name={project.name}
             layout={project.imageLayout}
             projectNumber={project.number}
+            isActive={isActive}
           />
         </div>
       </motion.div>
@@ -377,9 +381,10 @@ interface ProjectCardProps {
   project: any;
   contentOpacity: any;
   containerOpacity: any;
+  isActive: boolean;
 }
 
-const ProjectCard = ({ project, contentOpacity, containerOpacity }: ProjectCardProps) => {
+const ProjectCard = ({ project, contentOpacity, containerOpacity, isActive }: ProjectCardProps) => {
   if (project.isCTA) {
     return (
       <motion.div
@@ -428,7 +433,7 @@ const ProjectCard = ({ project, contentOpacity, containerOpacity }: ProjectCardP
     );
   }
 
-  return <ActiveProjectDetails project={project} contentOpacity={contentOpacity} containerOpacity={containerOpacity} />;
+  return <ActiveProjectDetails project={project} contentOpacity={contentOpacity} containerOpacity={containerOpacity} isActive={isActive} />;
 };
 
 /* ── Card Wrapper for Hooks Isolation in Loops ── */
@@ -437,9 +442,10 @@ interface CardWrapperProps {
   totalCards: number;
   progress: any;
   project: any;
+  isActive: boolean;
 }
 
-const CardWrapper = ({ idx, totalCards, progress, project }: CardWrapperProps) => {
+const CardWrapper = ({ idx, totalCards, progress, project, isActive }: CardWrapperProps) => {
   const step = 1 / (totalCards - 1);
   
   // Slide-in starts at (idx - 1) * step, finishes at (idx - 1 + 0.75) * step
@@ -516,7 +522,7 @@ const CardWrapper = ({ idx, totalCards, progress, project }: CardWrapperProps) =
       }}
       className="absolute inset-0 w-full h-full"
     >
-      <ProjectCard project={project} contentOpacity={contentOpacity} containerOpacity={containerOpacity} />
+      <ProjectCard project={project} contentOpacity={contentOpacity} containerOpacity={containerOpacity} isActive={isActive} />
     </motion.div>
   );
 };
@@ -652,6 +658,7 @@ const ProjectsSection = () => {
                 totalCards={CARDS.length}
                 progress={scrollYProgress}
                 project={project}
+                isActive={activeIndex === idx}
               />
             ))}
           </div>
