@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import FadeIn from './FadeIn';
 import LiveProjectButton from './LiveProjectButton';
+import InteractiveTerminal from './InteractiveTerminal';
 
 interface ProjectData {
   number: string;
@@ -244,27 +245,15 @@ const ImageCarousel = ({
   images,
   name,
   layout,
+  projectNumber,
 }: {
   images: string[];
   name: string;
   layout?: 'landscape' | 'portrait' | 'terminal';
+  projectNumber: string;
 }) => {
   if (images.length === 0) {
-    return (
-      <div className="w-full h-full min-h-[140px] sm:min-h-[180px] lg:min-h-[220px] rounded-[24px] border border-dashed border-[#D7E2EA]/20 bg-[#17171a]/40 flex flex-col items-center justify-center p-4 sm:p-6 gap-2 text-center transition-all duration-500 group-hover:border-[#D7E2EA]/35 group-hover:bg-[#17171a]/60 w-full">
-        <div className="w-10 h-10 rounded-full bg-[#1e1e22] border border-[#D7E2EA]/10 flex items-center justify-center text-[#D7E2EA]/40 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all duration-500 shadow-inner">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
-            <circle cx="9" cy="9" r="2"/>
-            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
-          </svg>
-        </div>
-        <div className="flex flex-col gap-0.5">
-          <span className="text-[10px] sm:text-xs font-bold text-[#D7E2EA]/70 tracking-wide uppercase">Preview Coming Soon</span>
-          <span className="text-[8px] sm:text-[10px] text-[#D7E2EA]/40 font-light max-w-[160px] sm:max-w-[200px]">We are preparing screenshots.</span>
-        </div>
-      </div>
-    );
+    return <InteractiveTerminal projectNumber={projectNumber} />;
   }
 
   if (layout === 'portrait') {
@@ -375,6 +364,7 @@ const ActiveProjectDetails = ({ project, contentOpacity, containerOpacity }: Act
             images={project.images}
             name={project.name}
             layout={project.imageLayout}
+            projectNumber={project.number}
           />
         </div>
       </motion.div>

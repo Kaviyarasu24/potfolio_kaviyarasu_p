@@ -77,26 +77,26 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
       >
         {/* Front Side */}
         <div
-          className="relative flex h-full w-full flex-col justify-between gap-6 rounded-[28px] border-2 border-[#17130D]/10 bg-[#FFFDF7] p-6 shadow-[0_16px_45px_rgba(23,19,13,0.08)] transition-colors duration-500 group-hover:border-[#F4B942] sm:p-8"
+          className="relative flex h-full w-full flex-col justify-between gap-6 rounded-[28px] border-2 border-theme-border/60 bg-theme-bg p-6 shadow-[0_16px_45px_rgba(0,0,0,0.04)] transition-all duration-500 group-hover:border-theme-accent sm:p-8"
           style={{ backfaceVisibility: 'hidden' }}
         >
           {/* Top: number + type + duration */}
           <div className="flex items-start justify-between">
             <span
-              className="font-black text-[#17130D]/15 leading-none select-none"
+              className="font-black text-theme-muted/15 leading-none select-none"
               style={{ fontSize: 'clamp(3.5rem, 8vw, 100px)' }}
             >
               {exp.number}
             </span>
             <div className="flex flex-col items-end gap-1 pt-1">
               <span
-                className="font-medium uppercase tracking-widest text-[#5F4A24]/70"
+                className="font-medium uppercase tracking-widest text-theme-accent"
                 style={{ fontSize: 'clamp(0.6rem, 1vw, 0.8rem)' }}
               >
                 {exp.type}
               </span>
               <span
-                className="font-medium uppercase tracking-widest text-[#17130D]/45"
+                className="font-medium uppercase tracking-widest text-theme-muted/65"
                 style={{ fontSize: 'clamp(0.6rem, 0.9vw, 0.75rem)' }}
               >
                 {exp.duration}
@@ -107,13 +107,13 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
           {/* Middle: company + role + location */}
           <div className="flex flex-col gap-2 mt-auto mb-auto">
             <h3
-              className="font-black uppercase text-[#17130D] leading-tight"
+              className="font-black uppercase text-theme-text leading-tight"
               style={{ fontSize: 'clamp(1.3rem, 2.8vw, 2.2rem)' }}
             >
               {exp.company}
             </h3>
             <p
-              className="font-medium uppercase tracking-widest text-[#17130D]/55"
+              className="font-medium uppercase tracking-widest text-theme-muted"
               style={{ fontSize: 'clamp(0.7rem, 1.1vw, 0.9rem)' }}
             >
               {exp.role} · {exp.location}
@@ -121,7 +121,7 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
           </div>
 
           {/* Divider */}
-          <div className="w-full h-px bg-[#17130D]/10" />
+          <div className="w-full h-px bg-theme-border/60" />
 
           {/* Bottom: tags + tap hint */}
           <div className="flex flex-col gap-3">
@@ -129,14 +129,14 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
               {exp.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-[#17130D]/15 bg-[#F7F1E6] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#17130D]/65"
+                  className="rounded-full border border-theme-border/60 bg-theme-card px-3 py-1 text-xs font-semibold uppercase tracking-wider text-theme-muted"
                 >
                   {tag}
                 </span>
               ))}
             </div>
             {isTouch && (
-              <p className="text-center text-[10px] uppercase tracking-widest text-[#17130D]/30 pt-1">
+              <p className="text-center text-[10px] uppercase tracking-widest text-theme-muted/40 pt-1">
                 Tap to see details
               </p>
             )}
@@ -145,7 +145,7 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
 
         {/* Back Side */}
         <div
-          className="absolute inset-0 flex flex-col justify-start rounded-[28px] border-2 border-[#17130D] bg-[#17130D] p-6 shadow-xl sm:p-8"
+          className="absolute inset-0 flex flex-col justify-start rounded-[28px] border-2 border-theme-text bg-theme-text p-6 shadow-xl sm:p-8"
           style={{
             backfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)'
@@ -153,13 +153,13 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
         >
           <div className="flex flex-col gap-6 h-full">
             <div className="flex items-center gap-3">
-              <span className="w-8 h-px bg-white/30"></span>
-              <h4 className="font-bold uppercase tracking-widest text-white/50 text-xs sm:text-sm">
+              <span className="w-8 h-px bg-theme-bg/30"></span>
+              <h4 className="font-bold uppercase tracking-widest text-theme-bg/60 text-xs sm:text-sm">
                 About The Role
               </h4>
             </div>
             <p
-              className="font-light text-white/90 leading-relaxed overflow-y-auto flex-1"
+              className="font-light text-theme-bg leading-relaxed overflow-y-auto flex-1"
               style={{
                 fontSize: 'clamp(0.85rem, 1.3vw, 1rem)',
                 scrollbarWidth: 'none',
@@ -170,7 +170,7 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
             </p>
             {/* Tap hint — only visible on touch devices */}
             {isTouch && (
-              <p className="text-center text-[10px] uppercase tracking-widest text-white/30 pt-2 border-t border-white/10">
+              <p className="text-center text-[10px] uppercase tracking-widest text-theme-bg/40 pt-2 border-t border-theme-bg/10">
                 Tap to flip back
               </p>
             )}
@@ -185,11 +185,11 @@ const ExperienceSection = () => {
   return (
     <section
       id="experience"
-      className="relative w-full overflow-hidden bg-[#FFFDF7] px-4 pb-24 pt-20 sm:px-6 sm:pt-24 md:px-10 md:pt-32"
+      className="relative w-full overflow-hidden bg-theme-card px-4 pb-24 pt-20 sm:px-6 sm:pt-24 md:px-10 md:pt-32 transition-colors duration-400"
     >
       <FadeIn y={40}>
         <h2
-          className="text-center font-black uppercase tracking-tight leading-none mb-16 sm:mb-20 md:mb-28 text-[#17130D]"
+          className="text-center font-black uppercase tracking-tight leading-none mb-16 sm:mb-20 md:mb-28 text-theme-text"
           style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
         >
           Experience

@@ -10,7 +10,7 @@ const AboutSection = () => {
   return (
     <section
       id="about"
-      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#F7F1E6] px-5 py-20 sm:px-8 md:px-10"
+      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-theme-bg px-5 py-20 sm:px-8 md:px-10 transition-colors duration-400"
     >
       {/* Corner decorative 3D images */}
       {/* Left — Jarvis-style 3D Robot Face */}
@@ -62,7 +62,7 @@ const AboutSection = () => {
         <div className="flex flex-col items-center gap-12 sm:gap-16 md:gap-20">
           <AnimatedText
             text={ABOUT_TEXT}
-            className="max-w-[680px] font-medium leading-relaxed text-[#17130D]/75"
+            className="max-w-[680px] font-medium leading-relaxed text-theme-muted"
             style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)' }}
           />
 
@@ -91,14 +91,14 @@ const AboutSection = () => {
                   key={group.label}
                   className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-5"
                 >
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#5F4A24]/70 sm:w-44 sm:shrink-0 sm:text-right">
+                  <span className="text-xs font-bold uppercase tracking-widest text-theme-accent sm:w-44 sm:shrink-0 sm:text-right">
                     {group.label}
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {group.items.map((item) => (
                       <span
                         key={item}
-                        className="rounded-full border border-[#17130D]/10 bg-[#FFFDF7] px-3 py-1 text-sm font-medium text-[#17130D]/75 shadow-sm transition-colors hover:border-[#F4B942] hover:bg-[#F4B942]/20 hover:text-[#17130D]"
+                        className="rounded-full border border-theme-border/60 bg-theme-card px-3 py-1 text-sm font-medium text-theme-muted shadow-sm transition-all hover:border-theme-accent hover:bg-theme-accentMuted hover:text-theme-text"
                       >
                         {item}
                       </span>
