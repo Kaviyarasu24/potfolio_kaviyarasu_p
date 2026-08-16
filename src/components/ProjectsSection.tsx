@@ -297,13 +297,13 @@ const ActiveProjectDetails = ({ project, contentOpacity, containerOpacity }: Act
       ref={cardRef}
       onMouseMove={handleMouseMove}
       style={{ opacity: containerOpacity }}
-      className="relative flex flex-col lg:flex-row justify-between overflow-hidden rounded-[24px] sm:rounded-[32px] md:rounded-[40px] border border-[#D7E2EA]/15 bg-[#121214] p-5 sm:p-7 lg:p-11 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)] group lg:gap-10 w-full h-full"
+      className="relative flex flex-col lg:flex-row justify-between overflow-hidden rounded-[24px] sm:rounded-[32px] md:rounded-[40px] border border-theme-border/60 bg-theme-card p-5 sm:p-7 lg:p-11 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.06)] group lg:gap-10 w-full h-full transition-all duration-400"
     >
       {/* Background Spotlight Glow */}
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-[inherit]"
         style={{
-          background: `radial-gradient(600px circle at ${coords.x}px ${coords.y}px, rgba(215, 226, 234, 0.05), transparent 75%)`,
+          background: `radial-gradient(600px circle at ${coords.x}px ${coords.y}px, var(--accent-muted), transparent 75%)`,
         }}
       />
 
@@ -316,19 +316,19 @@ const ActiveProjectDetails = ({ project, contentOpacity, containerOpacity }: Act
         <div className="relative z-10 flex flex-col justify-between gap-3 sm:gap-4 lg:gap-6 lg:w-[45%] lg:shrink-0">
           <div className="flex flex-col gap-1.5 sm:gap-2.5 w-full">
             <div className="flex items-center justify-between lg:justify-end">
-              <span className="lg:hidden text-[9px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/40">
+              <span className="lg:hidden text-[9px] font-medium uppercase tracking-[0.2em] text-theme-muted">
                 Project
               </span>
-              <span className="font-mono text-xs sm:text-sm font-semibold text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] select-none">
+              <span className="font-mono text-xs sm:text-sm font-semibold text-theme-accent drop-shadow-[0_0_8px_var(--accent-muted)] select-none">
                 // {project.number}
               </span>
             </div>
 
-            <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-none text-lg sm:text-2xl lg:text-4xl transition-colors duration-300 group-hover:text-white">
+            <h3 className="font-black uppercase text-theme-text tracking-tight leading-none text-lg sm:text-2xl lg:text-4xl transition-colors duration-300 group-hover:text-theme-accent">
               {project.name}
             </h3>
 
-            <p className="font-normal text-[#D7E2EA]/80 leading-relaxed text-[11px] sm:text-xs lg:text-base">
+            <p className="font-normal text-theme-muted leading-relaxed text-[11px] sm:text-xs lg:text-base">
               {project.description}
             </p>
 
@@ -337,7 +337,7 @@ const ActiveProjectDetails = ({ project, contentOpacity, containerOpacity }: Act
               {techs.map((tech: string) => (
                 <span
                   key={tech}
-                  className="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[9px] sm:text-[11px] font-mono font-medium bg-[#1e1e22] text-[#D7E2EA]/95 border border-[#D7E2EA]/10 hover:border-[#D7E2EA]/40 hover:bg-[#D7E2EA]/5 transition-all duration-300"
+                  className="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[9px] sm:text-[11px] font-mono font-medium bg-theme-bg text-theme-muted border border-theme-border/60 hover:border-theme-accent hover:bg-theme-accentMuted transition-all duration-300"
                 >
                   {tech}
                 </span>
@@ -383,26 +383,26 @@ const ProjectCard = ({ project, contentOpacity, containerOpacity }: ProjectCardP
   if (project.isCTA) {
     return (
       <motion.div
-        className="relative flex flex-col justify-between overflow-hidden rounded-[24px] sm:rounded-[32px] md:rounded-[40px] border border-[#D7E2EA]/15 p-6 sm:p-8 lg:p-11 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.6)] group w-full h-full"
+        className="relative flex flex-col justify-between overflow-hidden rounded-[24px] sm:rounded-[32px] md:rounded-[40px] border border-theme-border/60 p-6 sm:p-8 lg:p-11 shadow-[0_30px_70px_-20px_rgba(0,0,0,0.05)] group w-full h-full transition-all duration-400"
         style={{
-          background: 'radial-gradient(circle at top right, rgba(182, 0, 168, 0.15) 0%, rgba(12, 12, 12, 0) 70%), #121214',
+          background: 'radial-gradient(circle at top right, rgba(182, 0, 168, 0.1) 0%, rgba(0, 0, 0, 0) 70%), var(--bg-card)',
           opacity: containerOpacity,
         }}
       >
         <motion.div style={{ opacity: contentOpacity }} className="flex flex-col gap-3 max-w-2xl h-full justify-between">
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D7E2EA]/40">
+              <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-theme-muted">
                 Collaboration
               </span>
-              <span className="font-mono text-sm font-semibold text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] select-none">
+              <span className="font-mono text-sm font-semibold text-theme-accent drop-shadow-[0_0_8px_var(--accent-muted)] select-none">
                 // END
               </span>
             </div>
-            <h3 className="font-black uppercase text-[#D7E2EA] tracking-tight leading-none text-2xl sm:text-3xl lg:text-5xl mt-2 transition-colors duration-300 group-hover:text-white">
+            <h3 className="font-black uppercase text-theme-text tracking-tight leading-none text-2xl sm:text-3xl lg:text-5xl mt-2 transition-colors duration-300 group-hover:text-theme-accent">
               Let's build something amazing
             </h3>
-            <p className="font-normal text-[#D7E2EA]/90 leading-relaxed text-[11px] sm:text-xs lg:text-base mt-4">
+            <p className="font-normal text-theme-muted leading-relaxed text-[11px] sm:text-xs lg:text-base mt-4">
               Looking for an internship, open-source collaboration, or just want to chat about AI & Data Science? Let's connect!
             </p>
           </div>
@@ -410,7 +410,7 @@ const ProjectCard = ({ project, contentOpacity, containerOpacity }: ProjectCardP
           <div className="flex flex-col sm:flex-row gap-3.5 mt-8 w-full max-w-md">
             <a
               href="mailto:Kaviyarasup24@gmail.com"
-              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 py-2.5 lg:px-8 lg:py-3 text-xs sm:text-sm font-semibold uppercase tracking-widest text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98] w-full text-center"
+              className="inline-flex items-center justify-center rounded-full border border-theme-text/20 bg-theme-text/10 px-6 py-2.5 lg:px-8 lg:py-3 text-xs sm:text-sm font-semibold uppercase tracking-widest text-theme-text backdrop-blur-md transition hover:bg-theme-text/20 hover:scale-[1.02] active:scale-[0.98] w-full text-center"
             >
               Email Me
             </a>
@@ -418,7 +418,7 @@ const ProjectCard = ({ project, contentOpacity, containerOpacity }: ProjectCardP
               href="https://github.com/kaviyarasu24"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full border border-[#D7E2EA]/20 bg-transparent px-6 py-2.5 lg:px-8 lg:py-3 text-xs sm:text-sm font-semibold uppercase tracking-widest text-[#D7E2EA] transition hover:bg-white/5 hover:border-[#D7E2EA]/50 hover:scale-[1.02] active:scale-[0.98] w-full text-center"
+              className="inline-flex items-center justify-center rounded-full border border-theme-border/60 bg-transparent px-6 py-2.5 lg:px-8 lg:py-3 text-xs sm:text-sm font-semibold uppercase tracking-widest text-theme-text transition hover:bg-theme-text/5 hover:border-theme-accent hover:scale-[1.02] active:scale-[0.98] w-full text-center"
             >
               GitHub Profile
             </a>
@@ -560,7 +560,7 @@ const ProjectsSection = () => {
     <section
       ref={containerRef}
       id="projects"
-      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 w-full rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] bg-[#0C0C0C] h-[750vh]"
+      className="relative z-10 -mt-10 sm:-mt-12 md:-mt-14 w-full rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] bg-theme-bg h-[750vh] transition-colors duration-400"
     >
       {/* Pinned sticky screen on both mobile & desktop */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center py-6 sm:py-8">
@@ -577,9 +577,9 @@ const ProjectsSection = () => {
           </FadeIn>
           
           {/* Horizontal progress bar for mobile/tablet */}
-          <div className="lg:hidden w-32 h-[3px] bg-white/5 rounded-full overflow-hidden mt-3 shadow-inner">
+          <div className="lg:hidden w-32 h-[3px] bg-theme-text/10 rounded-full overflow-hidden mt-3 shadow-inner">
             <motion.div 
-              className="h-full bg-cyan-400 origin-left shadow-[0_0_8px_#22d3ee]"
+              className="h-full bg-theme-accent origin-left shadow-[0_0_8px_var(--accent-color)]"
               style={{ scaleX: scrollYProgress }}
             />
           </div>
@@ -598,16 +598,16 @@ const ProjectsSection = () => {
                   onClick={() => scrollToCard(idx)}
                   className={`group flex items-center justify-between text-left p-4.5 rounded-2xl border transition-all duration-300 w-full ${
                     isActive
-                      ? 'bg-[#121214] border-[#D7E2EA]/20 shadow-[0_12px_40px_-8px_rgba(215,226,234,0.1)]'
-                      : 'bg-[#0f0f11]/40 border-transparent hover:bg-[#121214]/30'
+                      ? 'bg-theme-card border-theme-border/60 shadow-[0_12px_40px_-8px_rgba(0,0,0,0.04)]'
+                      : 'bg-theme-card/30 border-transparent hover:bg-theme-card/60'
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    <span className={`font-mono text-sm sm:text-base ${isActive ? 'text-cyan-400 font-black' : 'text-[#D7E2EA]/20 group-hover:text-[#D7E2EA]/40 transition-colors'}`}>
+                    <span className={`font-mono text-sm sm:text-base ${isActive ? 'text-theme-accent font-black' : 'text-theme-muted/30 group-hover:text-theme-muted transition-colors'}`}>
                       {project.number}
                     </span>
                     <span className={`font-black text-base lg:text-lg uppercase tracking-tight transition-colors duration-300 ${
-                      isActive ? 'hero-heading' : 'text-[#D7E2EA]/40 group-hover:text-[#D7E2EA]/85'
+                      isActive ? 'hero-heading' : 'text-theme-muted group-hover:text-theme-text'
                     }`}>
                       {project.name.split('—')[0].split('(')[0].trim()}
                     </span>
@@ -616,7 +616,7 @@ const ProjectsSection = () => {
                     {isActive && (
                       <motion.div
                         layoutId="activeIndicator"
-                        className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"
+                        className="w-1.5 h-1.5 rounded-full bg-theme-accent shadow-[0_0_8px_var(--accent-color)]"
                       />
                     )}
                   </div>
@@ -626,9 +626,9 @@ const ProjectsSection = () => {
           </div>
 
           {/* Vertical Progress Bar - Hidden on mobile */}
-          <div className="hidden lg:block relative w-[3px] h-[360px] bg-white/5 rounded-full overflow-hidden shrink-0 self-center">
+          <div className="hidden lg:block relative w-[3px] h-[360px] bg-theme-text/10 rounded-full overflow-hidden shrink-0 self-center">
             <motion.div 
-              className="absolute top-0 left-0 w-full bg-cyan-400 origin-top shadow-[0_0_8px_#22d3ee]"
+              className="absolute top-0 left-0 w-full bg-theme-accent origin-top shadow-[0_0_8px_var(--accent-color)]"
               style={{ height: '100%', scaleY: scrollYProgress }}
             />
             {/* Ticks for each card */}
@@ -636,7 +636,7 @@ const ProjectsSection = () => {
               <div 
                 key={i}
                 className={`absolute w-3 h-[2px] left-1/2 -translate-x-1/2 transition-colors duration-300 ${
-                  activeIndex >= i ? 'bg-cyan-400' : 'bg-white/10'
+                  activeIndex >= i ? 'bg-theme-accent' : 'bg-theme-text/15'
                 }`}
                 style={{ top: `${(i / (CARDS.length - 1)) * 100}%` }}
               />

@@ -22,7 +22,7 @@ const LiveProjectButton = ({
       href={href}
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
-      className={`inline-flex items-center justify-center rounded-full border-[#D7E2EA] font-medium uppercase tracking-widest text-[#D7E2EA] whitespace-nowrap transition-all duration-200 hover:bg-[#D7E2EA]/10 hover:scale-[1.03] active:scale-[0.97] ${paddingClass} ${className}`}
+      className={`inline-flex items-center justify-center rounded-full border-theme-text font-medium uppercase tracking-widest text-theme-text whitespace-nowrap transition-all duration-200 hover:bg-theme-text/10 hover:scale-[1.03] active:scale-[0.97] ${paddingClass} ${className}`}
     >
       {label}
     </a>
