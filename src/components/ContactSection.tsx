@@ -130,18 +130,12 @@ const ContactSection = () => {
 
       {/* Footer line */}
       <FadeIn delay={0.4} y={20}>
-        <div className="mx-auto mt-20 flex max-w-5xl flex-col items-center gap-3 border-t border-theme-border/60 pt-8 text-center sm:mt-24 sm:flex-row sm:justify-between md:mt-28">
+        <div className="mx-auto mt-20 flex max-w-5xl flex-col items-center border-t border-theme-border/60 pt-8 text-center sm:mt-24 md:mt-28">
           <span
             className="font-semibold uppercase tracking-widest text-theme-muted"
             style={{ fontSize: 'clamp(0.7rem, 1.1vw, 0.9rem)' }}
           >
             © 2026 Kaviyarasu P
-          </span>
-          <span
-            className="font-semibold uppercase tracking-widest text-theme-muted"
-            style={{ fontSize: 'clamp(0.7rem, 1.1vw, 0.9rem)' }}
-          >
-            Designed & built in Coimbatore
           </span>
         </div>
       </FadeIn>
