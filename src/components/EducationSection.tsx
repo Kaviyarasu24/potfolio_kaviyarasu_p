@@ -52,14 +52,14 @@ const EduCard = ({ edu, index, total }: EduCardProps) => {
     >
       <motion.article
         style={{ scale }}
-        className="origin-top mx-auto w-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#0C0C0C]/10 bg-white p-6 sm:p-8 md:p-10 hover:border-[#0C0C0C]/30 transition-colors duration-500 shadow-sm hover:shadow-md"
+        className="mx-auto w-full origin-top rounded-[28px] border-2 border-[#17130D]/10 bg-[#FFFDF7] p-6 shadow-[0_18px_50px_rgba(23,19,13,0.08)] transition-colors duration-500 hover:border-[#F4B942] sm:p-8 md:p-10"
       >
         {/* Top row: number + meta */}
         <div className="flex flex-col sm:flex-row items-start sm:justify-between gap-4 mb-8 sm:mb-10">
           <div className="flex flex-row items-start gap-4 sm:gap-8 md:gap-12">
             {/* Number */}
             <div
-              className="shrink-0 font-black text-[#0C0C0C]/20 leading-none select-none"
+              className="shrink-0 font-black text-[#17130D]/20 leading-none select-none"
               style={{ fontSize: 'clamp(3rem, 9vw, 120px)' }}
             >
               {edu.number}
@@ -68,19 +68,19 @@ const EduCard = ({ edu, index, total }: EduCardProps) => {
             {/* Type + Institution */}
             <div className="flex flex-col gap-2 pt-1 sm:pt-2 md:pt-3">
               <span
-                className="font-medium uppercase tracking-widest text-[#0C0C0C]/55"
+                className="font-medium uppercase tracking-widest text-[#5F4A24]/70"
                 style={{ fontSize: 'clamp(0.65rem, 1.1vw, 0.9rem)' }}
               >
                 {edu.type} · {edu.year}
               </span>
               <h3
-                className="font-bold uppercase text-[#0C0C0C] leading-tight"
+                className="font-bold uppercase text-[#17130D] leading-tight"
                 style={{ fontSize: 'clamp(1rem, 2.2vw, 2rem)' }}
               >
                 {edu.institution}
               </h3>
               <p
-                className="font-medium text-[#0C0C0C]/55 uppercase tracking-widest"
+                className="font-medium text-[#17130D]/55 uppercase tracking-widest"
                 style={{ fontSize: 'clamp(0.65rem, 1vw, 0.85rem)' }}
               >
                 {edu.location}
@@ -91,13 +91,13 @@ const EduCard = ({ edu, index, total }: EduCardProps) => {
           {/* Score badge — top right */}
           <div className="shrink-0 flex flex-col items-end gap-1 pt-1 sm:pt-2">
             <span
-              className="font-black text-[#0C0C0C] leading-none"
+              className="font-black text-[#17130D] leading-none"
               style={{ fontSize: 'clamp(2rem, 5vw, 4rem)' }}
             >
               {edu.score}
             </span>
             <span
-              className="font-light uppercase tracking-widest text-[#0C0C0C]/60 text-right"
+              className="font-semibold uppercase tracking-widest text-[#17130D]/60 text-right"
               style={{ fontSize: 'clamp(0.6rem, 0.9vw, 0.8rem)' }}
             >
               {edu.scoreLabel}
@@ -106,13 +106,13 @@ const EduCard = ({ edu, index, total }: EduCardProps) => {
         </div>
 
         {/* Divider */}
-        <div className="w-full h-px bg-[#0C0C0C]/15 mb-8 sm:mb-10" />
+        <div className="w-full h-px bg-[#17130D]/15 mb-8 sm:mb-10" />
 
         {/* Bottom row: degree + tags */}
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
           {/* Degree */}
           <p
-            className="font-medium text-[#0C0C0C]/75 leading-relaxed max-w-xl"
+            className="font-medium text-[#17130D]/75 leading-relaxed max-w-xl"
             style={{ fontSize: 'clamp(0.9rem, 1.6vw, 1.25rem)' }}
           >
             {edu.degree}
@@ -123,7 +123,7 @@ const EduCard = ({ edu, index, total }: EduCardProps) => {
             {edu.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full border border-[#0C0C0C]/25 bg-[#0C0C0C]/[0.06] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#0C0C0C]/70 hover:border-[#0C0C0C]/50 hover:text-[#0C0C0C] transition-colors"
+                className="rounded-full border border-[#17130D]/15 bg-[#F7F1E6] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#17130D]/70 transition-colors hover:border-[#F4B942] hover:bg-[#F4B942]/20 hover:text-[#17130D]"
               >
                 {tag}
               </span>
@@ -139,27 +139,27 @@ const EducationSection = () => {
   return (
     <section
       id="education"
-      className="relative w-full bg-white rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-4 sm:px-6 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-24"
+      className="relative w-full rounded-t-[36px] bg-[#FFFDF7] px-4 pb-24 pt-20 sm:px-6 sm:pt-24 md:px-10 md:pt-32"
     >
-        <FadeIn y={40}>
-          <h2
-            className="text-center font-black uppercase tracking-tight leading-none mb-16 sm:mb-20 md:mb-28 text-[#0C0C0C]"
-            style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
-          >
-            Education
-          </h2>
-        </FadeIn>
+      <FadeIn y={40}>
+        <h2
+          className="text-center font-black uppercase tracking-tight leading-none mb-16 sm:mb-20 md:mb-28 text-[#17130D]"
+          style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
+        >
+          Education
+        </h2>
+      </FadeIn>
 
-        <div className="mx-auto max-w-7xl flex flex-col gap-6 sm:gap-8">
-          {EDUCATION.map((edu, i) => (
-            <EduCard
-              key={edu.number}
-              edu={edu}
-              index={i}
-              total={EDUCATION.length}
-            />
-          ))}
-        </div>
+      <div className="mx-auto max-w-7xl flex flex-col gap-6 sm:gap-8">
+        {EDUCATION.map((edu, i) => (
+          <EduCard
+            key={edu.number}
+            edu={edu}
+            index={i}
+            total={EDUCATION.length}
+          />
+        ))}
+      </div>
     </section>
   );
 };

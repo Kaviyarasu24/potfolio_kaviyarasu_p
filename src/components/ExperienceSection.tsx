@@ -61,7 +61,7 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
       viewport={{ once: true, margin: '0px' }}
       transition={{ delay: index * 0.1, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
       className="shrink-0 cursor-pointer group w-full"
-      style={{ 
+      style={{
         minHeight: 'clamp(320px, 40vh, 460px)',
         perspective: '1000px'
       }}
@@ -77,26 +77,26 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
       >
         {/* Front Side */}
         <div
-          className="relative flex flex-col justify-between gap-6 w-full h-full rounded-[32px] sm:rounded-[40px] border-2 border-[#0C0C0C]/10 bg-white p-6 sm:p-8 transition-colors duration-500 group-hover:border-[#0C0C0C]/30"
+          className="relative flex h-full w-full flex-col justify-between gap-6 rounded-[28px] border-2 border-[#17130D]/10 bg-[#FFFDF7] p-6 shadow-[0_16px_45px_rgba(23,19,13,0.08)] transition-colors duration-500 group-hover:border-[#F4B942] sm:p-8"
           style={{ backfaceVisibility: 'hidden' }}
         >
           {/* Top: number + type + duration */}
           <div className="flex items-start justify-between">
             <span
-              className="font-black text-[#0C0C0C]/15 leading-none select-none"
+              className="font-black text-[#17130D]/15 leading-none select-none"
               style={{ fontSize: 'clamp(3.5rem, 8vw, 100px)' }}
             >
               {exp.number}
             </span>
             <div className="flex flex-col items-end gap-1 pt-1">
               <span
-                className="font-medium uppercase tracking-widest text-[#0C0C0C]/50"
+                className="font-medium uppercase tracking-widest text-[#5F4A24]/70"
                 style={{ fontSize: 'clamp(0.6rem, 1vw, 0.8rem)' }}
               >
                 {exp.type}
               </span>
               <span
-                className="font-medium uppercase tracking-widest text-[#0C0C0C]/40"
+                className="font-medium uppercase tracking-widest text-[#17130D]/45"
                 style={{ fontSize: 'clamp(0.6rem, 0.9vw, 0.75rem)' }}
               >
                 {exp.duration}
@@ -107,13 +107,13 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
           {/* Middle: company + role + location */}
           <div className="flex flex-col gap-2 mt-auto mb-auto">
             <h3
-              className="font-black uppercase text-[#0C0C0C] leading-tight"
+              className="font-black uppercase text-[#17130D] leading-tight"
               style={{ fontSize: 'clamp(1.3rem, 2.8vw, 2.2rem)' }}
             >
               {exp.company}
             </h3>
             <p
-              className="font-medium uppercase tracking-widest text-[#0C0C0C]/55"
+              className="font-medium uppercase tracking-widest text-[#17130D]/55"
               style={{ fontSize: 'clamp(0.7rem, 1.1vw, 0.9rem)' }}
             >
               {exp.role} · {exp.location}
@@ -121,7 +121,7 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
           </div>
 
           {/* Divider */}
-          <div className="w-full h-px bg-[#0C0C0C]/10" />
+          <div className="w-full h-px bg-[#17130D]/10" />
 
           {/* Bottom: tags + tap hint */}
           <div className="flex flex-col gap-3">
@@ -129,14 +129,14 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
               {exp.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-[#0C0C0C]/20 bg-[#0C0C0C]/[0.04] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#0C0C0C]/60"
+                  className="rounded-full border border-[#17130D]/15 bg-[#F7F1E6] px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#17130D]/65"
                 >
                   {tag}
                 </span>
               ))}
             </div>
             {isTouch && (
-              <p className="text-center text-[10px] uppercase tracking-widest text-[#0C0C0C]/30 pt-1">
+              <p className="text-center text-[10px] uppercase tracking-widest text-[#17130D]/30 pt-1">
                 Tap to see details
               </p>
             )}
@@ -145,8 +145,8 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
 
         {/* Back Side */}
         <div
-          className="absolute inset-0 flex flex-col justify-start rounded-[32px] sm:rounded-[40px] border-2 border-[#0C0C0C]/30 bg-[#0C0C0C] p-6 sm:p-8 shadow-xl"
-          style={{ 
+          className="absolute inset-0 flex flex-col justify-start rounded-[28px] border-2 border-[#17130D] bg-[#17130D] p-6 shadow-xl sm:p-8"
+          style={{
             backfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)'
           }}
@@ -160,7 +160,7 @@ const ExpCard = ({ exp, index }: ExpCardProps) => {
             </div>
             <p
               className="font-light text-white/90 leading-relaxed overflow-y-auto flex-1"
-              style={{ 
+              style={{
                 fontSize: 'clamp(0.85rem, 1.3vw, 1rem)',
                 scrollbarWidth: 'none',
                 msOverflowStyle: 'none'
@@ -185,11 +185,11 @@ const ExperienceSection = () => {
   return (
     <section
       id="experience"
-      className="relative w-full bg-white px-4 sm:px-6 md:px-10 pt-20 sm:pt-24 md:pt-32 pb-24 overflow-hidden"
+      className="relative w-full overflow-hidden bg-[#FFFDF7] px-4 pb-24 pt-20 sm:px-6 sm:pt-24 md:px-10 md:pt-32"
     >
       <FadeIn y={40}>
         <h2
-          className="text-center font-black uppercase tracking-tight leading-none mb-16 sm:mb-20 md:mb-28 text-[#0C0C0C]"
+          className="text-center font-black uppercase tracking-tight leading-none mb-16 sm:mb-20 md:mb-28 text-[#17130D]"
           style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
         >
           Experience

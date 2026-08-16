@@ -35,16 +35,35 @@ const CONTACT_METHODS: ContactMethod[] = [
   },
 ];
 
+const CONTACT_MARQUEE = [
+  'Available for internships',
+  'Open to collaboration',
+  'AI projects',
+  'Data dashboards',
+  'Let us build it',
+];
+
 const ContactSection = () => {
   return (
     <section
       id="contact"
-      className="relative w-full bg-[#0C0C0C] px-5 sm:px-8 md:px-10 pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20"
+      className="relative w-full bg-[#F7F1E6] px-5 pb-16 pt-24 sm:px-8 sm:pb-20 sm:pt-28 md:px-10 md:pt-32"
     >
+      <div className="mb-14 overflow-hidden border-y border-[#17130D]/10 py-4">
+        <div className="marquee-track-reverse flex w-max gap-10 whitespace-nowrap">
+          {[...CONTACT_MARQUEE, ...CONTACT_MARQUEE].map((item, index) => (
+            <span key={`${item}-${index}`} className="text-xl font-black uppercase tracking-tight text-[#17130D] sm:text-3xl">
+              {item}
+              <span className="ml-10 text-[#F4B942]">+</span>
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* Heading */}
       <FadeIn y={40}>
         <h2
-          className="hero-heading text-center font-black uppercase tracking-tight leading-none mb-4"
+          className="mb-4 text-center font-black uppercase leading-none tracking-tight text-[#17130D]"
           style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
         >
           Get in touch
@@ -53,7 +72,7 @@ const ContactSection = () => {
 
       <FadeIn delay={0.15} y={20}>
         <p
-          className="text-center font-light uppercase tracking-widest text-[#D7E2EA]/60 mb-12 sm:mb-16 md:mb-20"
+          className="mb-12 text-center font-semibold uppercase tracking-widest text-[#5F4A24]/70 sm:mb-16 md:mb-20"
           style={{ fontSize: 'clamp(0.85rem, 1.4vw, 1.1rem)' }}
         >
           Pick whichever channel suits you
@@ -61,7 +80,7 @@ const ContactSection = () => {
       </FadeIn>
 
       {/* Contact cards */}
-          <div className="mx-auto grid max-w-5xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
+      <div className="mx-auto grid max-w-5xl grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
         {CONTACT_METHODS.map((method, i) => {
           const Icon = method.icon;
           const isExternal = method.href.startsWith('http');
@@ -72,18 +91,18 @@ const ContactSection = () => {
                 href={method.href}
                 target={isExternal ? '_blank' : undefined}
                 rel={isExternal ? 'noopener noreferrer' : undefined}
-                className="group relative flex h-full flex-col justify-between gap-8 sm:gap-10 rounded-[28px] sm:rounded-[32px] border-2 border-[#D7E2EA]/20 bg-[#141418] p-6 sm:p-7 md:p-8 transition-all duration-300 hover:border-[#D7E2EA]/60 hover:bg-[#1a1a20] hover:-translate-y-1"
+                className="group relative flex h-full flex-col justify-between gap-8 rounded-[24px] border-2 border-[#17130D]/10 bg-[#FFFDF7] p-6 shadow-[0_14px_42px_rgba(23,19,13,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-[#F4B942] hover:bg-white sm:gap-10 sm:p-7 md:p-8"
               >
                 <div className="flex items-start justify-between">
-                  <div className="rounded-full border border-[#D7E2EA]/20 p-3 sm:p-3.5 transition-colors duration-300 group-hover:border-[#D7E2EA]/50">
+                  <div className="rounded-full border border-[#17130D]/15 bg-[#F7F1E6] p-3 transition-colors duration-300 group-hover:border-[#F4B942] group-hover:bg-[#F4B942]/25 sm:p-3.5">
                     <Icon
-                      className="text-[#D7E2EA]"
+                      className="text-[#17130D]"
                       size={22}
                       strokeWidth={1.5}
                     />
                   </div>
                   <ArrowUpRight
-                    className="text-[#D7E2EA]/40 transition-all duration-300 group-hover:text-[#D7E2EA] group-hover:rotate-12"
+                    className="text-[#17130D]/35 transition-all duration-300 group-hover:rotate-12 group-hover:text-[#17130D]"
                     size={22}
                     strokeWidth={1.5}
                   />
@@ -91,13 +110,13 @@ const ContactSection = () => {
 
                 <div className="flex flex-col gap-2 sm:gap-3">
                   <span
-                    className="font-light uppercase tracking-widest text-[#D7E2EA]/50"
+                    className="font-semibold uppercase tracking-widest text-[#5F4A24]/70"
                     style={{ fontSize: 'clamp(0.7rem, 1.1vw, 0.9rem)' }}
                   >
                     {method.label}
                   </span>
                   <span
-                    className="font-medium text-[#D7E2EA] break-all"
+                    className="break-all font-medium text-[#17130D]"
                     style={{ fontSize: 'clamp(1rem, 1.8vw, 1.4rem)' }}
                   >
                     {method.value}
@@ -111,15 +130,15 @@ const ContactSection = () => {
 
       {/* Footer line */}
       <FadeIn delay={0.4} y={20}>
-        <div className="mx-auto mt-20 sm:mt-24 md:mt-28 flex max-w-5xl flex-col items-center gap-3 border-t border-[#D7E2EA]/10 pt-8 text-center sm:flex-row sm:justify-between">
+        <div className="mx-auto mt-20 flex max-w-5xl flex-col items-center gap-3 border-t border-[#17130D]/10 pt-8 text-center sm:mt-24 sm:flex-row sm:justify-between md:mt-28">
           <span
-            className="font-light uppercase tracking-widest text-[#D7E2EA]/50"
+            className="font-semibold uppercase tracking-widest text-[#17130D]/50"
             style={{ fontSize: 'clamp(0.7rem, 1.1vw, 0.9rem)' }}
           >
             © 2026 Kaviyarasu P
           </span>
           <span
-            className="font-light uppercase tracking-widest text-[#D7E2EA]/50"
+            className="font-semibold uppercase tracking-widest text-[#17130D]/50"
             style={{ fontSize: 'clamp(0.7rem, 1.1vw, 0.9rem)' }}
           >
             Designed & built in Coimbatore

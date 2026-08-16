@@ -10,7 +10,7 @@ const AboutSection = () => {
   return (
     <section
       id="about"
-      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden px-5 sm:px-8 md:px-10 py-20"
+      className="relative flex min-h-screen w-full items-center justify-center overflow-hidden bg-[#F7F1E6] px-5 py-20 sm:px-8 md:px-10"
     >
       {/* Corner decorative 3D images */}
       {/* Left — Jarvis-style 3D Robot Face */}
@@ -59,62 +59,62 @@ const AboutSection = () => {
           </h2>
         </FadeIn>
 
-          <div className="flex flex-col items-center gap-12 sm:gap-16 md:gap-20">
-                    <AnimatedText
-                      text={ABOUT_TEXT}
-                      className="font-medium leading-relaxed text-[#D7E2EA] max-w-[560px]"
-                      style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)' }}
-                    />
+        <div className="flex flex-col items-center gap-12 sm:gap-16 md:gap-20">
+          <AnimatedText
+            text={ABOUT_TEXT}
+            className="max-w-[680px] font-medium leading-relaxed text-[#17130D]/75"
+            style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)' }}
+          />
 
-                    {/* Skills */}
-                    <FadeIn delay={0.15} className="w-full max-w-3xl">
-                      <div className="flex flex-col gap-5 sm:gap-6">
-                        {[
-                          {
-                            label: 'Languages',
-                            items: ['Python', 'Java', 'SQL', 'TypeScript', 'HTML', 'CSS', 'JavaScript'],
-                          },
-                          {
-                            label: 'Frameworks & Libraries',
-                            items: ['Pandas', 'NumPy', 'Matplotlib', 'Scikit-learn', 'TensorFlow', 'React', 'Next.js', 'Expo', 'Expo Router', 'React Native', 'Tailwind CSS', 'LangChain'],
-                          },
-                          {
-                            label: 'Tools & Platforms',
-                            items: ['Power BI', 'Tableau', 'Git', 'GitHub', 'VS Code', 'Vercel', 'Supabase'],
-                          },
-                          {
-                            label: 'AI & GenAI',
-                            items: ['Machine Learning', 'Gemini', 'OpenAI', 'OpenRouter', 'Prompt Engineering', 'Speech Recognition', 'Cloud Computing', 'AI Native Development', 'Claude', 'Codex', 'LangChain Agents'],
-                          },
-                        ].map((group) => (
-                          <div
-                            key={group.label}
-                            className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-5"
-                          >
-                            <span className="text-xs uppercase tracking-widest text-[#D7E2EA]/40 sm:w-44 sm:shrink-0 sm:text-right">
-                              {group.label}
-                            </span>
-                            <div className="flex flex-wrap gap-2">
-                              {group.items.map((item) => (
-                                <span
-                                  key={item}
-                                  className="rounded-full border border-[#D7E2EA]/15 bg-[#D7E2EA]/[0.03] px-3 py-1 text-sm text-[#D7E2EA]/80 hover:border-[#D7E2EA]/40 hover:text-[#D7E2EA] transition-colors"
-                                >
-                                  {item}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </FadeIn>
+          {/* Skills */}
+          <FadeIn delay={0.15} className="w-full max-w-3xl">
+            <div className="flex flex-col gap-5 sm:gap-6">
+              {[
+                {
+                  label: 'Languages',
+                  items: ['Python', 'Java', 'SQL', 'TypeScript', 'HTML', 'CSS', 'JavaScript'],
+                },
+                {
+                  label: 'Frameworks & Libraries',
+                  items: ['Pandas', 'NumPy', 'Matplotlib', 'Scikit-learn', 'TensorFlow', 'React', 'Next.js', 'Expo', 'Expo Router', 'React Native', 'Tailwind CSS', 'LangChain'],
+                },
+                {
+                  label: 'Tools & Platforms',
+                  items: ['Power BI', 'Tableau', 'Git', 'GitHub', 'VS Code', 'Vercel', 'Supabase'],
+                },
+                {
+                  label: 'AI & GenAI',
+                  items: ['Machine Learning', 'Gemini', 'OpenAI', 'OpenRouter', 'Prompt Engineering', 'Speech Recognition', 'Cloud Computing', 'AI Native Development', 'Claude', 'Codex', 'LangChain Agents'],
+                },
+              ].map((group) => (
+                <div
+                  key={group.label}
+                  className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-5"
+                >
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#5F4A24]/70 sm:w-44 sm:shrink-0 sm:text-right">
+                    {group.label}
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-[#17130D]/10 bg-[#FFFDF7] px-3 py-1 text-sm font-medium text-[#17130D]/75 shadow-sm transition-colors hover:border-[#F4B942] hover:bg-[#F4B942]/20 hover:text-[#17130D]"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
 
-                    <FadeIn delay={0.25}>
-                      <Magnet strength={3} padding={80}>
-                        <ContactButton />
-                      </Magnet>
-                    </FadeIn>
-                  </div>      </div>
+          <FadeIn delay={0.25}>
+            <Magnet strength={3} padding={80}>
+              <ContactButton />
+            </Magnet>
+          </FadeIn>
+        </div>      </div>
     </section>
   );
 };

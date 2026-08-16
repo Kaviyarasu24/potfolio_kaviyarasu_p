@@ -1,5 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
+import { Mail, Volume2, VolumeX } from 'lucide-react';
 import FadeIn from './FadeIn';
+import ContactButton from './ContactButton';
 
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
@@ -9,118 +11,50 @@ const NAV_LINKS = [
   { label: 'Contact', href: '#contact' },
 ];
 
+const STATS = [
+  { value: '8.7', label: 'CGPA' },
+  { value: '7+', label: 'Projects' },
+  { value: '3', label: 'Roles' },
+  { value: '2027', label: 'B.Tech AI & DS' },
+];
+
+const HERO_MARQUEE = [
+  'AI/ML',
+  'Power BI',
+  'React',
+  'Python',
+  'GenAI',
+  'Data Analytics',
+  'Dashboards',
+  'Automation',
+];
+
 const HeroSection = () => {
-  const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
-  const [showSoundHint, setShowSoundHint] = useState(true);
-
-  // Auto-hide "Tap for sound" hint after 5 seconds
-  useEffect(() => {
-    const t = setTimeout(() => setShowSoundHint(false), 5000);
-    return () => clearTimeout(t);
-  }, []);
-
-  // Auto-mute video when scrolling past hero
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) {
-          const v = videoRef.current;
-          if (v && !v.muted) {
-            v.muted = true;
-            setMuted(true);
-          }
-        }
-      },
-      { threshold: 0, rootMargin: '-50% 0px 0px 0px' }
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
-  // Snap-scroll: one wheel tick / keypress while at top → jump to About
-  // Use a ref so the flag persists across renders and resets when the user
-  // scrolls back to the top (i.e. scrollY drops below threshold).
-  const snapFiredRef = useRef(false);
-
-  useEffect(() => {
-    const goToAbout = () => {
-      if (snapFiredRef.current) return;
-      snapFiredRef.current = true;
-      const about = document.getElementById('about');
-      if (about) about.scrollIntoView({ behavior: 'auto', block: 'start' });
-    };
-
-    const onWheel = (e: WheelEvent) => {
-      // Reset the flag when user scrolls back to the very top
-      if (window.scrollY === 0) snapFiredRef.current = false;
-      if (snapFiredRef.current) return;
-      if (e.deltaY <= 0) return;
-      if (window.scrollY > 50) return;
-      e.preventDefault();
-      goToAbout();
-    };
-
-    const onKey = (e: KeyboardEvent) => {
-      if (window.scrollY === 0) snapFiredRef.current = false;
-      if (snapFiredRef.current) return;
-      if (window.scrollY > 50) return;
-      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
-        e.preventDefault();
-        goToAbout();
-      }
-    };
-
-    window.addEventListener('wheel', onWheel, { passive: false });
-    window.addEventListener('keydown', onKey);
-    return () => {
-      window.removeEventListener('wheel', onWheel);
-      window.removeEventListener('keydown', onKey);
-    };
-  }, []);
 
   const toggleMute = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.muted = !v.muted;
-    setMuted(v.muted);
-    setShowSoundHint(false);
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setMuted(video.muted);
   };
 
   return (
-    <section ref={sectionRef} className="relative h-screen w-full overflow-hidden bg-black">
-      {/* Video background */}
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        className="absolute inset-0 h-full w-full object-cover"
-      >
-        <source src="/intro.mp4" type="video/mp4" />
-      </video>
+    <section className="editorial-grid relative min-h-screen w-full overflow-hidden bg-[#F7F1E6] px-5 py-5 text-[#17130D] sm:px-8 md:px-10">
+      <div className="mx-auto flex min-h-[calc(100vh-40px)] max-w-7xl flex-col overflow-hidden rounded-[28px] border border-[#17130D]/10 bg-[#FFFDF7] shadow-[0_24px_80px_rgba(23,19,13,0.08)]">
+        <FadeIn delay={0} y={-18}>
+          <nav className="flex flex-col gap-5 px-5 py-5 sm:px-7 md:flex-row md:items-center md:justify-between md:px-9">
+            <a href="#" className="text-lg font-black uppercase tracking-tight">
+              Kaviyarasu P
+            </a>
 
-      {/* Cinematic gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/35 to-black/40" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
-
-      {/* Content layer */}
-      <div className="relative z-10 flex h-full flex-col">
-        {/* Top bar */}
-        <FadeIn delay={0} y={-20} className="relative">
-          <div className="flex items-center justify-between px-6 md:px-10 pt-6 md:pt-8">
-            <ul className="flex items-center gap-5 sm:gap-8 md:gap-12">
+            <ul className="flex flex-wrap items-center gap-4 sm:gap-6">
               {NAV_LINKS.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-xs sm:text-sm font-medium uppercase tracking-[0.2em] text-white/80 transition hover:text-white"
+                    className="text-xs font-semibold uppercase tracking-[0.16em] text-[#17130D]/60 transition hover:text-[#17130D]"
                   >
                     {link.label}
                   </a>
@@ -130,94 +64,107 @@ const HeroSection = () => {
 
             <a
               href="mailto:Kaviyarasup24@gmail.com"
-              className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-[1.03]"
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-[#F4B942] px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-[#17130D] transition hover:-translate-y-0.5 hover:bg-[#e7aa2d]"
             >
+              <Mail size={15} />
               Email me
             </a>
-          </div>
+          </nav>
         </FadeIn>
 
-        {/* Middle-left: PORTFOLIO + Name + Subtitle */}
-        <div className="flex flex-1 items-center">
-          <div className="w-full max-w-7xl px-6 md:px-10">
-            <FadeIn delay={0.5} y={40}>
+        <div className="grid flex-1 items-center gap-10 px-5 pb-8 pt-6 sm:px-7 md:grid-cols-[1.05fr_0.95fr] md:px-9 md:pb-12 lg:gap-14">
+          <div className="flex flex-col items-start">
+            <FadeIn delay={0.15} y={24}>
+              <p className="mb-5 rounded-full border border-[#17130D]/10 bg-[#F4B942]/25 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[#5F4A24]">
+                Learn &gt; Build &gt; Analyze
+              </p>
+            </FadeIn>
+
+            <FadeIn delay={0.28} y={34}>
               <h1
-                className="font-black uppercase leading-[0.88] tracking-tight text-white whitespace-nowrap"
-                style={{ fontSize: 'clamp(2rem, 7.5vw, 7rem)' }}
+                className="max-w-4xl font-black uppercase leading-[0.9] tracking-tight text-[#17130D]"
+                style={{ fontSize: 'clamp(3.8rem, 11vw, 8.8rem)' }}
               >
-                Kaviyarasu P
+                <span className="kinetic-word block">Data</span>
+                <span className="kinetic-word block text-[#F4B942]">Developer</span>
+                <span className="kinetic-word block text-[#17130D]">Builder</span>
               </h1>
             </FadeIn>
 
-            <FadeIn delay={0.85} y={20}>
-              <p className="mt-5 md:mt-7 text-[10px] sm:text-xs md:text-sm font-medium uppercase tracking-[0.3em] text-white/75">
-                Developer · Data Analyst · Power BI Developer
+            <FadeIn delay={0.42} y={22}>
+              <p className="mt-6 max-w-2xl text-base font-medium leading-relaxed text-[#17130D]/70 sm:text-lg">
+                AI & Data Science student building intelligent apps, Power BI dashboards,
+                and GenAI products with a practical, project-first mindset.
               </p>
             </FadeIn>
-          </div>
-        </div>
 
-        {/* Bottom bar */}
-        <div className="flex items-end justify-between px-6 md:px-10 pb-7 sm:pb-10 md:pb-12">
-          {/* Scroll indicator */}
-          <FadeIn delay={1.1} y={20}>
-            <a href="#about" aria-label="Scroll to next section" className="group flex flex-col items-center gap-3">
-              <span className="text-[9px] sm:text-[10px] font-medium uppercase tracking-[0.35em] text-white/70 transition group-hover:text-white">
-                Scroll
-              </span>
-              <div className="relative h-12 w-px overflow-hidden bg-white/20">
-                <span
-                  className="absolute inset-x-0 top-0 h-1/2 w-full bg-white"
-                  style={{ animation: 'scrollLine 1.8s ease-in-out infinite' }}
-                />
-              </div>
-            </a>
-          </FadeIn>
-
-          {/* Mute toggle + Sound hint */}
-          <FadeIn delay={1.1} y={20}>
-            <div className="flex items-center gap-3">
-              {showSoundHint && (
-                <span
-                  className="hidden sm:inline text-[10px] font-medium uppercase tracking-[0.25em] text-white/80"
-                  style={{ animation: 'pulseFade 2s ease-in-out infinite' }}
+            <FadeIn delay={0.55} y={18}>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <ContactButton label="Start a conversation" href="#contact" />
+                <a
+                  href="#projects"
+                  className="inline-flex items-center justify-center rounded-full border-2 border-[#17130D] px-8 py-3 text-xs font-bold uppercase tracking-widest text-[#17130D] transition hover:bg-[#17130D] hover:text-[#F7F1E6] sm:px-10 sm:py-3.5 sm:text-sm"
                 >
-                  Tap for sound
-                </span>
-              )}
-              <button
-                onClick={toggleMute}
-                aria-label={muted ? 'Unmute video' : 'Mute video'}
-                className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-md transition hover:bg-white/20 hover:scale-110"
-              >
-                {muted ? (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                    <line x1="23" y1="9" x2="17" y2="15" />
-                    <line x1="17" y1="9" x2="23" y2="15" />
-                  </svg>
-                ) : (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
-                  </svg>
-                )}
-              </button>
+                  View projects
+                </a>
+              </div>
+            </FadeIn>
+          </div>
+
+          <FadeIn delay={0.35} x={40} y={0}>
+            <div className="relative">
+              <div className="absolute -right-4 -top-4 hidden h-28 w-28 rounded-full bg-[#F4B942] md:block" />
+              <div className="absolute -left-5 bottom-14 z-10 hidden rounded-full border border-[#17130D] bg-[#FFFDF7] px-4 py-2 text-[10px] font-black uppercase tracking-[0.18em] shadow-lg lg:block">
+                Selected work / 2024-2026
+              </div>
+              <div className="relative overflow-hidden rounded-[34px] border-[10px] border-[#17130D] bg-[#17130D] shadow-[18px_18px_0_#F4B942]">
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  className="aspect-[4/5] h-full w-full object-cover opacity-95"
+                >
+                  <source src="/intro.mp4" type="video/mp4" />
+                </video>
+
+                <button
+                  onClick={toggleMute}
+                  aria-label={muted ? 'Unmute video' : 'Mute video'}
+                  className="absolute bottom-4 right-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#FFFDF7] text-[#17130D] shadow-lg transition hover:scale-105"
+                >
+                  {muted ? <VolumeX size={19} /> : <Volume2 size={19} />}
+                </button>
+              </div>
             </div>
           </FadeIn>
         </div>
-      </div>
 
-      <style>{`
-        @keyframes scrollLine {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(200%); }
-        }
-        @keyframes pulseFade {
-          0%, 100% { opacity: 0.5; }
-          50% { opacity: 1; }
-        }
-      `}</style>
+        <FadeIn delay={0.7} y={18}>
+          <div className="grid border-t border-[#17130D]/10 sm:grid-cols-4">
+            {STATS.map((stat) => (
+              <div key={stat.label} className="border-[#17130D]/10 px-6 py-5 sm:border-r last:border-r-0">
+                <div className="text-3xl font-black tracking-tight text-[#17130D]">{stat.value}</div>
+                <div className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-[#17130D]/55">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </FadeIn>
+
+        <div className="overflow-hidden border-t border-[#17130D]/10 bg-[#17130D] py-3 text-[#F7F1E6]">
+          <div className="marquee-track flex w-max gap-8 whitespace-nowrap">
+            {[...HERO_MARQUEE, ...HERO_MARQUEE].map((item, index) => (
+              <span key={`${item}-${index}`} className="text-sm font-black uppercase tracking-[0.22em]">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
   );
 };
