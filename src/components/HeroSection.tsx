@@ -106,7 +106,7 @@ const HeroSection = () => {
 
             <FadeIn delay={0.55} y={18}>
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <ContactButton label="Start a conversation" href="#contact" />
+
                 <a
                   href="#projects"
                   className="inline-flex items-center justify-center rounded-full border-2 border-theme-text/80 px-7 py-2.5 text-xs font-bold uppercase tracking-widest text-theme-text transition hover:bg-theme-text hover:text-theme-bg sm:px-8 sm:py-3"
@@ -114,7 +114,7 @@ const HeroSection = () => {
                   View projects
                 </a>
                 <a
-                  href="/resume.pdf"
+                  href="/Kaviyarasu_P_v3.pdf"
                   download="Kaviyarasu_P_Resume.pdf"
                   className="inline-flex items-center justify-center rounded-full border border-theme-accent bg-theme-accentMuted/20 hover:bg-theme-accent/20 px-7 py-2.5 text-xs font-bold uppercase tracking-widest text-theme-accent transition sm:px-8 sm:py-3"
                 >

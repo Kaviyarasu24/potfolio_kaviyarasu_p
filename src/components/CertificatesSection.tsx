@@ -8,7 +8,7 @@ interface Certificate {
   badge: string;
   title: string;
   issuer: string;
-  awardedTo: string;
+
   description: string;
   credentialId: string;
   certificationNumber?: string;
@@ -29,62 +29,65 @@ interface Certificate {
 const CERTIFICATES: Certificate[] = [
   {
     id: 'certificate-1',
-    badge: 'YOUR_BADGE_LABEL',               // e.g. "MICROSOFT CERTIFIED GLOBAL CREDENTIAL"
-    title: 'YOUR_CERTIFICATE_TITLE',          // e.g. "Microsoft Certified: Fabric Analytics Engineer Associate"
-    issuer: 'YOUR_ISSUER_NAME',               // e.g. "Microsoft Corporation"
-    awardedTo: 'Kaviyarasu P',
-    description: 'YOUR_DESCRIPTION',          // Short paragraph about what the cert validates
-    credentialId: 'YOUR_CREDENTIAL_ID',       // e.g. "AB3B3590F24A3DB1"
-    certificationNumber: 'YOUR_CERT_NUMBER',  // Optional — remove line if not applicable
-    dateEarned: 'YOUR_DATE_EARNED',           // e.g. "August 2026"
-    expirationDate: 'YOUR_EXPIRY_DATE',       // Optional — remove line if not applicable
+    badge: 'Microsoft Certified',
+    title: 'Microsoft Certified: Fabric Analytics Engineer Associate',
+    issuer: 'Microsoft',
+    description:
+      'Demonstrates proven expertise in designing, developing, and deploying enterprise-scale data analytics solutions using Microsoft Fabric. Covers end-to-end analytics workflows, including lakehouse architecture, data ingestion and transformation, Delta Lake, data pipelines, semantic modeling, Power BI, and real-time analytics.',
+    credentialId: '75C9A244BB1367C3',
+    certificationNumber: '86Q53B-F328A7',
+    dateEarned: 'August 15, 2026',
+    expirationDate: 'August 16, 2027',
     skills: [
-      'YOUR_SKILL_1',
-      'YOUR_SKILL_2',
-      'YOUR_SKILL_3',
-      'YOUR_SKILL_4',
-      'YOUR_SKILL_5',
+      'Microsoft Fabric',
+      'Data Analytics',
+      'Data Engineering',
+      'Data Modeling',
+      'Power BI',
     ],
-    verifyUrl: 'YOUR_VERIFY_URL',             // Link to official credential verification page
+    verifyUrl: 'https://learn.microsoft.com/api/credentials/share/en-us/KaviyarasuP/75C9A244BB1367C3',
     image: '/certificates/Microsoft Certified Fabric Analytics Engineer Associate.png',
     pdfUrl: '/certificates/Microsoft Certified Fabric Analytics Engineer Associate.png',
   },
   {
     id: 'certificate-2',
-    badge: 'YOUR_BADGE_LABEL',
-    title: 'YOUR_CERTIFICATE_TITLE',
-    issuer: 'YOUR_ISSUER_NAME',
+    badge: 'Oracle Certified',
+    title: 'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate',
+    issuer: 'Oracle',
     awardedTo: 'Kaviyarasu P',
-    description: 'YOUR_DESCRIPTION',
-    credentialId: 'YOUR_CREDENTIAL_ID',
-    dateEarned: 'YOUR_DATE_EARNED',
+    description:
+      'Demonstrates foundational expertise in artificial intelligence and machine learning concepts, including generative AI, large language models, AI services, and core AI technologies within Oracle Cloud Infrastructure.',
+    credentialId: '1024944150CI25AICFA',
+    dateEarned: 'September 01, 2025',
     skills: [
-      'YOUR_SKILL_1',
-      'YOUR_SKILL_2',
-      'YOUR_SKILL_3',
-      'YOUR_SKILL_4',
-      'YOUR_SKILL_5',
+      'Artificial Intelligence',
+      'Machine Learning',
+      'Generative AI',
+      'Large Language Models (LLMs)',
+      'Oracle Cloud Infrastructure (OCI)',
     ],
-    verifyUrl: 'YOUR_VERIFY_URL',
+    verifyUrl: 'https://catalog-education.oracle.com/pls/certview/sharebadge?id=1024944150CI25AICFA',
     image: '/certificates/Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate_pages-to-jpg-0001.jpg',
     pdfUrl: '/certificates/Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate_pages-to-jpg-0001.jpg',
   },
   {
     id: 'certificate-3',
-    badge: 'YOUR_BADGE_LABEL',
-    title: 'YOUR_CERTIFICATE_TITLE',          // e.g. "TN Skill Development — Data Science & Analytics"
-    issuer: 'YOUR_ISSUER_NAME',               // e.g. "Tamil Nadu Skill Development Corporation (TNSDC)"
+    badge: 'TN Skills 2025',
+    title: 'TN Skills 2025 – Cloud Computing Competition',
+    issuer: 'Tamil Nadu Skill Development Corporation (TNSDC)',
     awardedTo: 'Kaviyarasu P',
-    description: 'YOUR_DESCRIPTION',
-    credentialId: 'YOUR_CREDENTIAL_ID',
-    dateEarned: 'YOUR_DATE_EARNED',
+    description:
+      'Recognized participation in the TN Skills 2025 Cloud Computing competition, demonstrating practical knowledge and technical competency in cloud computing through progressive Level 1 and Level 2 competition stages.',
+    credentialId: 'N/A',
+    dateEarned: 'September 2025 – December 2025',
     skills: [
-      'YOUR_SKILL_1',
-      'YOUR_SKILL_2',
-      'YOUR_SKILL_3',
-      'YOUR_SKILL_4',
+      'Cloud Computing',
+      'Cloud Infrastructure',
+      'Cloud Services',
+      'Cloud Architecture',
+      'Technical Problem Solving',
     ],
-    verifyUrl: 'YOUR_VERIFY_URL',
+    verifyUrl: 'https://skilltn.gov.in/verify',
     image: '/certificates/TN Skill Level 1.jpg',
     imageLabel: 'Level 1',
     image2: '/certificates/TN  Skill Level 2.jpg',
@@ -193,8 +196,7 @@ const CertificatesSection = () => (
                       {cert.title}
                     </h3>
                     <p className="text-theme-accent font-semibold text-xs sm:text-sm mt-1">
-                      Awarded by {cert.issuer} to{' '}
-                      <span className="text-theme-text">{cert.awardedTo}</span>
+                      Awarded by {cert.issuer}
                     </p>
                     <p className="font-normal text-theme-muted leading-relaxed text-[11px] sm:text-xs lg:text-sm mt-3">
                       {cert.description}
