@@ -89,7 +89,7 @@ const HeroSection = () => {
             <FadeIn delay={0.28} y={34}>
               <h1
                 className="max-w-4xl font-black uppercase leading-[0.9] tracking-tight text-theme-text"
-                style={{ fontSize: 'clamp(3rem, 9vw, 7.8rem)' }}
+                style={{ fontSize: 'clamp(2.5rem, 7.5vw, 5.8rem)' }}
               >
                 <span className="kinetic-word block">Data Analyst</span>
                 <span className="kinetic-word block text-theme-accent">Developer</span>
