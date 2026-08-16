@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, GraduationCap, Briefcase, Code, MessageSquare, Sun, Moon } from 'lucide-react';
-
-interface FloatingDockProps {
-  theme: 'cream' | 'obsidian';
-  toggleTheme: () => void;
-}
+import { Home, User, GraduationCap, Briefcase, Code, MessageSquare } from 'lucide-react';
 
 const NAV_ITEMS = [
   { id: 'hero', label: 'Home', icon: Home },
@@ -16,7 +11,7 @@ const NAV_ITEMS = [
   { id: 'contact', label: 'Contact', icon: MessageSquare },
 ];
 
-const FloatingDock = ({ theme, toggleTheme }: FloatingDockProps) => {
+const FloatingDock = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
@@ -83,9 +78,7 @@ const FloatingDock = ({ theme, toggleTheme }: FloatingDockProps) => {
                     layoutId="activeDockIndicator"
                     className="absolute inset-0 rounded-full bg-theme-accent shadow-lg"
                     style={{
-                      boxShadow: theme === 'obsidian' 
-                        ? '0 0 15px rgba(6, 182, 212, 0.45)' 
-                        : '0 0 12px rgba(244, 185, 66, 0.35)',
+                      boxShadow: '0 0 12px rgba(244, 185, 66, 0.35)',
                     }}
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
@@ -97,8 +90,6 @@ const FloatingDock = ({ theme, toggleTheme }: FloatingDockProps) => {
                   className={`relative z-10 transition-colors duration-200 ${
                     isActive
                       ? 'text-[#17130D]' // Black text on active background
-                      : theme === 'obsidian'
-                      ? 'text-zinc-400 hover:text-[#06B6D4]'
                       : 'text-[#17130D]/50 hover:text-[#F4B942]'
                   }`}
                   strokeWidth={isActive ? 2.5 : 2}
@@ -122,39 +113,6 @@ const FloatingDock = ({ theme, toggleTheme }: FloatingDockProps) => {
             );
           })}
         </div>
-
-        {/* Separator vertical line */}
-        <div className="h-6 w-px bg-theme-border/75" />
-
-        {/* Theme Toggle Button */}
-        <button
-          onClick={toggleTheme}
-          onMouseEnter={() => setHoveredItem('theme')}
-          onMouseLeave={() => setHoveredItem(null)}
-          className={`relative flex h-10 w-10 items-center justify-center rounded-full transition-transform active:scale-95 sm:h-11 sm:w-11 ${
-            theme === 'obsidian'
-              ? 'text-yellow-400 hover:bg-zinc-800/50'
-              : 'text-[#5F4A24] hover:bg-[#F4B942]/10'
-          }`}
-          aria-label="Toggle theme"
-        >
-          {theme === 'obsidian' ? <Sun size={20} /> : <Moon size={20} />}
-
-          {/* Tooltip for theme */}
-          <AnimatePresence>
-            {hoveredItem === 'theme' && (
-              <motion.div
-                initial={{ opacity: 0, y: 15, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                transition={{ duration: 0.15 }}
-                className="absolute -top-12 left-1/2 -translate-x-1/2 rounded-lg border border-theme-border/60 bg-theme-card px-2.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-theme-text shadow-lg whitespace-nowrap"
-              >
-                {theme === 'obsidian' ? 'Cream Mode' : 'Obsidian Mode'}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </button>
       </motion.div>
     </div>
   );
