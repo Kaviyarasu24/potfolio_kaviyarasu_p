@@ -80,11 +80,14 @@ const InteractiveTerminal = ({ projectNumber }: InteractiveTerminalProps) => {
   ]);
   const [isBotTyping, setIsBotTyping] = useState(false);
 
-  const consoleEndRef = useRef<HTMLDivElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Scroll to bottom helper
   useEffect(() => {
-    consoleEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+    }
   }, [visibleLogs, chatMessages, isTypingCmd, isBotTyping]);
 
   // Terminal Runner
@@ -182,7 +185,7 @@ const InteractiveTerminal = ({ projectNumber }: InteractiveTerminalProps) => {
         </div>
 
         {/* Messages Body */}
-        <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-3 scrollbar-thin text-left">
+        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-4 flex flex-col gap-3 scrollbar-thin text-left">
           {chatMessages.map((msg, idx) => (
             <div
               key={idx}
@@ -209,7 +212,6 @@ const InteractiveTerminal = ({ projectNumber }: InteractiveTerminalProps) => {
               <span className="w-1.5 h-1.5 rounded-full bg-zinc-450 animate-bounce" style={{ animationDelay: '300ms' }} />
             </div>
           )}
-          <div ref={consoleEndRef} />
         </div>
 
         {/* Suggestion Chips */}
@@ -269,7 +271,7 @@ const InteractiveTerminal = ({ projectNumber }: InteractiveTerminalProps) => {
       </div>
 
       {/* Terminal Content Screen */}
-      <div className="flex-1 overflow-y-auto p-5 font-mono text-[10px] sm:text-[11px] leading-relaxed text-zinc-300 flex flex-col items-start gap-1 scrollbar-thin text-left">
+      <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-5 font-mono text-[10px] sm:text-[11px] leading-relaxed text-zinc-300 flex flex-col items-start gap-1 scrollbar-thin text-left">
         {/* Render visible logs */}
         {visibleLogs.map((line, idx) => {
           let colorClass = 'text-zinc-300';
@@ -300,7 +302,6 @@ const InteractiveTerminal = ({ projectNumber }: InteractiveTerminalProps) => {
             <span className="w-1.5 h-3 bg-zinc-500 inline-block animate-pulse" />
           </div>
         )}
-        <div ref={consoleEndRef} />
       </div>
     </div>
   );
