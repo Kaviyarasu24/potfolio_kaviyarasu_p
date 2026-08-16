@@ -28,7 +28,8 @@ const FloatingDock = ({ theme, toggleTheme }: FloatingDockProps) => {
       for (const item of NAV_ITEMS) {
         const el = document.getElementById(item.id);
         if (el) {
-          const top = el.offsetTop;
+          const rect = el.getBoundingClientRect();
+          const top = rect.top + window.scrollY;
           const height = el.offsetHeight;
           if (scrollPosition >= top && scrollPosition < top + height) {
             setActiveSection(item.id);

@@ -82,6 +82,7 @@ const InteractiveTerminal = ({ projectNumber, isActive = true }: InteractiveTerm
   const [isBotTyping, setIsBotTyping] = useState(false);
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const chatTimeoutRef = useRef<any>(null);
 
   // Scroll to bottom helper
   useEffect(() => {
@@ -94,6 +95,9 @@ const InteractiveTerminal = ({ projectNumber, isActive = true }: InteractiveTerm
   // Reset state when the card becomes inactive (e.g. user scrolls away)
   useEffect(() => {
     if (!isActive) {
+      if (chatTimeoutRef.current) {
+        clearTimeout(chatTimeoutRef.current);
+      }
       setVisibleLogs([]);
       setLogIndex(0);
       setTypedCmdText('');
@@ -104,6 +108,11 @@ const InteractiveTerminal = ({ projectNumber, isActive = true }: InteractiveTerm
       ]);
       setIsBotTyping(false);
     }
+    return () => {
+      if (chatTimeoutRef.current) {
+        clearTimeout(chatTimeoutRef.current);
+      }
+    };
   }, [isActive]);
 
   // Terminal Runner
@@ -123,6 +132,7 @@ const InteractiveTerminal = ({ projectNumber, isActive = true }: InteractiveTerm
       
       let charIndex = 0;
       const cmdText = currentLine.text;
+      let typingTimeout: any;
       
       const interval = setInterval(() => {
         if (charIndex < cmdText.length) {
@@ -130,7 +140,7 @@ const InteractiveTerminal = ({ projectNumber, isActive = true }: InteractiveTerm
           charIndex++;
         } else {
           clearInterval(interval);
-          setTimeout(() => {
+          typingTimeout = setTimeout(() => {
             setIsTypingCmd(false);
             setVisibleLogs(prev => [...prev, currentLine]);
             setLogIndex(idx => idx + 1);
@@ -138,7 +148,10 @@ const InteractiveTerminal = ({ projectNumber, isActive = true }: InteractiveTerm
         }
       }, 40);
 
-      return () => clearInterval(interval);
+      return () => {
+        clearInterval(interval);
+        if (typingTimeout) clearTimeout(typingTimeout);
+      };
     } else {
       const timer = setTimeout(() => {
         setVisibleLogs(prev => [...prev, currentLine]);
@@ -166,7 +179,7 @@ const InteractiveTerminal = ({ projectNumber, isActive = true }: InteractiveTerm
     setIsBotTyping(true);
 
     // Simulate AI response delay
-    setTimeout(() => {
+    chatTimeoutRef.current = setTimeout(() => {
       setIsBotTyping(false);
       setChatMessages(prev => [...prev, { sender: 'bot', text: answer }]);
     }, 1500);
@@ -222,10 +235,10 @@ const InteractiveTerminal = ({ projectNumber, isActive = true }: InteractiveTerm
           ))}
           
           {isBotTyping && (
-            <div className="self-start bg-zinc-850 rounded-2xl rounded-tl-none border border-white/5 px-4 py-3 flex gap-1 items-center">
-              <span className="w-1.5 h-1.5 rounded-full bg-zinc-450 animate-bounce" style={{ animationDelay: '0ms' }} />
-              <span className="w-1.5 h-1.5 rounded-full bg-zinc-450 animate-bounce" style={{ animationDelay: '150ms' }} />
-              <span className="w-1.5 h-1.5 rounded-full bg-zinc-450 animate-bounce" style={{ animationDelay: '300ms' }} />
+            <div className="self-start bg-zinc-800/80 rounded-2xl rounded-tl-none border border-white/5 px-4 py-3 flex gap-1 items-center">
+              <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: '150ms' }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-bounce" style={{ animationDelay: '300ms' }} />
             </div>
           )}
         </div>
@@ -313,7 +326,7 @@ const InteractiveTerminal = ({ projectNumber, isActive = true }: InteractiveTerm
 
         {/* Bottom blinking cursor when completed */}
         {!isTypingCmd && !isRunning && logIndex >= logs.length && (
-          <div className="text-zinc-550 flex items-center gap-1 mt-1">
+          <div className="text-zinc-500 flex items-center gap-1 mt-1">
             <span>kaviyarasu@portfolio:~$ </span>
             <span className="w-1.5 h-3 bg-zinc-500 inline-block animate-pulse" />
           </div>

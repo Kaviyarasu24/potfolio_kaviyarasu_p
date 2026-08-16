@@ -602,7 +602,7 @@ const ProjectsSection = () => {
                 <button
                   key={project.number}
                   onClick={() => scrollToCard(idx)}
-                  className={`group flex items-center justify-between text-left p-4.5 rounded-2xl border transition-all duration-300 w-full ${
+                  className={`group flex items-center justify-between text-left p-4 rounded-2xl border transition-all duration-300 w-full ${
                     isActive
                       ? 'bg-theme-card border-theme-border/60 shadow-[0_12px_40px_-8px_rgba(0,0,0,0.04)]'
                       : 'bg-theme-card/30 border-transparent hover:bg-theme-card/60'
