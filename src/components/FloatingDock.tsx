@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, User, GraduationCap, Briefcase, Code, MessageSquare } from 'lucide-react';
+import { Home, User, GraduationCap, Briefcase, Code, Award, MessageSquare } from 'lucide-react';
 
 const NAV_ITEMS = [
   { id: 'hero', label: 'Home', icon: Home },
@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { id: 'education', label: 'Education', icon: GraduationCap },
   { id: 'experience', label: 'Experience', icon: Briefcase },
   { id: 'projects', label: 'Projects', icon: Code },
+  { id: 'certificates', label: 'Certificates', icon: Award },
   { id: 'contact', label: 'Contact', icon: MessageSquare },
 ];
 

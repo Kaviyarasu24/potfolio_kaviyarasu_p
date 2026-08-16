@@ -3,6 +3,7 @@ import AboutSection from './components/AboutSection';
 import EducationSection from './components/EducationSection';
 import ExperienceSection from './components/ExperienceSection';
 import ProjectsSection from './components/ProjectsSection';
+import CertificatesSection from './components/CertificatesSection';
 import ContactSection from './components/ContactSection';
 import FloatingDock from './components/FloatingDock';
 
@@ -21,6 +22,7 @@ const App = () => {
       <EducationSection />
       <ExperienceSection />
       <ProjectsSection />
+      <CertificatesSection />
       <ContactSection />
       <FloatingDock />
     </main>
