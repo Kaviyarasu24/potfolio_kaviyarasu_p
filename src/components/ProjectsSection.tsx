@@ -103,18 +103,8 @@ const PROJECTS: ProjectData[] = [
   },
 ];
 
-// Combine projects and CTA card into a single card deck structure
-const CARDS = [
-  ...PROJECTS.map(p => ({ ...p, isCTA: false })),
-  {
-    isCTA: true,
-    number: '08',
-    category: 'Collaboration',
-    name: "Let's build something amazing",
-    description: "Looking for an internship, open-source collaboration, or just want to chat about AI & Data Science? Let's connect!",
-    images: [],
-  }
-];
+// Combine projects into a single card deck structure
+const CARDS = PROJECTS.map(p => ({ ...p, isCTA: false }));
 
 /* ── Landscape carousel ── */
 const LandscapeCarousel = ({ images, name }: { images: string[]; name: string }) => {
