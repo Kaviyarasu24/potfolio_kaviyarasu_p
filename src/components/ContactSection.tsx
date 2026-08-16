@@ -50,7 +50,7 @@ const ContactSection = () => {
       className="relative w-full bg-theme-bg px-5 pb-16 pt-24 sm:px-8 sm:pb-20 sm:pt-28 md:px-10 md:pt-32 transition-colors duration-400"
     >
       <div className="mb-14 overflow-hidden border-y border-theme-border/60 py-4">
-        <div className="marquee-track-reverse flex w-max gap-10 whitespace-nowrap">
+        <div className="marquee-track flex w-max gap-10 whitespace-nowrap">
           {[...CONTACT_MARQUEE, ...CONTACT_MARQUEE].map((item, index) => (
             <span key={`${item}-${index}`} className="text-xl font-black uppercase tracking-tight text-theme-text sm:text-3xl">
               {item}

@@ -166,15 +166,7 @@ const HeroSection = () => {
           </div>
         </FadeIn>
 
-        <div className="overflow-hidden border-t border-theme-border/60 bg-theme-text py-3 text-theme-bg transition-colors duration-400">
-          <div className="marquee-track flex w-max gap-8 whitespace-nowrap">
-            {[...HERO_MARQUEE, ...HERO_MARQUEE].map((item, index) => (
-              <span key={`${item}-${index}`} className="text-sm font-black uppercase tracking-[0.22em]">
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
+
       </div>
     </section>
   );
