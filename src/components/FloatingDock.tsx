@@ -88,11 +88,10 @@ const FloatingDock = () => {
                 {/* Icon wrapper */}
                 <Icon
                   size={19}
-                  className={`relative z-10 transition-colors duration-200 ${
-                    isActive
+                  className={`relative z-10 transition-colors duration-200 ${isActive
                       ? 'text-[#17130D]' // Black text on active background
                       : 'text-[#17130D]/50 hover:text-[#F4B942]'
-                  }`}
+                    }`}
                   strokeWidth={isActive ? 2.5 : 2}
                 />
 
