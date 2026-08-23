@@ -30,6 +30,29 @@ const CERTIFICATES: Certificate[] = [
   {
     id: 'certificate-1',
     badge: 'Microsoft Certified',
+    title: 'Microsoft Certified: Power BI Data Analyst Associate',
+    issuer: 'Microsoft',
+    description:
+      'Demonstrates proven expertise in cleaning, transforming, and modeling data, and designing and building scalable data visualization solutions using Microsoft Power BI to deliver actionable insights and maximize business value.',
+    credentialId: 'E84EF6488C61191',
+    certificationNumber: '12D803-0Z1755',
+    dateEarned: 'August 23, 2026',
+    expirationDate: 'August 24, 2027',
+    skills: [
+      'Power BI',
+      'Data Analysis',
+      'Data Visualization',
+      'Data Modeling',
+      'DAX (Data Analysis Expressions)',
+      'Data Ingestion & Transformation',
+    ],
+    verifyUrl: 'https://learn.microsoft.com/api/credentials/share/en-us/KaviyarasuP/E84EF6488C61191',
+    image: '/certificates/Microsoft Certified Power BI Data Analyst Associate.png',
+    pdfUrl: '/certificates/Microsoft Certified Power BI Data Analyst Associate.png',
+  },
+  {
+    id: 'certificate-2',
+    badge: 'Microsoft Certified',
     title: 'Microsoft Certified: Fabric Analytics Engineer Associate',
     issuer: 'Microsoft',
     description:
@@ -50,7 +73,7 @@ const CERTIFICATES: Certificate[] = [
     pdfUrl: '/certificates/Microsoft Certified Fabric Analytics Engineer Associate.png',
   },
   {
-    id: 'certificate-2',
+    id: 'certificate-3',
     badge: 'Oracle Certified',
     title: 'Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate',
     issuer: 'Oracle',
@@ -70,7 +93,7 @@ const CERTIFICATES: Certificate[] = [
     pdfUrl: '/certificates/Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate_pages-to-jpg-0001.jpg',
   },
   {
-    id: 'certificate-3',
+    id: 'certificate-4',
     badge: 'TN Skills 2025',
     title: 'TN Skills 2025 – Cloud Computing Competition',
     issuer: 'Tamil Nadu Skill Development Corporation (TNSDC)',
