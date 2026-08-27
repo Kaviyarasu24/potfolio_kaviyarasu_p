@@ -47,8 +47,8 @@ const CERTIFICATES: Certificate[] = [
       'Data Ingestion & Transformation',
     ],
     verifyUrl: 'https://learn.microsoft.com/api/credentials/share/en-us/KaviyarasuP/E84EF6488C61191',
-    image: '/certificates/Microsoft Certified Power BI Data Analyst Associate.png',
-    pdfUrl: '/certificates/Microsoft Certified Power BI Data Analyst Associate.png',
+    image: '/certificates/Microsoft Certified Power BI Data Analyst Associate.webp',
+    pdfUrl: '/certificates/Microsoft Certified Power BI Data Analyst Associate.webp',
   },
   {
     id: 'certificate-2',
@@ -69,8 +69,8 @@ const CERTIFICATES: Certificate[] = [
       'Power BI',
     ],
     verifyUrl: 'https://learn.microsoft.com/api/credentials/share/en-us/KaviyarasuP/75C9A244BB1367C3',
-    image: '/certificates/Microsoft Certified Fabric Analytics Engineer Associate.png',
-    pdfUrl: '/certificates/Microsoft Certified Fabric Analytics Engineer Associate.png',
+    image: '/certificates/Microsoft Certified Fabric Analytics Engineer Associate.webp',
+    pdfUrl: '/certificates/Microsoft Certified Fabric Analytics Engineer Associate.webp',
   },
   {
     id: 'certificate-3',
@@ -89,8 +89,8 @@ const CERTIFICATES: Certificate[] = [
       'Oracle Cloud Infrastructure (OCI)',
     ],
     verifyUrl: 'https://catalog-education.oracle.com/pls/certview/sharebadge?id=1024944150CI25AICFA',
-    image: '/certificates/Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate_pages-to-jpg-0001.jpg',
-    pdfUrl: '/certificates/Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate_pages-to-jpg-0001.jpg',
+    image: '/certificates/Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate_pages-to-jpg-0001.webp',
+    pdfUrl: '/certificates/Oracle Cloud Infrastructure 2025 Certified AI Foundations Associate_pages-to-jpg-0001.webp',
   },
   {
     id: 'certificate-4',
@@ -109,11 +109,11 @@ const CERTIFICATES: Certificate[] = [
       'Technical Problem Solving',
     ],
     verifyUrl: 'https://skilltn.gov.in/verify',
-    image: '/certificates/TN Skill Level 1.jpg',
+    image: '/certificates/TN Skill Level 1.webp',
     imageLabel: 'Level 1',
-    image2: '/certificates/TN  Skill Level 2.jpg',
+    image2: '/certificates/TN  Skill Level 2.webp',
     image2Label: 'Level 2',
-    pdfUrl: '/certificates/TN Skill Level 1.jpg',
+    pdfUrl: '/certificates/TN Skill Level 1.webp',
   },
 ];
 

@@ -70,9 +70,9 @@ src/
 
 public/
     ├── intro.mp4              # hero background video
-    ├── project01_01.png       # IPL Dashboard screenshot
-    ├── project02_*.png        # JARVIS screenshots
-    ├── financeflow-*.jpeg     # FinanceFlow mobile screenshots (01–09)
+    ├── project01_01.webp      # IPL Dashboard screenshot
+    ├── project02_*.webp       # JARVIS screenshots
+    ├── financeflow-*.webp     # FinanceFlow mobile screenshots (01–09)
     └── ...                    # other project images
 ```
 
