@@ -12,10 +12,10 @@ const NAV_LINKS = [
 ];
 
 const STATS = [
-  { value: '8.7', label: 'CGPA' },
-  { value: '7+', label: 'Projects' },
-  { value: '3', label: 'Roles' },
-  { value: '2027', label: 'B.Tech AI & DS' },
+  { value: '07+', label: 'Projects' },
+  { value: '03', label: 'Global Certifications' },
+  { value: '10+', label: 'Technologies' },
+  { value: '03', label: 'Technical Roles' },
 ];
 
 const HERO_MARQUEE = [
