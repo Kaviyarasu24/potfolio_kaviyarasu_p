@@ -114,22 +114,21 @@ const HeroSection = () => {
             </FadeIn>
           </div>
 
-          <FadeIn delay={0.35} x={40} y={0}>
-            <div className="relative">
-              <div className="absolute -right-4 -top-4 hidden h-28 w-28 rounded-full bg-theme-accent md:block" />
-              {/* Removed selected work pill */}
-              <div className="relative overflow-hidden rounded-[34px] border-[10px] border-theme-border bg-theme-border shadow-[18px_18px_0_var(--accent-color)] transition-all duration-400">
+          <FadeIn delay={0.35} x={40} y={0} className="flex justify-center md:justify-end">
+            <div className="relative w-full max-w-[280px] sm:max-w-[330px] md:max-w-[360px] lg:max-w-[390px]">
+              <div className="absolute -right-3 -top-3 hidden h-20 w-20 rounded-full bg-theme-accent md:block" />
+              <div className="relative overflow-hidden rounded-[28px] sm:rounded-[34px] border-[6px] sm:border-[8px] border-theme-border bg-theme-border shadow-[12px_12px_0_var(--accent-color)] sm:shadow-[16px_16px_0_var(--accent-color)] transition-all duration-400">
                 <picture>
                   <source srcSet="/kavi.webp" type="image/webp" />
                   <img
                     src="/kavi.png"
                     alt="Kaviyarasu P"
-                    width={600}
-                    height={750}
+                    width={400}
+                    height={500}
                     fetchPriority="high"
                     loading="eager"
                     decoding="async"
-                    className="aspect-[4/5] h-full w-full object-cover opacity-95 transition-transform duration-500 hover:scale-105"
+                    className="aspect-[4/5] h-full w-full object-cover object-top opacity-95 transition-transform duration-500 hover:scale-105"
                   />
                 </picture>
               </div>
