@@ -18,15 +18,15 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
 
   // Timer lifecycle for the loader
   useEffect(() => {
-    // Fade out loading text 400ms before split transition starts
+    // Snappy fade out of loading text
     const textTimer = setTimeout(() => {
       setTextVisible(false);
-    }, 1100);
+    }, 450);
 
-    // Complete loader after 1.5s total duration (reverted back from 3.5s)
+    // Snappy completion of loader after 700ms total
     const completeTimer = setTimeout(() => {
       if (onComplete) onComplete();
-    }, 1500);
+    }, 700);
 
     return () => {
       clearTimeout(textTimer);
@@ -42,20 +42,20 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
     initial: {},
     animate: {
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.04,
       },
     },
   } as any;
 
   const letterVariants = {
-    initial: { opacity: 0, y: 30 },
+    initial: { opacity: 0, y: 20 },
     animate: {
       opacity: 1,
       y: 0,
       transition: {
         type: 'spring',
-        stiffness: 150,
-        damping: 15,
+        stiffness: 200,
+        damping: 18,
       },
     },
   } as any;
@@ -68,7 +68,7 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
     exit: {
       d: 'M0 0 L1440 0 C1080 0, 360 0, 0 0 Z',
       transition: {
-        duration: 1.0,
+        duration: 0.55,
         ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
       },
     },
@@ -82,7 +82,7 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
     exit: {
       d: 'M0 100 L1440 100 C1080 100, 360 100, 0 100 Z',
       transition: {
-        duration: 1.0,
+        duration: 0.55,
         ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
       },
     },
@@ -124,7 +124,7 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
         initial={{ y: 0 }}
         exit={{ y: '-50vh' }}
         transition={{
-          duration: 1.0,
+          duration: 0.55,
           ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
         }}
         className="fixed top-0 left-0 w-full h-[50vh] bg-theme-text z-[9999] pointer-events-none select-none"
@@ -147,7 +147,7 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
         initial={{ y: 0 }}
         exit={{ y: '50vh' }}
         transition={{
-          duration: 1.0,
+          duration: 0.55,
           ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
         }}
         className="fixed bottom-0 left-0 w-full h-[50vh] bg-theme-text z-[9999] pointer-events-none select-none"
