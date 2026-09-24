@@ -1,5 +1,4 @@
-import { useState, useRef } from 'react';
-import { Mail, Volume2, VolumeX } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import FadeIn from './FadeIn';
 import ContactButton from './ContactButton';
 
@@ -30,15 +29,6 @@ const HERO_MARQUEE = [
 ];
 
 const HeroSection = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [muted, setMuted] = useState(true);
-
-  const toggleMute = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.muted = !video.muted;
-    setMuted(video.muted);
-  };
 
   return (
     <section id="hero" className="editorial-grid relative min-h-screen w-full overflow-hidden bg-theme-bg px-5 py-5 text-theme-text sm:px-8 md:px-10 transition-colors duration-400">
@@ -129,25 +119,19 @@ const HeroSection = () => {
               <div className="absolute -right-4 -top-4 hidden h-28 w-28 rounded-full bg-theme-accent md:block" />
               {/* Removed selected work pill */}
               <div className="relative overflow-hidden rounded-[34px] border-[10px] border-theme-border bg-theme-border shadow-[18px_18px_0_var(--accent-color)] transition-all duration-400">
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  className="aspect-[4/5] h-full w-full object-cover opacity-95"
-                >
-                  <source src="/intro.mp4" type="video/mp4" />
-                </video>
-
-                <button
-                  onClick={toggleMute}
-                  aria-label={muted ? 'Unmute video' : 'Mute video'}
-                  className="absolute bottom-4 right-4 flex h-11 w-11 items-center justify-center rounded-full bg-theme-card text-theme-text shadow-lg transition hover:scale-105"
-                >
-                  {muted ? <VolumeX size={19} /> : <Volume2 size={19} />}
-                </button>
+                <picture>
+                  <source srcSet="/kavi.webp" type="image/webp" />
+                  <img
+                    src="/kavi.png"
+                    alt="Kaviyarasu P"
+                    width={600}
+                    height={750}
+                    fetchPriority="high"
+                    loading="eager"
+                    decoding="async"
+                    className="aspect-[4/5] h-full w-full object-cover opacity-95 transition-transform duration-500 hover:scale-105"
+                  />
+                </picture>
               </div>
             </div>
           </FadeIn>
