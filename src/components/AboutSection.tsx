@@ -22,10 +22,13 @@ const AboutSection = () => {
         className="pointer-events-none absolute top-[4%] left-[1%] sm:left-[2%] md:left-[4%] w-[70px] sm:w-[170px] md:w-[220px]"
       >
         <img
-          src="https://img.icons8.com/3d-fluency/512/robot-2.png"
+          src="/robot-3d.webp"
           alt="AI Robot"
+          width={220}
+          height={220}
           className="w-full h-auto drop-shadow-2xl"
           loading="lazy"
+          decoding="async"
           draggable={false}
         />
       </FadeIn>
@@ -40,10 +43,13 @@ const AboutSection = () => {
         className="pointer-events-none absolute bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%] w-[65px] sm:w-[150px] md:w-[200px]"
       >
         <img
-          src="https://img.icons8.com/3d-fluency/512/combo-chart.png"
+          src="/chart-3d.webp"
           alt="Data Analytics"
+          width={200}
+          height={200}
           className="w-full h-auto drop-shadow-2xl"
           loading="lazy"
+          decoding="async"
           draggable={false}
         />
       </FadeIn>
